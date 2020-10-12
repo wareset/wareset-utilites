@@ -1,4 +1,4 @@
-import typed from '@wareset/typed';
+import typed from '@wareset-utilites/typed';
 export { typed };
 export const noop = () => {};
 export const keys = Object.keys;

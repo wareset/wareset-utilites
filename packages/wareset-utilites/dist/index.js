@@ -12,7 +12,7 @@ Object.defineProperty(exports, "typed", {
 exports.timeout = exports.trycatch = exports.setOwnProps = exports.setOwnProp = exports.eachAsync = exports.each = exports.inObj = exports.inArr = exports.getOwnProps = exports.getOwnPropNames = exports.getOwnProp = exports.hasOwnProp = exports.getPrototype = exports.isObjStrict = exports.isArrStrict = exports.isPromise = exports.isFunc = exports.isBool = exports.isSymb = exports.isStr = exports.isNum = exports.isObj = exports.isArr = exports.isVoid = exports.entries = exports.values = exports.keys = exports.noop = void 0;
 
 function _typed() {
-  const data = _interopRequireDefault(require("@wareset/typed"));
+  const data = _interopRequireDefault(require("@wareset-utilites/typed"));
 
   _typed = function () {
     return data;

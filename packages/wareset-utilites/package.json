@@ -1,6 +1,6 @@
 {
   "name": "wareset-utilites",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "A set of universal functions",
   "author": "cftcview <cftcview@gmail.com>",
   "homepage": "https://github.com/wareset/wareset-utilites/tree/main/packages/wareset-utilites#readme",
@@ -34,6 +34,6 @@
     "url": "https://github.com/wareset/wareset-utilites/issues"
   },
   "dependencies": {
-    "@wareset/typed": "0.2.5"
+    "@wareset-utilites/typed": "0.2.6"
   }
 }
