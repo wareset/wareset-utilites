@@ -1,9 +1,9 @@
 {
   "name": "wareset-utilites",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "A set of universal functions",
   "author": "cftcview <cftcview@gmail.com>",
-  "homepage": "https://github.com/wareset/wareset-utilites/tree/master/packages/wareset-utilites#readme",
+  "homepage": "https://github.com/wareset/wareset-utilites/tree/main/packages/wareset-utilites#readme",
   "license": "MIT",
   "main": "dist/index",
   "module": "dist/index.mjs",
