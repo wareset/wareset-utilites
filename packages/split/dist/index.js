@@ -5,57 +5,89 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = smartsplit;
 const CACHE_SEPARATORS = {};
-const CACHE_QUOTES = {};
-const CACHE_BRACKETS = {};
+const CACHE_SOURCES = {};
+const CACHE_REGEXPS = {};
 
-const len = v => v ? v.length : 0;
+const noop = v => v;
 
-const cRe = v => v.source || (v ? `[${v}]` : v);
+const CREATE_SEPARATOR = v => {
+  v = v.source || (v ? `[${v}]` : '');
+  return new RegExp(`(${v})`);
+};
 
-const getRegSeparator = v => new RegExp(`(${v})`, 'm');
+const CREATE_SOURCE = v => {
+  v = (v && v.source || v || '?:').split('|').map(v => `(${v})`);
+  return [v.length, v.join('|')];
+};
 
-const getRegQuotes = v => new RegExp(`(?:^|\\W)(${v})|(${v})(?=\\W|$)`, 'gm');
+const CREATE_REGEXP = (q1, q2) => {
+  return new RegExp(`(\\\\?')|(\\\\?")|(\\\\?\`)|${q1}|${q2}`, 'g');
+};
 
-const getRegBrackets = v => new RegExp(v, 'gm');
+const QUOTES = '\'"`';
+const SAFER = '\0';
+const REG_ADD_SAFE = new RegExp(`(\\w)([${QUOTES}])(\\w)`, 'g');
 
-function smartsplit(str, s = /\s*(,)\s*/, q1 = '\'"`', q2 = '') {
-  s = CACHE_SEPARATORS[s] || (CACHE_SEPARATORS[s] = getRegSeparator(cRe(s)));
-  const step = len(str.match(s));
+const __ADD_SAFE__ = v => v.replace(REG_ADD_SAFE, `$1$2${SAFER}$2$3`);
+
+const REG_DEL_SAFE = new RegExp(`[${QUOTES}]${SAFER}|${SAFER}[${QUOTES}]`, 'g');
+
+const __DEL_SAFE__ = v => v.replace(REG_DEL_SAFE, '');
+
+const __split__ = (str, SEPARATOR, REGEXP, l1, l2, isSafeSingles) => {
+  const step = (str.match(SEPARATOR) || []).length;
   if (!step) return [str];
-
-  if (q2) {
-    q1 = CACHE_BRACKETS[q1] || (CACHE_BRACKETS[q1] = getRegBrackets(cRe(q1)));
-    q2 = CACHE_BRACKETS[q2] || (CACHE_BRACKETS[q2] = getRegBrackets(cRe(q2)));
-  } else q1 = CACHE_QUOTES[q1] || (CACHE_QUOTES[q1] = getRegQuotes(cRe(q1)));
-
   const res = [];
-  const columnsDirty = str.split(s);
-  let isMatch = false;
-  let isDeep = 0;
-  let isQuote = false;
-  let matchSames = 0;
-  let column, match1, match2, l1, l2;
+  let DEL_SAFE = noop;
+  if (isSafeSingles) str = __ADD_SAFE__(str), DEL_SAFE = __DEL_SAFE__;
+  const data = str.split(SEPARATOR);
+  let column, index, pusher;
 
-  for (let i = 0; i < len(columnsDirty); i += step) {
-    column = columnsDirty[i], match1 = column.match(q1), l1 = len(match1);
-    if (isMatch !== (isMatch === isQuote)) res.push(column);else res[len(res) - 1] += columnsDirty[i + 1 - step] + column;
+  for (let i = 0; i < data.length; i += step) {
+    pusher = '';
+    let isQuote = false;
+    const matches = [];
 
-    if (!q2) {
-      if (l1 > 1) {
-        match1 = match1.map(v => v[len(v) - 1]).filter((v, k, a) => isQuote ? v === a[a.length - 1] : v === a[0]);
-        l1 = len(match1);
+    do {
+      column = data[i];
+      column.replace(REGEXP, (...a) => {
+        a.slice(1, -2).forEach((v, k, a) => {
+          if (!v || k <= 2 && v.length > 1) return;
+
+          if (isQuote === false) {
+            if (k <= 2) isQuote = k;
+            if (k <= l2) matches.push(k);else if ((index = matches.indexOf(k - l1)) > -1) {
+              matches.splice(index, 1);
+            }
+          } else if (k === isQuote) matches.pop(), isQuote = false;
+        });
+      });
+      pusher += column;
+
+      if (matches.length) {
+        pusher += data[i + 1], i += step;
+        if (i >= data.length) throw new Error();
       }
+    } while (matches.length);
 
-      isMatch = !!(l1 % 2);
-      if (isMatch) isQuote = !isQuote;
-    } else {
-      match2 = column.match(q2);
-      isDeep += l1 - (l2 = len(match2));
-      if (l1 && l2) matchSames += len(match2.filter(v => ~match1.indexOf(v)));
-      if (isDeep < 0) isDeep = -isDeep;
-      isMatch = isQuote = !!(isDeep || matchSames % 2);
-    }
+    res.push(DEL_SAFE(pusher));
   }
 
   return res;
+};
+
+function smartsplit(str, s = /\s*(,)\s*/, q1, q2, isSafeSingles = true, isNewFn) {
+  s = CACHE_SEPARATORS[s] || (CACHE_SEPARATORS[s] = CREATE_SEPARATOR(s));
+  let l1, l2;
+  if (!q2) q2 = q1;
+  [l1, q1] = CACHE_SOURCES[q1] || (CACHE_SOURCES[q1] = CREATE_SOURCE(q1));
+  [l2, q2] = CACHE_SOURCES[q2] || (CACHE_SOURCES[q2] = CREATE_SOURCE(q2));
+  if (l1 !== l2) throw new Error();
+  l2 += 2;
+  const k = q1 + SAFER + q2;
+  const REGEXP = CACHE_REGEXPS[k] || (CACHE_REGEXPS[k] = CREATE_REGEXP(q1, q2));
+
+  const res = str => __split__(str, s, REGEXP, l1, l2, isSafeSingles);
+
+  return isNewFn ? res : res(str);
 }
