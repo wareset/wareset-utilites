@@ -13,6 +13,10 @@ Version <=0.1.1 returns the prototypes and not the constructors!
 Starting with the >=0.2.3 version, the method `typed.of` returns a `NULL`.
 Technically, this is more correct, because `NULL` is also an object, but without a constructor.
 
+##### >=0.3.0
+
+Starting with the >=0.3.0 version, returns the prototype and the constructor (if object has been created like `Object.create({ q: 1 })`, returns prototype `{ q: 1 }`)!.
+
 ## Installation
 
 ```bash
@@ -27,92 +31,122 @@ npm i @wareset-utilites/typed ## yarn add @wareset-utilites/typed
 import typed from '@wareset-utilites/typed';
 ```
 
-### Method: `typed(value: any)`
+### Method: `typed(value)` and `typed.of(value)`
+
+```typescript
+declare function typed(value: any): Function | object | null | undefined;
+declare function typedOf(
+  value: any
+): Array<Function | object | null | undefined>;
+```
 
 Returns prototype:
 
 ```js
-assert(typed(null), null);
-assert(typed(undefined), undefined);
+expect(typed(undefined)).toBe(undefined);
+expect(typed.of(undefined)).toEqual([undefined]);
 
-assert(typed('str'), String);
-assert(typed(30401), Number);
-assert(typed(false), Boolean);
-assert(typed({ q: 1 }), Object);
-// etc...
+expect(typed(null)).toBe(null);
+expect(typed.of(null)).toEqual([null]);
 
-assert(
-  typed(() => {}),
-  Function
-);
-assert(
-  typed(async () => {}),
-  AsyncFunction
-);
+const boolean = true;
+expect(typed(boolean)).toBe(Boolean);
+expect(typed.of(boolean)).toEqual([Boolean, Object, null]);
 
-const DIV = document.createElement('div');
-assert(typed(DIV), HTMLDivElement);
-// etc...
-```
+const symbol = Symbol('1');
+expect(typed(symbol)).toBe(Symbol);
+expect(typed.of(symbol)).toEqual([Symbol, Object, null]);
 
-### Method: `typed.of(value: any)`
+const number = 304010;
+expect(typed(number)).toBe(Number);
+expect(typed.of(number)).toEqual([Number, Object, null]);
 
-Returns an array of all prototypes:
+const dataView = new DataView(new ArrayBuffer(16));
+expect(typed(dataView)).toBe(DataView);
+expect(typed.of(dataView)).toEqual([DataView, Object, null]);
 
-```js
-assert(typed.of(null), [null]);
-assert(typed.of(undefined), [undefined]);
+expect(typed(() => {})).toBe(Function);
+expect(typed.of(() => {})).toEqual([Function, Object, null]);
 
-assert(typed.of({ q: 1 }), [Object, null]);
-assert(typed.of('string'), [String, Object, null]);
-// etc...
-
-assert(
-  typed.of(() => {}),
-  [Function, Object, null]
-);
-assert(
-  typed.of(async () => {}),
-  [AsyncFunction, Function, Object, null]
-);
-
-const H1 = document.createElement('h1');
-console.log(typed.of(H1));
-/* RETURN: */ [
-  HTMLHeadingElement,
-  HTMLElement,
-  Element,
-  Node,
-  EventTarget,
+const AsyncFunction = (async () => {}).constructor;
+expect(typed(async () => {})).toBe(AsyncFunction);
+expect(typed.of(async () => {})).toEqual([
+  AsyncFunction,
+  Function,
   Object,
   null
-];
+]);
 // etc...
+
+test('Class:', () => {
+  class Qwer {}
+  class Wert extends Qwer {}
+  class Erty extends Wert {}
+
+  const newClass = new Erty();
+  expect(typed(newClass)).toBe(Erty);
+  expect(typed.of(newClass)).toEqual([Erty, Wert, Qwer, Object, null]);
+});
+
+test('DIV:', () => {
+  const div = document.createElement('div');
+  expect(typed(div)).toBe(HTMLDivElement);
+  expect(typed.of(div)).toEqual([
+    HTMLDivElement,
+    HTMLElement,
+    Element,
+    Node,
+    EventTarget,
+    Object,
+    null
+  ]);
+});
+// etc...
+
+// Object:
+const proto = { q: 1 };
+const object = Object.create(proto);
+expect(typed(object)).toBe(proto);
+expect(typed.of(object)).toEqual([{ q: 1 }, Object, null]);
+
+const object2 = Object.create(object);
+expect(typed(object2)).toEqual({});
+expect(typed.of(object2)).toEqual([{}, { q: 1 }, Object, null]);
+
+const proto2 = [1, 2, 3];
+const object3 = Object.create(proto2);
+expect(typed(object3)).toBe(proto2);
+expect(typed.of(object3)).toEqual([[1, 2, 3], Array, Object, null]);
+
+const object4 = Object.create(object3);
+expect(typed(object4)).toBe(object3);
+expect(typed.of(object4)).toEqual([{}, [1, 2, 3], Array, Object, null]);
 ```
 
-### Methods: `typed(value: any, ...types)` and `typed.of(value: any, ...types)`
+### Methods: `typedOf(value, ...types)` and `typed.of(value, ...types)`
+
+```typescript
+declare function typed(
+  value: any,
+  ...types: Array<Function | object | null | undefined>
+): boolean;
+declare function typedOf(
+  value: any,
+  ...types: Array<Function | object | null | undefined>
+): boolean;
+```
 
 Check the availability of prototypes:
 
 ```js
-// typed
-console.log(typed(9999, [Boolean, String, Element, {}, Object]));
-/* RETURN: */ false; // because they are not a Number
+expect(typed(Infinity, Number)).toBe(true); // Number
+expect(typed(Infinity, Number, String)).toBe(true); // Number
+expect(typed(Infinity, String)).toBe(false);
+expect(typed(Infinity, Array, String)).toBe(false);
 
-console.log(typed(9999, Number));
-console.log(typed(9999, [Number]));
-console.log(typed(9999, 1111));
-console.log(typed(9999, [Number, String])); // because there is a Number
-/* RETURN: */ true;
-
-// typed.of
-console.log(typed.of(9999, [Boolean, String, Node]));
-/* RETURN: */ false; // because they are not a Number or Object
-
-console.log(typed.of(9999, Number));
-console.log(typed.of(9999, [Object])); // because Object
-console.log(typed.of(9999, [1111]));
-/* RETURN: */ true;
+expect(typed.of(Infinity, null)).toBe(true); // null always true
+expect(typed.of(Infinity, Object, Array, String)).toBe(true); // Object
+expect(typed.of(Infinity, undefined, Array, String)).toBe(false);
 
 // other
 const someFn = () => {};
@@ -127,7 +161,7 @@ console.log(typed(someFn, someFnAsync)); // false
 // etc...
 ```
 
-### Methods: `typed.check(value: any, ...types)` and `typed.of.check(value: any, ...types)`
+### Methods: `typed.check(value, ...types)` and `typed.of.check(value, ...types)`
 
 Check the availability of prototypes:
 
@@ -140,28 +174,6 @@ console.log(typed.of.check(9999, [String, Object])); // RETURN: 9999
 
 console.log(typed.check(9999, String)); // throw new Error()
 console.log(typed.of.check(9999, [String, Node])); // throw new Error()
-
-// LIVE EXAMPLE:
-
-function strictTypedFn(element, options = {}) {
-  typed.of.check(element, Element), typed.check(options, Object);
-
-  // some code ...
-}
-
-// This function will succeed:
-try {
-  strictTypedFn(document.createElement('div'), { param1: 1, param2: 2 });
-} catch (err) {
-  // ...
-}
-
-// This function will return an exception:
-try {
-  strictTypedFn(12, 'string');
-} catch (err) {
-  // ...
-}
 ```
 
 ## License
