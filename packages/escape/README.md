@@ -5,19 +5,19 @@ Escape regexp
 # Usage
 
 ```js
-import escape from '@wareset-utilites/escape';
+import esc from '@wareset-utilites/escape';
 ```
 
 ##### Method: escape(string: String, ignoreSymbols: String, isNewFn: Boolean)
 
 ```js
 const str = `{[()]}`;
-console.log(escape(str)); // \\{\\[\\(\\)\\]\\}
-console.log(escape(str, '{()}')); // {\\[()\\]}
+console.log(esc(str)); // \\{\\[\\(\\)\\]\\}
+console.log(esc(str, '{()}')); // {\\[()\\]}
 
 // if exists 'ignoreSymbols' and 'isNewFn' is true:
-const newEscape = escape(null, '{()}', true);
-console.log(newEscape(str)); // {\\[()\\]}
+const newEsc = esc(null, '{()}', true);
+console.log(newEsc(str)); // {\\[()\\]}
 ```
 
 ## License
