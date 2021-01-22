@@ -1,6 +1,6 @@
 {
   "name": "@wareset-utilites/each",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "wareset-utilites: each",
   "author": "cftcview <cftcview@gmail.com>",
   "homepage": "https://github.com/wareset/wareset-utilites/tree/main/packages/each#readme",
@@ -52,7 +52,7 @@
   },
   "dependencies": {
     "@wareset-utilites/is": "0.1.1",
-    "@wareset-utilites/object": "0.0.1",
+    "@wareset-utilites/object": "0.1.0",
     "@wareset-utilites/typed": "0.3.1"
   }
 }
