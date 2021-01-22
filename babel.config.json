@@ -1,18 +1,6 @@
 {
-  "ignore": ["**/*.js"],
   "plugins": [
     ["@babel/plugin-proposal-class-properties"],
-    [
-      "@babel/plugin-transform-modules-commonjs",
-      {
-        "lazy": true
-      }
-    ],
-    [
-      "module-extension",
-      {
-        "mjs": "js"
-      }
-    ]
+    ["@babel/plugin-transform-block-scoping"]
   ]
 }
