@@ -1,6 +1,6 @@
 {
   "name": "@wareset-utilites/deep-equal",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "No fast deep equal",
   "author": "cftcview <cftcview@gmail.com>",
   "homepage": "https://github.com/wareset/wareset-utilites/tree/main/packages/deep-equal#readme",
@@ -52,7 +52,7 @@
   },
   "dependencies": {
     "@wareset-utilites/is": "0.1.1",
-    "@wareset-utilites/object": "0.0.1",
+    "@wareset-utilites/object": "0.1.0",
     "@wareset-utilites/typed": "0.3.1"
   }
 }
