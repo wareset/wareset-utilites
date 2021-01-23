@@ -27,7 +27,6 @@ export { nearly } from '@wareset-utilites/nearly'
 export { queuer, Queuer } from '@wareset-utilites/queuer'
 export { regexp } from '@wareset-utilites/regexp'
 // "dependencies": {
-//   "@wareset-utilites/is": "0.0.1",
 //   "@wareset-utilites/lang": "0.0.1"
 // }
 export { split } from '@wareset-utilites/split'
