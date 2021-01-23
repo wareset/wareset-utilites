@@ -20,7 +20,6 @@
     "dester": "dester ./src ./dist --babel",
     "build": "rm -rf ./dist && npm run -s dester",
     "dev": "npm run -s dester -- -w",
-    "publish": "npm run -s build && npm publish",
     "pkg:name": "cat package.json | grep '\"name\":' | cut -d '\"' -f4",
     "pkg:version": "cat package.json | grep '\"version\":' | cut -d '\"' -f4",
     "git:get:tag": "echo $(npm run -s pkg:name)@$(npm run -s pkg:version)",
