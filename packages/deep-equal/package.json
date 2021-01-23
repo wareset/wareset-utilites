@@ -1,7 +1,7 @@
 {
   "name": "@wareset-utilites/deep-equal",
   "version": "0.1.4",
-  "description": "No fast deep equal",
+  "description": "wareset-utilites: deep-equal",
   "author": "cftcview <cftcview@gmail.com>",
   "homepage": "https://github.com/wareset/wareset-utilites/tree/main/packages/deep-equal#readme",
   "license": "MIT",
