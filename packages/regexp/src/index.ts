@@ -1,16 +1,9 @@
-import { isVoid, isString, isRegExp } from '@wareset-utilites/is'
 import { test, last } from '@wareset-utilites/lang'
 
 export const regexp = (...a: Array<string | RegExp>): RegExp => {
   const flags: any =
-    a.length < 2 || !isString(last(a)) || !test(/^[gim]+$/, last(a))
-      ? ''
-      : a.pop()
-  let regexp = ''
-  a.forEach(
-    (v) => !isVoid(v) && (regexp += isRegExp(v) ? (v as RegExp).source : v)
-  )
-  return new RegExp(regexp, flags)
+    a.length < 2 || last(a).source || !test(/^[gim]+$/, last(a)) ? '' : a.pop()
+  return new RegExp(a.map((v) => (v as RegExp).source || v).join(''), flags)
 }
 
 export default regexp
