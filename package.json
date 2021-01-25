@@ -1,6 +1,7 @@
 {
   "name": "wareset-utilites-monorepo",
   "private": true,
+  "author": "cftcview <cftcview@gmail.com>",
   "license": "MIT",
   "description": "This is the monorepo for Wareset's utilites",
   "workspaces": [
