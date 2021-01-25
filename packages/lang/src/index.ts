@@ -11,13 +11,13 @@ export const size = (
   v.length != null ? v.length : v.size != null ? v.size : size(Object.keys(v))
 
 export const first: {
-  (v: any[]): any
-  (v: string): string
-} = (v: any[] | string): any => v[0]
+  (v: any[], offset?: number): any
+  (v: string, offset?: number): string
+} = (v: any[] | string, offset = 0): any => v[0 + offset]
 export const last: {
-  (v: any[]): any
-  (v: string): string
-} = (v: any[] | string): any => v[v.length - 1]
+  (v: any[], offset?: number): any
+  (v: string, offset?: number): string
+} = (v: any[] | string, offset = 0): any => v[v.length - 1 - offset]
 
 export const indexOf = (source: any[] | string, value: any, key = 0): number =>
   source.indexOf(value, key)
