@@ -6,9 +6,10 @@ export const instanceOf = (value: any, type: any): boolean =>
   value instanceof type
 
 export const size = (
-  v: any[] | string | Map<any, any> | Set<any> | any
+  v: any[] | string | Map<any, any> | Set<any> | any,
+  _?: number
 ): number =>
-  v.length != null ? v.length : v.size != null ? v.size : size(Object.keys(v))
+  (_ = v.length) != null ? _ : (_ = v.size) != null ? _ : size(Object.keys(v))
 
 export const first: {
   (v: any[], offset?: number): any
@@ -17,7 +18,7 @@ export const first: {
 export const last: {
   (v: any[], offset?: number): any
   (v: string, offset?: number): string
-} = (v: any[] | string, offset = 0): any => v[v.length - 1 - offset]
+} = (v: any[] | string, offset = 0): any => v[size(v) - 1 - offset]
 
 export const indexOf = (source: any[] | string, value: any, key = 0): number =>
   source.indexOf(value, key)
