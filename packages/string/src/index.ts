@@ -1,30 +1,30 @@
 /* eslint-disable max-len */
+import { size, indexOf, slice, replace } from '@wareset-utilites/lang'
 
 export const startsWith = (string = '', search = '', position = 0): boolean =>
   !!(
-    search.length &&
-    string.length >= search.length &&
-    string.indexOf(search, position) === position
+    size(search) &&
+    size(string) >= size(search) &&
+    indexOf(string, search, position) === position
   )
 // prettier-ignore
-export const endsWith = (string = '', search = '', position = string.length): boolean =>
+export const endsWith = (string = '', search = '', position = size(string)): boolean =>
   !!(
-    search.length &&
-    string.length >= search.length &&
+    size(search) &&
+    size(string) >= size(search) &&
     string.lastIndexOf(search) ===
-      position - search.length + (position < 0 ? string.length : 0)
+      position - size(search) + (position < 0 ? size(string) : 0)
   )
 
 const __regexp__ = (s: string): RegExp => new RegExp(s, 'g')
-export const trim = (string = '', trimer = '\\s'): string => {
-  return string.replace(__regexp__(`^[${trimer}]+|[${trimer}]+$`), '')
-}
-export const trimLeft = (string = '', trimer = '\\s'): string => {
-  return string.replace(__regexp__(`^[${trimer}]+`), '')
-}
-export const trimRight = (string = '', trimer = '\\s'): string => {
-  return string.replace(__regexp__(`[${trimer}]+$`), '')
-}
+export const trim = (string = '', trimer = '\\s'): string =>
+  replace(string, __regexp__(`^[${trimer}]+|[${trimer}]+$`))
+
+export const trimLeft = (string = '', trimer = '\\s'): string =>
+  replace(string, __regexp__(`^[${trimer}]+`))
+
+export const trimRight = (string = '', trimer = '\\s'): string =>
+  replace(string, __regexp__(`[${trimer}]+$`))
 
 export const repeat = (string = '', count = 1): string => {
   let res = ''
@@ -32,13 +32,12 @@ export const repeat = (string = '', count = 1): string => {
   while (count-- > 0) res += string
   return res
 }
-export const padStart = (string = '', length = 0, pad = ' '): string => {
-  return !((length -= string.length) > 0)
+export const padStart = (string = '', length = 0, pad = ' '): string =>
+  !((length -= size(string)) > 0)
     ? string
-    : repeat(pad, length / pad.length).slice(0, length) + string
-}
-export const padEnd = (string = '', length = 0, pad = ' '): string => {
-  return !((length -= string.length) > 0)
+    : slice(repeat(pad, length / size(pad)), 0, length) + string
+
+export const padEnd = (string = '', length = 0, pad = ' '): string =>
+  !((length -= size(string)) > 0)
     ? string
-    : string + repeat(pad, length / pad.length).slice(0, length)
-}
+    : string + slice(repeat(pad, length / size(pad)), 0, length)
