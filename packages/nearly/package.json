@@ -1,6 +1,6 @@
 {
   "name": "@wareset-utilites/nearly",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Returns the nearest value from the array, or from a pattern",
   "author": "cftcview <cftcview@gmail.com>",
   "homepage": "https://github.com/wareset/wareset-utilites/tree/main/packages/nearly#readme",
@@ -49,5 +49,9 @@
     "ts-jest": "26.4.4",
     "tslib": "2.0.3",
     "typescript": "4.x"
+  },
+  "dependencies": {
+    "@wareset-utilites/is": "0.1.4",
+    "@wareset-utilites/lang": "0.1.3"
   }
 }

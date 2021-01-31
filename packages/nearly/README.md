@@ -10,7 +10,7 @@ npm i @wareset-utilites/nearly ## yarn add @wareset-utilites/nearly
 
 ## Usage
 
-#### `nearly(value: Number, pattern: Array<Number> | Number, method: -1 | 0 | 1)`
+#### `nearly(value: number, pattern: number | number[], method?: -1 | 0 | 1): number`
 
 'method':
 
@@ -19,22 +19,30 @@ npm i @wareset-utilites/nearly ## yarn add @wareset-utilites/nearly
 - 1 - ceil
 
 ```js
-import nearly from '@wareset-utilites/nearly';
+import nearly from '@wareset-utilites/nearly'
 
 // If the pattern is an array, returns the nearest value.
-assert(nearly(1.25, [1, 1.24, 1.26, 2], -1), 1.24);
-assert(nearly(1.25, [1, 1.24, 1.26, 2], 0), 1.26);
-assert(nearly(1.25, [1, 1.24, 1.26, 2], 1), 1.26);
+expect(nearly(1.25, [1, 1.24, 1.26, 2])).toBe(1.26)
+
+expect(nearly(1.25, [1, 1.24, 1.26, 2], -1)).toBe(1.24)
+expect(nearly(1.25, [1, 1.24, 1.26, 2], 0)).toBe(1.26)
+expect(nearly(1.25, [1, 1.24, 1.26, 2], 1)).toBe(1.26)
+
+expect(nearly(1.25, [], -1)).toBe(1.25)
+expect(nearly(1.25, [], 0)).toBe(1.25)
+expect(nearly(1.25, [], 1)).toBe(1.25)
 
 // If the pattern is a number, it returns a multiple of it.
-assert(nearly(3040.10576, 150.101, -1), 3002.02);
-assert(nearly(3040.10576, 150.101, 0), 3002.02);
-assert(nearly(3040.10576, 150.101, 1), 3152.121);
+expect(nearly(3040.10576, 150.101)).toBe(3002.02)
+
+expect(nearly(3040.10576, 150.101, -1)).toBe(3002.02)
+expect(nearly(3040.10576, 150.101, 0)).toBe(3002.02)
+expect(nearly(3040.10576, 150.101, 1)).toBe(3152.121)
 
 // If the pattern is zero, it returns standard rounding.
-assert(nearly(3040.10576, 0, -1), Math.floor(3040.10576));
-assert(nearly(3040.10576, 0, 0), Math.round(3040.10576));
-assert(nearly(3040.10576, 0, 1), Math.ceil(3040.10576));
+expect(nearly(3040.10576, 0, -1)).toBe(Math.floor(3040.10576))
+expect(nearly(3040.10576, 0, 0)).toBe(Math.round(3040.10576))
+expect(nearly(3040.10576, 0, 1)).toBe(Math.ceil(3040.10576))
 ```
 
 ## License
