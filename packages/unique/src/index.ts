@@ -26,10 +26,12 @@
 
 // import { indexOf, includes } from '@wareset-utilites/lang'
 
+import { indexOf } from '@wareset-utilites/lang'
+
 export const unique = (
   array: any[],
   filter: any[] = ['', NaN, null, undefined]
 ): any[] =>
-  array.filter((v, k, a) => a.indexOf(v) === k && filter.indexOf(v) < 0)
+  array.filter((v, k, a) => indexOf(a, v) === k && indexOf(filter, v) < 0)
 
 export default unique
