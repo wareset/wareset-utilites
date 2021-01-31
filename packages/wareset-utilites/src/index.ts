@@ -11,6 +11,7 @@ export * from '@wareset-utilites/object'
 export { deepEqual, deepEqualExtended } from '@wareset-utilites/deep-equal'
 // "dependencies": {
 //   "@wareset-utilites/is": "0.0.1",
+//   "@wareset-utilites/lang": "0.0.1",
 //   "@wareset-utilites/object": "0.0.1",
 //   "@wareset-utilites/typed": "0.3.0"
 // }
