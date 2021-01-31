@@ -1,3 +1,5 @@
+const size = (v: any[] | string): number => v.length
+
 const getProto = Object.getPrototypeOf || ((v: any): any => v.__proto__)
 const getPrototypeOf = (v: any): any => (v == null ? v : getProto(v))
 const getProtoFn = (v: any): any =>
@@ -14,11 +16,9 @@ const getCtors = (v: any): Array<Function | object> => {
 
 const eq = (a: any, b: any): boolean =>
   a === b || (a === getCtor(b) && (!b.prototype || typeof b !== 'function'))
-// const cases = (t) =>
-//   getCtor(t[0]) === Array && t[0].length ? [...t.shift(), ...t] : t;
 
 const check = (fn: Function) => (value: any, ...t: any[]): any => {
-  if (t.length && !fn(value, ...t)) throw new TypeError(value)
+  if (size(t) && !fn(value, ...t)) throw new TypeError(value)
   return value
 }
 
@@ -31,8 +31,9 @@ const typedOf: {
   check: typeof check
 } = (value: any, ...types: IPrototypesList): any => {
   const ctors = getCtors(value)
-  if (!types.length) return ctors
-  return ctors.some((ctor) => types.some((t) => eq(ctor, t)))
+  return !size(types)
+    ? ctors
+    : ctors.some((ctor) => types.some((t) => eq(ctor, t)))
 }
 typedOf.check = check(typedOf)
 
@@ -43,7 +44,7 @@ const typed: {
   of: typeof typedOf
 } = (value: any, ...types: IPrototypesList): any => {
   const ctor = getCtor(value)
-  return !types.length ? ctor : types.some((t) => eq(ctor, t))
+  return !size(types) ? ctor : types.some((t) => eq(ctor, t))
 }
 typed.check = check(typed)
 typed.of = typedOf
