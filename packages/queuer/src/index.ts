@@ -1,30 +1,30 @@
+import { size } from '@wareset-utilites/lang'
+
 type Callbacks = Array<any>
 
-const queuerCycle = (queue: Callbacks, c: any): void => {
-  let fn, res
-  for (let i = 0; i < queue.length; i++) {
-    fn = queue[i]
-    if (!fn.isRun) {
-      // console.log(queue.length);
-      ;(fn.isRun = true), (res = fn(fn.isRes))
-      if (res instanceof Promise) {
-        res.finally(() => queuerCycle(queue, c))
-        return
+export const Queuer = (...args: Callbacks): Function | Promise<any> | void => {
+  const queuerCycle = (queue: Callbacks, c: any): void => {
+    let fn, res
+    for (let i = 0; i < size(queue); i++) {
+      fn = queue[i]
+      if (!fn.isRun) {
+        ;(fn.isRun = true), (res = fn(fn.isRes))
+        if (res instanceof Promise) {
+          res.finally(() => queuerCycle(queue, c))
+          return
+        }
+      }
+
+      if (c.fn !== fn) queue.splice(i, 1), (i = i - 1)
+      if (queue[i - 1] && c.fn !== queue[i - 1]) {
+        queue.splice(i - 1, 1), (i = i - 1)
       }
     }
 
-    if (c.fn !== fn) queue.splice(i, 1), (i = i - 1)
-    if (queue[i - 1] && c.fn !== queue[i - 1]) {
-      queue.splice(i - 1, 1), (i = i - 1)
-    }
+    queue.length = 0
+    c.resolve(true)
   }
-  // console.log(c);
-  // if (queue.length) queuerCycle(queue, c);
-  queue.length = 0
-  c.resolve(true)
-}
 
-export const Queuer = (...args: Callbacks): Function | Promise<any> | void => {
   const QUEUE: Callbacks = []
   const CURRENT: {
     fn: Function
@@ -36,11 +36,11 @@ export const Queuer = (...args: Callbacks): Function | Promise<any> | void => {
 
   const queuer = (...args: Callbacks): Function | Promise<any> | void => {
     let data: any, callbacks
-    if (args.length === 1) (data = undefined), (callbacks = args[0])
+    if (size(args) === 1) (data = undefined), (callbacks = args[0])
     else [data, callbacks] = args
 
-    if (Array.isArray(callbacks) && callbacks.length) {
-      const run = !QUEUE.length
+    if (Array.isArray(callbacks) && size(callbacks)) {
+      const run = !size(QUEUE)
 
       const queue: Callbacks = []
       ;[(): any => data, ...callbacks].forEach((_fn, k) => {
