@@ -4,6 +4,7 @@ import {
   isFunction,
   isNativeFunction
 } from '@wareset-utilites/is'
+import { size } from '@wareset-utilites/lang'
 import { getOwnPropertyNames } from '@wareset-utilites/object'
 import { typed } from '@wareset-utilites/typed'
 
@@ -98,7 +99,7 @@ const __deepEqual__ = (
   }
 
   let keys = getOwnPropertyNames(a)
-  if (keys.length !== getOwnPropertyNames(b).length) return false
+  if (size(keys) !== size(getOwnPropertyNames(b))) return false
   if (options.immerse && (options.natives || !isNativeFunction(proto))) {
     getProtoOwnPropNames(a, keys, options.natives)
   }
@@ -111,7 +112,7 @@ const __deepEqual__ = (
 
   if (options.symbols && getOwnPropSymbols) {
     const symbols = getOwnPropSymbols(a)
-    if (symbols.length !== getOwnPropSymbols(b).length) return false
+    if (size(symbols) !== size(getOwnPropSymbols(b))) return false
     for (v of symbols) {
       if (!(v in b) || !__deepEqual__(a[v], b[v], depth, options, __cache__)) {
         return false
@@ -142,18 +143,15 @@ export const deepEqual = (
   a: any,
   b: any,
   depth: boolean | number = true
-): boolean => {
-  return __deepEqual__(a, b, depth, OPTIONS, new Map())
-}
+): boolean => __deepEqual__(a, b, depth, OPTIONS, new Map())
 
 export const deepEqualExtended = (
   a: any,
   b: any,
   options: IOptions = OPTIONS
-): boolean => {
-  options = { ...OPTIONS, ...options }
-  return __deepEqual__(a, b, options.depth, options, new Map())
-}
+): boolean =>
+  (options = { ...OPTIONS, ...options }) &&
+  __deepEqual__(a, b, options.depth, options, new Map())
 
 deepEqual.extended = deepEqualExtended
 
