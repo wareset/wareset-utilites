@@ -1,22 +1,22 @@
-// const ERROR_STRING = () => String(Error().stack)
+'use strict';
 
+Object.defineProperty(exports, '__esModule', {
+  value: true
+}); // const ERROR_STRING = () => String(Error().stack)
 // let BASE_STACK = []
 // const stack = () =>
 //   ERROR_STRING()
 //     .split(/\n+/g)
 //     .map((v) => v.trim())
 //     .filter((v) => BASE_STACK.indexOf(v) === -1)
-
 // const DEFAULT_STACK = {
 //   __stack__: [],
 //   get stack() {
 //     return stack()
 //   }
 // }
-
 // export const stacktrace = (() => {
 //   BASE_STACK = DEFAULT_STACK.stack
-
 //   return (verbose) => {
 //     let text = stack().reverse()
 //     text.pop()
@@ -32,13 +32,13 @@
 //           .replace(/[^\d:]/g, '')
 //       )
 //     } else text = text.map((v, k, a) => k + '__' + v)
-
 //     if (!text.length) text.push('0__global')
 //     return text
 //   }
 // })()
-
 // export default stacktrace
 
-export const stacktrace = () => ('' + Error().stack).split(/\s*\n+\s*/).slice(2)
-export default stacktrace
+var stacktrace = () => ('' + Error().stack).split(/\s*\n+\s*/).slice(2);
+
+exports.default = stacktrace;
+exports.stacktrace = stacktrace;
