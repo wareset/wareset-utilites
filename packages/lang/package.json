@@ -1,6 +1,6 @@
 {
   "name": "@wareset-utilites/lang",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "wareset-utilites: lang",
   "author": "cftcview <cftcview@gmail.com>",
   "homepage": "https://github.com/wareset/wareset-utilites/tree/main/packages/lang#readme",
@@ -40,7 +40,7 @@
   "scripts": {
     "test": "jest --",
     "dester": "dester ./src ./ --babel",
-    "build": "npm run -s dester",
+    "build": "npm run -s dester -- -s",
     "dev": "npm run -s dester -- -w --no-r",
     "pkg:name": "cat package.json | grep '\"name\":' | cut -d '\"' -f4",
     "pkg:version": "cat package.json | grep '\"version\":' | cut -d '\"' -f4",
