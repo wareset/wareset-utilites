@@ -26,12 +26,12 @@
 
 // import { indexOf, includes } from '@wareset-utilites/lang'
 
-import { indexOf } from '@wareset-utilites/lang'
+import { indexOf } from '@wareset-utilites/lang/index-of'
+import { includes } from '@wareset-utilites/lang/includes'
 
-export const unique = (
-  array: any[],
+export const unique = <T>(
+  list: T[],
   filter: any[] = ['', NaN, null, undefined]
-): any[] =>
-  array.filter((v, k, a) => indexOf(a, v) === k && indexOf(filter, v) < 0)
+): T[] => list.filter((v, k, a) => indexOf(a, v) === k && !includes(filter, v))
 
 export default unique
