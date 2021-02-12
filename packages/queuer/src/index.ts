@@ -1,23 +1,29 @@
-import { size } from '@wareset-utilites/lang'
+import { length } from '@wareset-utilites/lang/length'
+import { splice } from '@wareset-utilites/lang/splice'
+import { indexOf } from '@wareset-utilites/lang/index-of'
+
+import { isArray } from '@wareset-utilites/is/is-array'
+import { isFunction } from '@wareset-utilites/is/is-function'
+import { isPromise } from '@wareset-utilites/is/is-promise'
 
 type Callbacks = Array<any>
 
 export const Queuer = (...args: Callbacks): Function | Promise<any> | void => {
   const queuerCycle = (queue: Callbacks, c: any): void => {
     let fn, res
-    for (let i = 0; i < size(queue); i++) {
+    for (let i = 0; i < length(queue); i++) {
       fn = queue[i]
       if (!fn.isRun) {
         ;(fn.isRun = true), (res = fn(fn.isRes))
-        if (res instanceof Promise) {
+        if (isPromise(res)) {
           res.finally(() => queuerCycle(queue, c))
           return
         }
       }
 
-      if (c.fn !== fn) queue.splice(i, 1), (i = i - 1)
+      if (c.fn !== fn) splice(queue, i, 1), (i = i - 1)
       if (queue[i - 1] && c.fn !== queue[i - 1]) {
-        queue.splice(i - 1, 1), (i = i - 1)
+        splice(queue, i - 1, 1), (i = i - 1)
       }
     }
 
@@ -36,23 +42,23 @@ export const Queuer = (...args: Callbacks): Function | Promise<any> | void => {
 
   const queuer = (...args: Callbacks): Function | Promise<any> | void => {
     let data: any, callbacks
-    if (size(args) === 1) (data = undefined), (callbacks = args[0])
+    if (length(args) === 1) (data = undefined), (callbacks = args[0])
     else [data, callbacks] = args
 
-    if (Array.isArray(callbacks) && size(callbacks)) {
-      const run = !size(QUEUE)
+    if (isArray(callbacks) && length(callbacks)) {
+      const run = !length(QUEUE)
 
       const queue: Callbacks = []
       ;[(): any => data, ...callbacks].forEach((_fn, k) => {
-        const fn = typeof _fn !== 'function' ? (): Function => _fn : _fn
+        const fn = !isFunction(_fn) ? (): Function => _fn : _fn
         const FN = (data: any): any => {
           CURRENT.fn = FN
           const res = fn(data)
           if (queue[k + 1]) {
-            if (!(res instanceof Promise)) {
+            if (!isPromise(res)) {
               if (queue[k + 1]) queue[k + 1].isRes = res
             } else {
-              res.then((res) => queue[k + 1] && (queue[k + 1].isRes = res))
+              res.then((res: any) => queue[k + 1] && (queue[k + 1].isRes = res))
             }
           }
           return res
@@ -60,7 +66,7 @@ export const Queuer = (...args: Callbacks): Function | Promise<any> | void => {
         queue.push(FN)
       })
       ;(queue[0].isRun = true), (queue[1].isRes = data)
-      QUEUE.splice(QUEUE.indexOf(CURRENT.fn), 0, ...queue)
+      splice(QUEUE, indexOf(QUEUE, CURRENT.fn), 0, ...queue)
 
       if (run) {
         CURRENT.promise = new Promise((resolve) => (CURRENT.resolve = resolve))
@@ -75,6 +81,6 @@ export const Queuer = (...args: Callbacks): Function | Promise<any> | void => {
   return queuer(...args)
 }
 
-export const queuer = Queuer()
+// export const queuer = Queuer()
 
-export default queuer
+export default Queuer

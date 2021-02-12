@@ -1,24 +1,27 @@
 {
   "name": "@wareset-utilites/queuer",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Runs synchronous and asynchronous functions in turn",
   "author": "cftcview <cftcview@gmail.com>",
   "homepage": "https://github.com/wareset/wareset-utilites/tree/main/packages/queuer#readme",
   "license": "MIT",
-  "main": "dist/index",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
+  "main": "index",
+  "module": "index.mjs",
+  "types": "index.d.ts",
   "files": [
-    "dist",
-    "README.md"
+    "README.md",
+    "__types__",
+    "index.d.ts",
+    "index.js",
+    "index.mjs"
   ],
   "keywords": [
     "queuer"
   ],
   "scripts": {
     "test": "jest --",
-    "dester": "dester ./src ./dist --babel",
-    "build": "rm -rf ./dist && npm run -s dester",
+    "dester": "dester ./src ./ --babel",
+    "build": "npm run -s dester",
     "dev": "npm run -s dester -- -w",
     "pkg:name": "cat package.json | grep '\"name\":' | cut -d '\"' -f4",
     "pkg:version": "cat package.json | grep '\"version\":' | cut -d '\"' -f4",
@@ -38,19 +41,20 @@
     "url": "https://github.com/wareset/wareset-utilites/issues"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9",
+    "@babel/core": "^7.12.10",
     "@babel/plugin-proposal-class-properties": "^7.12.1",
-    "@babel/plugin-transform-block-scoping": "7.12.12",
-    "@types/node": "^12.19.0",
-    "@types/jest": "26.0.19",
+    "@babel/plugin-transform-block-scoping": "^7.12.12",
+    "@types/jest": "^26.0.20",
+    "@types/node": "^12.19.15",
     "dester": "0.x",
-    "jest": "^26.6.0",
-    "ts-node": "^9.0.0",
-    "ts-jest": "26.4.4",
-    "tslib": "2.0.3",
+    "jest": "^26.6.3",
+    "ts-jest": "^26.5.0",
+    "ts-node": "^9.1.1",
+    "tslib": "^2.1.0",
     "typescript": "4.x"
   },
   "dependencies": {
-    "@wareset-utilites/lang": "0.1.3"
+    "@wareset-utilites/is": "0.1.5",
+    "@wareset-utilites/lang": "0.1.4"
   }
 }
