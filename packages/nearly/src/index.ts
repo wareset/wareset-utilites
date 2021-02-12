@@ -1,5 +1,8 @@
-import { isArray, isNumber } from '@wareset-utilites/is'
-import { size, indexOf } from '@wareset-utilites/lang'
+import { isArray } from '@wareset-utilites/is/is-array'
+import { isNumber } from '@wareset-utilites/is/is-number'
+
+import { indexOf } from '@wareset-utilites/lang/index-of'
+import { length } from '@wareset-utilites/lang/length'
 
 // export interface INearly {
 //   (value: number, pattern: number | number[], method?: -1 | 0 | 1): number
@@ -24,7 +27,7 @@ export const nearly = ((): {
   ): number => {
     let res: any
     if (isArray(pattern)) {
-      if (!size(pattern)) res = value
+      if (!length(pattern)) res = value
       else {
         const f = METHODS_FOR_ARR[method] || METHODS_FOR_ARR[0]
         res = pattern.reduce((prev, curr) =>
@@ -40,7 +43,7 @@ export const nearly = ((): {
 
       const str = `${pattern}`
       const index = indexOf(str, '.')
-      res = index === -1 ? fin : +fin.toFixed(size(str) - index - 1)
+      res = index === -1 ? fin : +fin.toFixed(length(str) - index - 1)
     } else res = (METHODS_FOR_NUM[method] || METHODS_FOR_NUM[0])(value)
 
     return res
