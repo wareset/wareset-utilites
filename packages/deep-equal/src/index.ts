@@ -1,14 +1,25 @@
-import {
-  isNumber,
-  isObject,
-  isFunction,
-  isNativeFunction
-} from '@wareset-utilites/is'
-import { size } from '@wareset-utilites/lang'
-import { getOwnPropertyNames } from '@wareset-utilites/object'
+/* eslint-disable max-len */
+
+import { isNumber } from '@wareset-utilites/is/is-number'
+import { isObject } from '@wareset-utilites/is/is-object'
+import { isFunction } from '@wareset-utilites/is/is-function'
+import { isNativeFunction } from '@wareset-utilites/is/is-native-function'
+
+import { instanceOf } from '@wareset-utilites/lang/instance-of'
+import { size } from '@wareset-utilites/lang/size'
+import { length } from '@wareset-utilites/lang/length'
+
 import { typed } from '@wareset-utilites/typed'
 
-const OBJ_PROTOTYPE = Object.prototype
+// const {
+//   getOwnPropertyNames,
+//   getOwnPropertySymbols,
+//   prototype: objectPrototype
+// } = Object
+
+import { objectPrototype } from '@wareset-utilites/object/object-prototype'
+import { getOwnPropertyNames } from '@wareset-utilites/object/get-own-property-names'
+import { getOwnPropertySymbols } from '@wareset-utilites/object/get-own-property-symbols'
 
 const getProtoOwnPropNames = (
   a: any,
@@ -22,11 +33,7 @@ const getProtoOwnPropNames = (
   })
 }
 
-const getOwnPropSymbols = Object.getOwnPropertySymbols
-
-const iof = (v: any, f: Function): boolean => v instanceof f
-
-export interface IOptions {
+export interface IDeepEqualOptions {
   depth?: number | boolean
   symbols?: boolean
   immerse?: boolean
@@ -34,7 +41,7 @@ export interface IOptions {
   natives?: boolean
 }
 
-const OPTIONS: IOptions = {
+const OPTIONS: IDeepEqualOptions = {
   depth: true,
   symbols: true,
   immerse: true,
@@ -42,16 +49,19 @@ const OPTIONS: IOptions = {
   natives: false
 }
 
+const vOf = 'valueOf'
+const toS = 'toString'
+
+let undef: undefined
 const __deepEqual__ = (
   a: any,
   b: any,
   depth: boolean | number | undefined,
-  options: IOptions = OPTIONS,
+  options: IDeepEqualOptions = OPTIONS,
   __cache__: Map<any, any>
 ): boolean => {
   if (a === b) return true
-  if (!depth || !isObject(a) || !isObject(b) || depth < 0)
-    return a !== a && b !== b
+  if (!(+depth! > 0) || !isObject(a) || !isObject(b)) return a !== a && b !== b
 
   const proto = typed(a)
   if (proto !== typed(b)) return false
@@ -61,76 +71,57 @@ const __deepEqual__ = (
 
   if (isNumber(depth)) (depth as number)--
 
-  let k, v
+  const __da__ = (a: any, b: any): boolean =>
+    __deepEqual__(a, b, depth, options, __cache__)
+
+  let k, v, tmp: any
 
   try {
-    if (iof(a, ArrayBuffer)) (a = new DataView(a)), (b = new DataView(b))
+    if (instanceOf(a, ArrayBuffer)) (a = new DataView(a)), (b = new DataView(b))
 
     if (ArrayBuffer.isView(a)) {
       if (a.byteLength !== b.byteLength) return false
       ;(a = new Float64Array(a.buffer)), (b = new Float64Array(b.buffer))
-      for (k = a.byteLength; k-- > 0; undefined) {
-        if (a[k] !== b[k]) return false
-      }
+      for (k = a.byteLength; k-- > 0; undef) if (a[k] !== b[k]) return false
       return true
     }
   } catch (err) {
-    return false
+    /**/
   }
 
-  if (iof(a, Map)) {
-    if (a.size !== b.size) return false
+  if ((tmp = instanceOf(a, Map)) || instanceOf(a, Set)) {
+    if (size(a) !== size(b)) return false
 
-    for ([k] of a) if (!b.has(k)) return false
-    for ([k, v] of a) {
-      if (!__deepEqual__(v, b.get(k), depth, options, __cache__)) return false
-    }
-    // if (proto === Map) return true;
+    if (tmp) {
+      for ([k] of a) if (!b.has(k)) return false
+      for ([k, v] of a) if (!__da__(v, b.get(k))) return false
+    } else for (v of a) if (!b.has(v)) return false
   }
 
-  if (iof(a, Set)) {
-    if (a.size !== b.size) return false
-    for (v of a) if (!b.has(v)) return false
-    // if (proto === Set) return true;
-  }
-
-  if (options.noweaks && (iof(a, WeakMap) || iof(a, WeakSet))) {
+  if (options.noweaks && (instanceOf(a, WeakMap) || instanceOf(a, WeakSet))) {
     return false
   }
 
   let keys = getOwnPropertyNames(a)
-  if (size(keys) !== size(getOwnPropertyNames(b))) return false
+  if (length(keys) !== length(getOwnPropertyNames(b))) return false
   if (options.immerse && (options.natives || !isNativeFunction(proto))) {
     getProtoOwnPropNames(a, keys, options.natives)
   }
-  if (a instanceof Error) keys = keys.filter((v: string) => v !== 'stack')
-  for (v of keys) {
-    if (!(v in b) || !__deepEqual__(a[v], b[v], depth, options, __cache__)) {
-      return false
-    }
-  }
+  if (instanceOf(a, Error)) keys = keys.filter((v: string) => v !== 'stack')
+  for (v of keys) if (!(v in b) || !__da__(a[v], b[v])) return false
 
-  if (options.symbols && getOwnPropSymbols) {
-    const symbols = getOwnPropSymbols(a)
-    if (size(symbols) !== size(getOwnPropSymbols(b))) return false
-    for (v of symbols) {
-      if (!(v in b) || !__deepEqual__(a[v], b[v], depth, options, __cache__)) {
-        return false
-      }
-    }
+  if (options.symbols && getOwnPropertySymbols) {
+    const symbols = getOwnPropertySymbols(a)
+    if (length(symbols) !== length(getOwnPropertySymbols(b))) return false
+    for (v of symbols) if (!(v in b) || !__da__(a[v], b[v])) return false
   }
 
   try {
-    if (a.valueOf !== OBJ_PROTOTYPE.valueOf && isFunction(a.valueOf)) {
-      // prettier-ignore
-      return __deepEqual__(
-        a.valueOf(), b.valueOf(), depth, options, __cache__)
+    if (a[vOf] !== objectPrototype[vOf] && isFunction(a[vOf])) {
+      return __da__(a[vOf](), b[vOf]())
     }
-
-    if (a.toString !== OBJ_PROTOTYPE.toString && isFunction(a.toString)) {
-      // prettier-ignore
-      return __deepEqual__(
-        a.toString(), b.toString(), depth, options, __cache__)
+    if (a[toS] !== objectPrototype[toS] && isFunction(a[toS])) {
+      return __da__(a[toS](), b[toS]())
     }
   } catch (err) {
     return false
@@ -148,7 +139,7 @@ export const deepEqual = (
 export const deepEqualExtended = (
   a: any,
   b: any,
-  options: IOptions = OPTIONS
+  options: IDeepEqualOptions = OPTIONS
 ): boolean =>
   (options = { ...OPTIONS, ...options }) &&
   __deepEqual__(a, b, options.depth, options, new Map())

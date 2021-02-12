@@ -1,4 +1,4 @@
-const deepequal = require('../dist/index').default
+const deepequal = require('../index').default
 
 // const DATA_1 = {
 //   Infinity: Infinity,
