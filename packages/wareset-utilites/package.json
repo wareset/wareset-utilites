@@ -1,6 +1,6 @@
 {
   "name": "wareset-utilites",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "description": "A set of universal functions",
   "author": "cftcview <cftcview@gmail.com>",
   "homepage": "https://github.com/wareset/wareset-utilites/tree/main/packages/wareset-utilites#readme",
@@ -18,8 +18,8 @@
   "scripts": {
     "test": "jest --",
     "dester": "dester ./src ./ --babel",
-    "build": "npm run -s dester",
-    "dev": "npm run -s dester -- -w",
+    "build": "npm run -s dester -- -s",
+    "dev": "npm run -s dester -- -w --no-r",
     "pkg:name": "cat package.json | grep '\"name\":' | cut -d '\"' -f4",
     "pkg:version": "cat package.json | grep '\"version\":' | cut -d '\"' -f4",
     "git:get:tag": "echo $(npm run -s pkg:name)@$(npm run -s pkg:version)",
@@ -51,22 +51,22 @@
     "typescript": "4.x"
   },
   "dependencies": {
-    "@wareset-utilites/deep-equal": "0.1.7",
-    "@wareset-utilites/each": "0.1.5",
-    "@wareset-utilites/escape": "0.1.3",
-    "@wareset-utilites/hash": "0.1.1",
-    "@wareset-utilites/is": "0.1.5",
-    "@wareset-utilites/lang": "0.1.4",
-    "@wareset-utilites/nearly": "0.1.7",
-    "@wareset-utilites/object": "0.1.1",
-    "@wareset-utilites/queuer": "0.1.6",
-    "@wareset-utilites/regexp": "0.1.5",
+    "@wareset-utilites/deep-equal": "0.1.8",
+    "@wareset-utilites/each": "0.1.6",
+    "@wareset-utilites/escape": "0.1.4",
+    "@wareset-utilites/hash": "0.1.2",
+    "@wareset-utilites/is": "0.1.6",
+    "@wareset-utilites/lang": "0.1.5",
+    "@wareset-utilites/nearly": "0.1.8",
+    "@wareset-utilites/object": "0.1.2",
+    "@wareset-utilites/queuer": "0.1.7",
+    "@wareset-utilites/regexp": "0.1.6",
     "@wareset-utilites/split": "0.3.2",
-    "@wareset-utilites/stacktrace": "0.1.2",
-    "@wareset-utilites/string": "0.1.3",
-    "@wareset-utilites/timeout": "0.0.2",
-    "@wareset-utilites/trycatch": "0.0.2",
-    "@wareset-utilites/typed": "0.3.3",
-    "@wareset-utilites/unique": "1.1.2"
+    "@wareset-utilites/stacktrace": "0.1.3",
+    "@wareset-utilites/string": "0.1.4",
+    "@wareset-utilites/timeout": "0.0.3",
+    "@wareset-utilites/trycatch": "0.0.3",
+    "@wareset-utilites/typed": "0.3.4",
+    "@wareset-utilites/unique": "1.1.3"
   }
 }
