@@ -1,0 +1,21 @@
+export * from './__types__';
+
+export { isArray } from './__types__';
+export { isArrayStrict } from './__types__';
+export { isBe } from './__types__';
+export { isBoolean } from './__types__';
+export { isFalse } from './__types__';
+export { isFunction } from './__types__';
+export { isNativeFunction } from './__types__';
+export { isNill } from './__types__';
+export { isNull } from './__types__';
+export { isNumber } from './__types__';
+export { isObject } from './__types__';
+export { isObjectStrict } from './__types__';
+export { isPromise } from './__types__';
+export { isRegExp } from './__types__';
+export { isString } from './__types__';
+export { isSymbol } from './__types__';
+export { isTrue } from './__types__';
+export { isUndefined } from './__types__';
+export { isVoid } from './__types__';
