@@ -1,0 +1,10 @@
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+var timeout = (msec = 0, callback = () => {}) => new Promise(res => setTimeout(() => res(callback()), msec));
+
+exports.default = timeout;
+exports.timeout = timeout;
