@@ -13,6 +13,6 @@ var length = require('@wareset-utilites/lang/length');
 var __searchlen__; // prettier-ignore
 
 
-var startsWith = (string, search, position = 0) => !!((__searchlen__ = length.length(search)) && length.length(string) >= __searchlen__ && indexOf.indexOf(string, search, position) === position);
+var startsWith = (string, search, position = 0) => !!(position < 0 && (position = -position), (__searchlen__ = length.length(search)) && length.length(string) >= __searchlen__ && indexOf.indexOf(string, search, position) === position);
 
 exports.startsWith = startsWith;

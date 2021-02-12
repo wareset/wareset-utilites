@@ -15,6 +15,6 @@ var __searchlen__;
 var __stringlen__; // prettier-ignore
 
 
-var endsWith = (string, search, position = length.length(string)) => !!((__searchlen__ = length.length(search)) && (__stringlen__ = length.length(string)) >= __searchlen__ && lastIndexOf.lastIndexOf(string, search) === position - __searchlen__ + (position < 0 ? __stringlen__ : 0));
+var endsWith = (string, search, position = 0) => !!(position < 0 && (position = -position), (__searchlen__ = length.length(search)) && (__stringlen__ = length.length(string)) >= __searchlen__ && lastIndexOf.lastIndexOf(string, search, __stringlen__ -= position) === __stringlen__ - __searchlen__);
 
 exports.endsWith = endsWith;

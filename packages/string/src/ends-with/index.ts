@@ -5,10 +5,10 @@ import { length } from '@wareset-utilites/lang/length'
 let __searchlen__: number
 let __stringlen__: number
 // prettier-ignore
-export const endsWith = (string: string, search: string, position = length(string)): boolean =>
-  !!(
-    (__searchlen__ = length(search)) &&
+export const endsWith = (string: string, search: string, position = 0): boolean =>
+  !!((position < 0 && (position = -position)),
+  (__searchlen__ = length(search)) &&
     (__stringlen__ = length(string)) >= __searchlen__ &&
-    lastIndexOf(string, search) ===
-      position - __searchlen__ + (position < 0 ? __stringlen__ : 0)
+    lastIndexOf(string, search,
+      (__stringlen__ -= position)) === __stringlen__ - __searchlen__
   )
