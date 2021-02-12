@@ -1,9 +1,14 @@
-import { test, last, size } from '@wareset-utilites/lang'
+import { test } from '@wareset-utilites/lang/test'
+import { last } from '@wareset-utilites/lang/last'
+import { length } from '@wareset-utilites/lang/length'
 
-export const regexp = (...a: Array<string | RegExp>): RegExp => {
-  const flags: any =
-    size(a) < 2 || last(a).source || !test(/^[gim]+$/, last(a)) ? '' : a.pop()
-  return new RegExp(a.map((v) => (v as RegExp).source || v).join(''), flags)
-}
+let flags: any
+export const regexp = (...a: Array<string | RegExp>): RegExp => (
+  (flags =
+    length(a) < 2 || (last(a) as RegExp).source || !test(/^[gim]+$/, last(a))
+      ? ''
+      : a.pop()),
+  new RegExp(a.map((v) => (v as RegExp).source || v).join(''), flags)
+)
 
 export default regexp
