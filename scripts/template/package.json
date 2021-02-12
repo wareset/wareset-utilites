@@ -5,11 +5,10 @@
   "author": "cftcview <cftcview@gmail.com>",
   "homepage": "https://github.com/wareset/wareset-utilites/tree/main/packages/%NAME%#readme",
   "license": "MIT",
-  "main": "dist/index",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
+  "main": "index",
+  "module": "index.mjs",
+  "types": "index.d.ts",
   "files": [
-    "dist",
     "README.md"
   ],
   "keywords": [
@@ -17,9 +16,9 @@
   ],
   "scripts": {
     "test": "jest --",
-    "dester": "dester ./src ./dist --babel",
-    "build": "rm -rf ./dist && npm run -s dester",
-    "dev": "npm run -s dester -- -w",
+    "dester": "dester ./src ./ --babel",
+    "build": "npm run -s dester",
+    "dev": "npm run -s dester -- -w --no-r",
     "pkg:name": "cat package.json | grep '\"name\":' | cut -d '\"' -f4",
     "pkg:version": "cat package.json | grep '\"version\":' | cut -d '\"' -f4",
     "git:get:tag": "echo $(npm run -s pkg:name)@$(npm run -s pkg:version)",

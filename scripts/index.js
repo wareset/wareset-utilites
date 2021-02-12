@@ -236,7 +236,7 @@ const autobuild = () => {
       }
     )
 
-    execSync('npm publish', {
+    execSync('sleep 1 && npm publish && sleep 1', {
       stdio: ['ignore', 'inherit', 'inherit'],
       cwd: DIR_PACKAGE,
       shell: true

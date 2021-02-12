@@ -55,10 +55,10 @@
     "@wareset-utilites/each": "0.1.4",
     "@wareset-utilites/escape": "0.1.2",
     "@wareset-utilites/hash": "0.1.0",
-    "@wareset-utilites/is": "0.1.4",
-    "@wareset-utilites/lang": "0.1.3",
+    "@wareset-utilites/is": "0.1.5",
+    "@wareset-utilites/lang": "0.1.4",
     "@wareset-utilites/nearly": "0.1.6",
-    "@wareset-utilites/object": "0.1.0",
+    "@wareset-utilites/object": "0.1.1",
     "@wareset-utilites/queuer": "0.1.5",
     "@wareset-utilites/regexp": "0.1.4",
     "@wareset-utilites/split": "0.3.1",
@@ -66,7 +66,7 @@
     "@wareset-utilites/string": "0.1.1",
     "@wareset-utilites/timeout": "0.0.1",
     "@wareset-utilites/trycatch": "0.0.1",
-    "@wareset-utilites/typed": "0.3.2",
+    "@wareset-utilites/typed": "0.3.3",
     "@wareset-utilites/unique": "1.1.1"
   }
 }
