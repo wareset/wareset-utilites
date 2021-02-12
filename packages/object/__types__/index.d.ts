@@ -1,0 +1,12 @@
+export { defineProperties } from './define-properties';
+export { defineProperty } from './define-property';
+export { getOwnPropertyDescriptor } from './get-own-property-descriptor';
+export { getOwnPropertyDescriptors } from './get-own-property-descriptors';
+export { getOwnPropertyNames } from './get-own-property-names';
+export { getOwnPropertySymbols } from './get-own-property-symbols';
+export { entries } from './entries';
+export { hasOwnProperty } from './has-own-property';
+export { keys } from './keys';
+export { object } from './object';
+export { objectPrototype } from './object-prototype';
+export { values } from './values';
