@@ -1,6 +1,6 @@
 {
   "name": "wareset-utilites",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "description": "A set of universal functions",
   "author": "cftcview <cftcview@gmail.com>",
   "homepage": "https://github.com/wareset/wareset-utilites/tree/main/packages/wareset-utilites#readme",
@@ -63,7 +63,7 @@
     "@wareset-utilites/regexp": "0.1.5",
     "@wareset-utilites/split": "0.3.2",
     "@wareset-utilites/stacktrace": "0.1.2",
-    "@wareset-utilites/string": "0.1.2",
+    "@wareset-utilites/string": "0.1.3",
     "@wareset-utilites/timeout": "0.0.2",
     "@wareset-utilites/trycatch": "0.0.2",
     "@wareset-utilites/typed": "0.3.3",
