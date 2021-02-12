@@ -1,4 +1,4 @@
-const typed = require('../dist/index').default
+const typed = require('../index').default
 
 test('Infinity:', () => {
   expect(typed(Infinity)).toBe(Number)
