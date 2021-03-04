@@ -26,8 +26,8 @@
 
 // import { indexOf, includes } from '@wareset-utilites/lang'
 
-import { indexOf } from '@wareset-utilites/lang/index-of'
-import { includes } from '@wareset-utilites/lang/includes'
+import { indexOf } from '@wareset-utilites/array'
+import { includes } from '@wareset-utilites/array/includes'
 
 export const unique = <T>(
   list: T[],
