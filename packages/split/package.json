@@ -1,6 +1,6 @@
 {
   "name": "@wareset-utilites/split",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Converts a string to an array, taking quotes or brackets",
   "author": "cftcview <cftcview@gmail.com>",
   "homepage": "https://github.com/wareset/wareset-utilites/tree/main/packages/split#readme",
