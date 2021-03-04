@@ -4,7 +4,7 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
-var replace = require('@wareset-utilites/lang/replace');
+var replace = require('@wareset-utilites/string/replace');
 
 var length = require('@wareset-utilites/lang/length');
 

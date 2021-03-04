@@ -1,4 +1,4 @@
-import { replace } from '@wareset-utilites/lang/replace';
+import { replace } from '@wareset-utilites/string/replace';
 import { length } from '@wareset-utilites/lang/length';
 import { slice } from '@wareset-utilites/lang/slice'; // export const hash = (string) => {
 //   string = ('' + string).replace(/\r/g, '')
