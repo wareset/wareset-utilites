@@ -1,6 +1,6 @@
 {
   "name": "@wareset-utilites/lang",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "wareset-utilites: lang",
   "author": "cftcview <cftcview@gmail.com>",
   "homepage": "https://github.com/wareset/wareset-utilites/tree/main/packages/lang#readme",
@@ -11,10 +11,7 @@
   "files": [
     "README.md",
     "__types__",
-    "find",
-    "find-index",
     "first",
-    "includes",
     "index-of",
     "index.d.ts",
     "index.js",
@@ -24,13 +21,8 @@
     "last-index-of",
     "length",
     "noop",
-    "pop",
-    "replace",
-    "reverse",
-    "shift",
     "size",
     "slice",
-    "splice",
     "test",
     "type-of"
   ],
@@ -71,5 +63,8 @@
     "ts-node": "^9.1.1",
     "tslib": "^2.1.0",
     "typescript": "4.x"
+  },
+  "dependencies": {
+    "@wareset-utilites/math": "0.1.1"
   }
 }

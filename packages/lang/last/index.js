@@ -6,6 +6,8 @@ Object.defineProperty(exports, '__esModule', {
 
 var length = require('../length');
 
-var last = (v, offset = 0) => v[length.length(v) - 1 - offset];
+var math = require('@wareset-utilites/math');
+
+var last = (v, offset = 0) => v[length.length(v) - 1 - math.abs(offset)];
 
 exports.last = last;
