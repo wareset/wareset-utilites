@@ -1,4 +1,6 @@
+export * from '@wareset-utilites/array'
 export * from '@wareset-utilites/lang'
+export * from '@wareset-utilites/math'
 
 export { typed, typedOf } from '@wareset-utilites/typed'
 

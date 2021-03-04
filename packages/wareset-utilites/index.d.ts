@@ -2,6 +2,8 @@ export * from './__types__';
 export * from './__types__';
 export * from './__types__';
 export * from './__types__';
+export * from './__types__';
+export * from './__types__';
 export { Queuer } from './__types__';
 export { deepEqual } from './__types__';
 export { deepEqualExtended } from './__types__';

@@ -4,7 +4,11 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
+var array = require('@wareset-utilites/array');
+
 var lang = require('@wareset-utilites/lang');
+
+var math = require('@wareset-utilites/math');
 
 var typed = require('@wareset-utilites/typed');
 
@@ -38,11 +42,27 @@ var timeout = require('@wareset-utilites/timeout');
 
 var trycatch = require('@wareset-utilites/trycatch');
 
+Object.keys(array).forEach(function (k) {
+  if (k !== 'default') Object.defineProperty(exports, k, {
+    enumerable: true,
+    get: function () {
+      return array[k];
+    }
+  });
+});
 Object.keys(lang).forEach(function (k) {
   if (k !== 'default') Object.defineProperty(exports, k, {
     enumerable: true,
     get: function () {
       return lang[k];
+    }
+  });
+});
+Object.keys(math).forEach(function (k) {
+  if (k !== 'default') Object.defineProperty(exports, k, {
+    enumerable: true,
+    get: function () {
+      return math[k];
     }
   });
 });
