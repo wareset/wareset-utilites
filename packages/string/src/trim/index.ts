@@ -1,4 +1,4 @@
-import { replace } from '@wareset-utilites/lang/replace'
+import { replace } from '../replace'
 import { __regexp__ } from '../lib'
 
 export const trim = (string: string, trimer?: string): string =>

@@ -1,10 +1,20 @@
 export * from './__types__';
 
 export { endsWith } from './__types__';
+export { first } from './__types__';
+export { indexOf } from './__types__';
+export { last } from './__types__';
+export { lastIndexOf } from './__types__';
+export { length } from './__types__';
 export { padEnd } from './__types__';
 export { padStart } from './__types__';
 export { repeat } from './__types__';
+export { replace } from './__types__';
+export { slice } from './__types__';
 export { startsWith } from './__types__';
+export { toCapitalize } from './__types__';
+export { toLowercase } from './__types__';
+export { toUppercase } from './__types__';
 export { trim } from './__types__';
 export { trimLeft } from './__types__';
 export { trimRight } from './__types__';
