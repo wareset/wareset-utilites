@@ -1,6 +1,6 @@
 {
   "name": "@wareset-utilites/queuer",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Runs synchronous and asynchronous functions in turn",
   "author": "cftcview <cftcview@gmail.com>",
   "homepage": "https://github.com/wareset/wareset-utilites/tree/main/packages/queuer#readme",
@@ -54,7 +54,7 @@
     "typescript": "4.x"
   },
   "dependencies": {
-    "@wareset-utilites/is": "0.1.6",
-    "@wareset-utilites/lang": "0.1.5"
+    "@wareset-utilites/is": "0.1.7",
+    "@wareset-utilites/array": "0.1.1"
   }
 }

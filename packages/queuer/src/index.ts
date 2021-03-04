@@ -1,6 +1,6 @@
-import { length } from '@wareset-utilites/lang/length'
-import { splice } from '@wareset-utilites/lang/splice'
-import { indexOf } from '@wareset-utilites/lang/index-of'
+import { length } from '@wareset-utilites/array'
+import { splice } from '@wareset-utilites/array/splice'
+import { indexOf } from '@wareset-utilites/array'
 
 import { isArray } from '@wareset-utilites/is/is-array'
 import { isFunction } from '@wareset-utilites/is/is-function'
