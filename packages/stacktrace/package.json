@@ -1,6 +1,6 @@
 {
   "name": "@wareset-utilites/stacktrace",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Outputs an array of the call location",
   "author": "cftcview <cftcview@gmail.com>",
   "homepage": "https://github.com/wareset/wareset-utilites/tree/main/packages/stacktrace#readme",
