@@ -10,26 +10,22 @@ var isNumber = require('@wareset-utilites/is/is-number');
 
 var indexOf = require('@wareset-utilites/lang/index-of');
 
-var length = require('@wareset-utilites/lang/length'); // export interface INearly {
+var length = require('@wareset-utilites/lang/length');
+
+var math = require('@wareset-utilites/math'); // export interface INearly {
 //   (value: number, pattern: number | number[], method?: -1 | 0 | 1): number
 // }
 
 
 var nearly = (() => {
-  var {
-    abs,
-    floor,
-    round,
-    ceil
-  } = Math;
   var METHODS_FOR_NUM = {
-    '-1': floor,
-    '0': round,
-    '1': ceil
+    '-1': math.floor,
+    '0': math.round,
+    '1': math.ceil
   };
   var METHODS_FOR_ARR = {
-    '-1': (a = 0, b = 0, c = 0) => abs(a - c) <= abs(b - c),
-    '0': (a = 0, b = 0, c = 0) => abs(a - c) < abs(b - c),
+    '-1': (a = 0, b = 0, c = 0) => math.abs(a - c) <= math.abs(b - c),
+    '0': (a = 0, b = 0, c = 0) => math.abs(a - c) < math.abs(b - c),
     '1': null
   };
   return (value = 1, pattern, method = 0) => {
@@ -42,7 +38,7 @@ var nearly = (() => {
       }
     } else if (pattern && isNumber.isNumber(pattern)) {
       if (pattern < 0) pattern = -pattern;
-      var coef = abs(value % pattern);
+      var coef = math.abs(value % pattern);
       var fin = value - coef;
       fin = +method > 0 || !method && coef > pattern / 2 ? fin + pattern : fin;
       var str = `${pattern}`;

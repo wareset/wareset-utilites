@@ -4,6 +4,8 @@ import { isNumber } from '@wareset-utilites/is/is-number'
 import { indexOf } from '@wareset-utilites/lang/index-of'
 import { length } from '@wareset-utilites/lang/length'
 
+import { abs, floor, round, ceil } from '@wareset-utilites/math'
+
 // export interface INearly {
 //   (value: number, pattern: number | number[], method?: -1 | 0 | 1): number
 // }
@@ -11,7 +13,6 @@ import { length } from '@wareset-utilites/lang/length'
 export const nearly = ((): {
   (value: number, pattern: number | number[], method?: -1 | 0 | 1): number
 } => {
-  const { abs, floor, round, ceil } = Math
   const METHODS_FOR_NUM = { '-1': floor, '0': round, '1': ceil }
 
   const METHODS_FOR_ARR = {
