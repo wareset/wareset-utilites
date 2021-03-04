@@ -25,6 +25,10 @@ const DIR_TEMPLATE = path.resolve(DIR_ROOT, 'scripts/template')
 const FILENAME_JEST = 'jest.config.js'
 const FILE_TEMPLATE_JEST = path.resolve(DIR_TEMPLATE, FILENAME_JEST)
 
+/* GITIGNORE */
+const FILENAME_GITIGNORE = '.gitignore'
+const FILE_TEMPLATE_GITIGNORE = path.resolve(DIR_TEMPLATE, FILENAME_GITIGNORE)
+
 /* README */
 const FILENAME_README = 'README.md'
 const FILE_TEMPLATE_README = path.resolve(DIR_TEMPLATE, FILENAME_README)
@@ -52,6 +56,13 @@ for (const pakagename of LS_PACKAGES) {
     fs.copyFileSync(
       FILE_TEMPLATE_JEST,
       path.resolve(DIR_PACKAGE, FILENAME_JEST)
+    )
+  }
+
+  if (LS_PACKAGE.indexOf(FILENAME_GITIGNORE) < 0) {
+    fs.copyFileSync(
+      FILE_TEMPLATE_GITIGNORE,
+      path.resolve(DIR_PACKAGE, FILENAME_GITIGNORE)
     )
   }
 
@@ -196,7 +207,7 @@ const autobuild = () => {
     console.log(pakagename, packageJson.version)
     console.log(git)
     execSync(
-      `npm run build && git add . && git commit -m "autobuild: ${pakagename}/${packageJson.version}" && git push`,
+      `npm run build && sleep 1 && git add . && git commit -m "autobuild: ${pakagename}/${packageJson.version}" && git push`,
       {
         stdio: ['ignore', 'inherit', 'inherit'],
         cwd: DIR_PACKAGE,
@@ -228,7 +239,7 @@ const autobuild = () => {
     console.log('UPDATING:')
     console.log(pakagename, packageJson.version)
     execSync(
-      `npm run build && git add . && git commit -m "autobuild: ${pakagename}/${packageJson.version}" && git push`,
+      `npm run build && sleep 1 && git add . && git commit -m "autobuild: ${pakagename}/${packageJson.version}" && git push`,
       {
         stdio: ['ignore', 'inherit', 'inherit'],
         cwd: DIR_PACKAGE,

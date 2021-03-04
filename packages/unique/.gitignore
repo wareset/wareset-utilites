@@ -1,5 +1,5 @@
 # Ignore everything
-*
+/*
 
 # But not these files...
 !.gitignore
@@ -7,5 +7,5 @@
 !package.json
 !README.md
 
-!src/*
-!__tests__/*
+!src/
+!__tests__/
