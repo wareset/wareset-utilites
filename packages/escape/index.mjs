@@ -1,4 +1,4 @@
-import { replace } from '@wareset-utilites/lang/replace';
+import { replace } from '@wareset-utilites/string/replace';
 
 var esc = (() => {
   var regexpG = s => new RegExp(s, 'g'); // const replace = (string: string, regexp: RegExp, replacer: string): string =>

@@ -1,4 +1,4 @@
-import { replace } from '@wareset-utilites/lang/replace'
+import { replace } from '@wareset-utilites/string/replace'
 
 export const esc = ((): {
   (string: string, ignore?: string): string
