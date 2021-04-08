@@ -1,6 +1,6 @@
 {
   "name": "@wareset-utilites/string",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "wareset-utilites: string",
   "author": "cftcview <cftcview@gmail.com>",
   "homepage": "https://github.com/wareset/wareset-utilites/tree/main/packages/string#readme",
@@ -22,6 +22,10 @@
     "replace",
     "starts-with",
     "to-capitalize",
+    "to-code-camelcase",
+    "to-code-kebabcase",
+    "to-code-pascalcase",
+    "to-code-snakecase",
     "to-lowercase",
     "to-uppercase",
     "trim",
@@ -67,7 +71,8 @@
     "typescript": "4.x"
   },
   "dependencies": {
-    "@wareset-utilites/math": "0.1.1",
-    "@wareset-utilites/lang": "0.1.6"
+    "@wareset-utilites/array": "0.1.2",
+    "@wareset-utilites/math": "0.1.2",
+    "@wareset-utilites/lang": "0.1.7"
   }
 }
