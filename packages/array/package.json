@@ -1,6 +1,6 @@
 {
   "name": "@wareset-utilites/array",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "wareset-utilites: array",
   "author": "cftcview <cftcview@gmail.com>",
   "homepage": "https://github.com/wareset/wareset-utilites/tree/main/packages/array#readme",
@@ -11,21 +11,35 @@
   "files": [
     "README.md",
     "__types__",
+    "array",
+    "clear",
+    "filter",
     "find",
+    "find-extra-left",
+    "find-extra-right",
     "find-index",
-    "find-index-last",
-    "find-last",
+    "find-index-extra-left",
+    "find-index-extra-right",
     "for-each",
-    "for-each-last",
-    "includes",
+    "for-each-extra-left",
+    "for-each-extra-right",
+    "for-each-right",
     "index.d.ts",
     "index.js",
     "index.mjs",
+    "join",
+    "lib",
+    "map",
     "pop",
     "push",
     "reverse",
     "shift",
+    "some",
+    "some-extra-left",
+    "some-extra-right",
     "splice",
+    "splice-between",
+    "splice-with",
     "unshift"
   ],
   "keywords": [
@@ -67,7 +81,7 @@
     "typescript": "4.x"
   },
   "dependencies": {
-    "@wareset-utilites/lang": "0.1.6",
-    "@wareset-utilites/math": "0.1.1"
+    "@wareset-utilites/lang": "0.1.7",
+    "@wareset-utilites/math": "0.1.2"
   }
 }

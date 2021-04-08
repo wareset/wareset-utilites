@@ -1,6 +1,6 @@
-import { __finder__, __IFinderCallbackSelf__ } from '../find'
+import { __finder__, __IFinderCallbackSelf__ } from '../lib'
 
-export const findIndexLast = <T>(
+export const findExtraLeft = <T>(
   list: T[],
   callback: (
     value: T,
@@ -11,4 +11,4 @@ export const findIndexLast = <T>(
   // thisArg?: any,
   offset?: number,
   offsetEnd?: number
-): number => __finder__(list, callback, offset, offsetEnd, true, true) as number
+): T | undefined => __finder__(list, callback, offset, offsetEnd) as T

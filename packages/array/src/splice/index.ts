@@ -1,6 +1,6 @@
 export const splice = <T>(
   source: T[],
-  n1: number,
-  n2: number,
+  idx1: number,
+  idx2: number,
   ...a: T[]
-): T[] => source.splice(n1, n2, ...a)
+): T[] => source.splice(idx1, idx2, ...a)
