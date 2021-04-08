@@ -36,7 +36,7 @@ export const nearly = ((): {
         )
       }
     } else if (pattern && isNumber(pattern)) {
-      if (pattern < 0) pattern = -pattern
+      pattern = abs(pattern)
 
       const coef = abs(value % pattern)
       let fin = value - coef

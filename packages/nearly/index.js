@@ -37,7 +37,7 @@ var nearly = (() => {
         res = pattern.reduce((prev, curr) => f(prev, curr, value) ? prev : curr);
       }
     } else if (pattern && isNumber.isNumber(pattern)) {
-      if (pattern < 0) pattern = -pattern;
+      pattern = math.abs(pattern);
       var coef = math.abs(value % pattern);
       var fin = value - coef;
       fin = +method > 0 || !method && coef > pattern / 2 ? fin + pattern : fin;

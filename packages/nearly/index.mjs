@@ -26,7 +26,7 @@ var nearly = (() => {
         res = pattern.reduce((prev, curr) => f(prev, curr, value) ? prev : curr);
       }
     } else if (pattern && isNumber(pattern)) {
-      if (pattern < 0) pattern = -pattern;
+      pattern = abs(pattern);
       var coef = abs(value % pattern);
       var fin = value - coef;
       fin = +method > 0 || !method && coef > pattern / 2 ? fin + pattern : fin;
