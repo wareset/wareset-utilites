@@ -1,3 +1,5 @@
+/* eslint-disable security/detect-non-literal-regexp */
+
 import { replace } from '@wareset-utilites/string/replace'
 
 export const esc = ((): {

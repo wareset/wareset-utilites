@@ -1,6 +1,6 @@
 {
   "name": "@wareset-utilites/escape",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "wareset-utilites: escape",
   "author": "cftcview <cftcview@gmail.com>",
   "homepage": "https://github.com/wareset/wareset-utilites/tree/main/packages/escape#readme",
@@ -54,6 +54,6 @@
     "typescript": "4.x"
   },
   "dependencies": {
-    "@wareset-utilites/string": "0.1.6"
+    "@wareset-utilites/string": "0.1.7"
   }
 }

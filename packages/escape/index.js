@@ -5,6 +5,8 @@ Object.defineProperty(exports, '__esModule', {
 });
 
 var replace = require('@wareset-utilites/string/replace');
+/* eslint-disable security/detect-non-literal-regexp */
+
 
 var esc = (() => {
   var regexpG = s => new RegExp(s, 'g'); // const replace = (string: string, regexp: RegExp, replacer: string): string =>
