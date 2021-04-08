@@ -8,7 +8,7 @@ const getProtoFn = (v: any): any => (!v || !v[c] || v[c][p] !== v ? v : v[c])
 
 const getCtor = (v: any): Function | object =>
   (v = getProtoFn(getPrototypeOf(v)))
-const getCtors = (v: any, protos: any[] = []): Array<Function | object> => {
+const getCtors = (v: any, protos: any[] = []): (Function | object)[] => {
   do (v = getPrototypeOf(v)), protos.push(getProtoFn(v))
   while (v)
   return protos
