@@ -1,11 +1,12 @@
 import { isObject } from '@wareset-utilites/is/is-object';
 import { keys } from '@wareset-utilites/object/keys';
 import { typed } from '@wareset-utilites/typed';
+import { array } from '@wareset-utilites/array/array';
 /* eslint-disable max-len */
 
 var each = (object, callback) => {
   if (isObject(object)) {
-    if (typed.of(object, Array, Set)) {
+    if (typed.of(object, array, Set)) {
       var k = 0;
 
       for (var v of object) {

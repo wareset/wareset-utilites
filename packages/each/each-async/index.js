@@ -9,12 +9,14 @@ var isObject = require('@wareset-utilites/is/is-object');
 var keys = require('@wareset-utilites/object/keys');
 
 var typed = require('@wareset-utilites/typed');
+
+var array = require('@wareset-utilites/array/array');
 /* eslint-disable max-len */
 
 
 var eachAsync = async (object, callback) => {
   if (isObject.isObject(object)) {
-    if (typed.typed.of(object, Array, Set)) {
+    if (typed.typed.of(object, array.array, Set)) {
       var k = 0;
 
       for await (var v of object) {
@@ -34,5 +36,4 @@ var eachAsync = async (object, callback) => {
   return object;
 };
 
-exports.default = eachAsync;
 exports.eachAsync = eachAsync;
