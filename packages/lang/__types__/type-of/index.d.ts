@@ -1,1 +1,4 @@
-export declare const typeOf: (value: any, type: string) => boolean;
+export declare const typeOf: {
+    (value: any): string;
+    (value: any, type: string): boolean;
+};

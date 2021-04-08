@@ -1,3 +1,3 @@
-var noop = (..._) => {};
+var noop = () => {};
 
 export { noop };

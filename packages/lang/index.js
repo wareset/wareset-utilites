@@ -6,6 +6,8 @@ Object.defineProperty(exports, '__esModule', {
 
 var first = require('./first');
 
+var includes = require('./includes');
+
 var indexOf = require('./index-of');
 
 var instanceOf = require('./instance-of');
@@ -26,10 +28,18 @@ var test = require('./test');
 
 var typeOf = require('./type-of');
 
+var yoop = require('./yoop');
+
 Object.defineProperty(exports, 'first', {
   enumerable: true,
   get: function () {
     return first.first;
+  }
+});
+Object.defineProperty(exports, 'includes', {
+  enumerable: true,
+  get: function () {
+    return includes.includes;
   }
 });
 Object.defineProperty(exports, 'indexOf', {
@@ -90,5 +100,11 @@ Object.defineProperty(exports, 'typeOf', {
   enumerable: true,
   get: function () {
     return typeOf.typeOf;
+  }
+});
+Object.defineProperty(exports, 'yoop', {
+  enumerable: true,
+  get: function () {
+    return yoop.yoop;
   }
 });

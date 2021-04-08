@@ -4,6 +4,6 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
-var noop = (..._) => {};
+var noop = () => {};
 
 exports.noop = noop;

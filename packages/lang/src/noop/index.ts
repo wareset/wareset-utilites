@@ -1,1 +1,1 @@
-export const noop = (..._: any[]): void => {}
+export const noop: (..._: any[]) => void = () => {}

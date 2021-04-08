@@ -1,4 +1,5 @@
 export { first } from './first';
+export { includes } from './includes';
 export { indexOf } from './index-of';
 export { instanceOf } from './instance-of';
 export { last } from './last';
@@ -9,3 +10,4 @@ export { size } from './size';
 export { slice } from './slice';
 export { test } from './test';
 export { typeOf } from './type-of';
+export { yoop } from './yoop';
