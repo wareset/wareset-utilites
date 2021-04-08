@@ -6,13 +6,14 @@ import { instanceOf } from '@wareset-utilites/lang/instance-of';
 import { size } from '@wareset-utilites/lang/size';
 import { length } from '@wareset-utilites/lang/length';
 import { typed } from '@wareset-utilites/typed';
+import { forEach } from '@wareset-utilites/array/for-each';
 import { objectPrototype } from '@wareset-utilites/object/object-prototype';
 import { getOwnPropertyNames } from '@wareset-utilites/object/get-own-property-names';
 import { getOwnPropertySymbols } from '@wareset-utilites/object/get-own-property-symbols';
 /* eslint-disable max-len */
 
 var getProtoOwnPropNames = (a, keys, natives) => {
-  typed.of(a).forEach(p => {
+  forEach(typed.of(a), p => {
     if (p && (natives || !isNativeFunction(p))) {
       keys.push(...getOwnPropertyNames(p.prototype));
     }

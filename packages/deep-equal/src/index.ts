@@ -11,6 +11,8 @@ import { length } from '@wareset-utilites/lang/length'
 
 import { typed } from '@wareset-utilites/typed'
 
+import { forEach } from '@wareset-utilites/array/for-each'
+
 // const {
 //   getOwnPropertyNames,
 //   getOwnPropertySymbols,
@@ -26,14 +28,14 @@ const getProtoOwnPropNames = (
   keys: string[],
   natives: boolean | undefined
 ): void => {
-  ;(typed.of(a) as Function[]).forEach((p) => {
+  forEach(typed.of(a) as Function[], (p) => {
     if (p && (natives || !isNativeFunction(p))) {
       keys.push(...getOwnPropertyNames(p.prototype))
     }
   })
 }
 
-export interface IDeepEqualOptions {
+export type TypeDeepEqualOptions = {
   depth?: number | boolean
   symbols?: boolean
   immerse?: boolean
@@ -41,7 +43,7 @@ export interface IDeepEqualOptions {
   natives?: boolean
 }
 
-const OPTIONS: IDeepEqualOptions = {
+const OPTIONS: TypeDeepEqualOptions = {
   depth: true,
   symbols: true,
   immerse: true,
@@ -57,7 +59,7 @@ const __deepEqual__ = (
   a: any,
   b: any,
   depth: boolean | number | undefined,
-  options: IDeepEqualOptions = OPTIONS,
+  options: TypeDeepEqualOptions = OPTIONS,
   __cache__: Map<any, any>
 ): boolean => {
   if (a === b) return true
@@ -77,7 +79,8 @@ const __deepEqual__ = (
   let k, v, tmp: any
 
   try {
-    if (instanceOf(a, ArrayBuffer)) (a = new DataView(a)), (b = new DataView(b))
+    if (instanceOf(a, ArrayBuffer))
+      (a = new DataView(a as any)), (b = new DataView(b as any))
 
     if (ArrayBuffer.isView(a)) {
       if (a.byteLength !== b.byteLength) return false
@@ -139,7 +142,13 @@ export const deepEqual = (
 export const deepEqualExtended = (
   a: any,
   b: any,
-  options: IDeepEqualOptions = OPTIONS
+  options: {
+    depth?: number | boolean
+    symbols?: boolean
+    immerse?: boolean
+    noweaks?: boolean
+    natives?: boolean
+  } = OPTIONS
 ): boolean =>
   (options = { ...OPTIONS, ...options }) &&
   __deepEqual__(a, b, options.depth, options, new Map())

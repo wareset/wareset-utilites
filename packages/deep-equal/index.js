@@ -20,6 +20,8 @@ var length = require('@wareset-utilites/lang/length');
 
 var typed = require('@wareset-utilites/typed');
 
+var forEach = require('@wareset-utilites/array/for-each');
+
 var objectPrototype = require('@wareset-utilites/object/object-prototype');
 
 var getOwnPropertyNames = require('@wareset-utilites/object/get-own-property-names');
@@ -29,7 +31,7 @@ var getOwnPropertySymbols = require('@wareset-utilites/object/get-own-property-s
 
 
 var getProtoOwnPropNames = (a, keys, natives) => {
-  typed.typed.of(a).forEach(p => {
+  forEach.forEach(typed.typed.of(a), p => {
     if (p && (natives || !isNativeFunction.isNativeFunction(p))) {
       keys.push(...getOwnPropertyNames.getOwnPropertyNames(p.prototype));
     }
