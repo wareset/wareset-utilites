@@ -1,21 +1,34 @@
+/* eslint-disable max-len */
+
 const __run__ = (ErrorFn: any, ...a: any[]): never => {
   throw new ErrorFn(...a)
 }
-export const error = (...a: any[]): never => __run__(Error, ...a)
 
-export const evalError = (...a: any[]): never => __run__(EvalError, ...a)
-
-export const rangeError = (...a: any[]): never => __run__(RangeError, ...a)
-
-export const referenceError = (...a: any[]): never =>
-  __run__(ReferenceError, ...a)
-
-export const syntaxError = (...a: any[]): never => __run__(SyntaxError, ...a)
-
-export const typeError = (...a: any[]): never => __run__(TypeError, ...a)
-
-
-
-
-
-export const uriError = (...a: any[]): never => __run__(URIError, ...a)
+// prettier-ignore
+export const error: {
+  (...a: any[]): never
+} = ((...a: any[]) => { __run__(Error, ...a) as never }) as (...a: any[]) => never
+// prettier-ignore
+export const evalError: {
+  (...a: any[]): never
+} = ((...a: any[]) => { __run__(EvalError, ...a) }) as (...a: any[]) => never
+// prettier-ignore
+export const rangeError: {
+  (...a: any[]): never
+} = ((...a: any[]) => { __run__(RangeError, ...a) }) as (...a: any[]) => never
+// prettier-ignore
+export const referenceError: {
+  (...a: any[]): never
+} = ((...a: any[]) => { __run__(ReferenceError, ...a) }) as (...a: any[]) => never
+// prettier-ignore
+export const syntaxError: {
+  (...a: any[]): never
+} = ((...a: any[]) => { __run__(SyntaxError, ...a) }) as (...a: any[]) => never
+// prettier-ignore
+export const typeError: {
+  (...a: any[]): never
+} = ((...a: any[]) => { __run__(TypeError, ...a) }) as (...a: any[]) => never
+// prettier-ignore
+export const uriError: {
+  (...a: any[]): never
+} = ((...a: any[]) => { __run__(URIError, ...a) }) as (...a: any[]) => never
