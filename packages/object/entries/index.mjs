@@ -1,5 +1,5 @@
 import { keys } from '../keys';
 
-var entries = value => keys(value).map(k => [k, value[k]]);
+var entries = object => keys(object).map(k => [k, object[k]]);
 
 export { entries };

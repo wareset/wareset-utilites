@@ -1,1 +1,3 @@
-export declare const values: (value: any) => any[];
+export declare const values: <T>(object: {
+    [s: string]: T;
+} | ArrayLike<T>) => T[];

@@ -2,9 +2,9 @@ import { getOwnPropertyDescriptor } from '../get-own-property-descriptor';
 import { getOwnPropertyNames } from '../get-own-property-names';
 
 var getOwnPropertyDescriptors = // Object.getOwnPropertyDescriptors ||
-object => {
+o => {
   var res = {};
-  getOwnPropertyNames(object).forEach(k => res[k] = getOwnPropertyDescriptor(object, k));
+  getOwnPropertyNames(o).forEach(k => res[k] = getOwnPropertyDescriptor(o, k));
   return res;
 };
 

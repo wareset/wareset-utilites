@@ -1,6 +1,6 @@
 {
   "name": "@wareset-utilites/object",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "wareset-utilites: object",
   "author": "cftcview <cftcview@gmail.com>",
   "homepage": "https://github.com/wareset/wareset-utilites/tree/main/packages/object#readme",
@@ -14,6 +14,7 @@
     "define-properties",
     "define-property",
     "entries",
+    "freeze",
     "get-own-property-descriptor",
     "get-own-property-descriptors",
     "get-own-property-names",
@@ -23,8 +24,11 @@
     "index.js",
     "index.mjs",
     "keys",
+    "lib",
     "object",
     "object-prototype",
+    "prevent-extensions",
+    "seal",
     "values"
   ],
   "keywords": [
@@ -64,5 +68,8 @@
     "ts-node": "^9.1.1",
     "tslib": "^2.1.0",
     "typescript": "4.x"
+  },
+  "dependencies": {
+    "@wareset-utilites/lang": "0.1.7"
   }
 }

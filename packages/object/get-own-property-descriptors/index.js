@@ -9,9 +9,9 @@ var getOwnPropertyDescriptor = require('../get-own-property-descriptor');
 var getOwnPropertyNames = require('../get-own-property-names');
 
 var getOwnPropertyDescriptors = // Object.getOwnPropertyDescriptors ||
-object => {
+o => {
   var res = {};
-  getOwnPropertyNames.getOwnPropertyNames(object).forEach(k => res[k] = getOwnPropertyDescriptor.getOwnPropertyDescriptor(object, k));
+  getOwnPropertyNames.getOwnPropertyNames(o).forEach(k => res[k] = getOwnPropertyDescriptor.getOwnPropertyDescriptor(o, k));
   return res;
 };
 

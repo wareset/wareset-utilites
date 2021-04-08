@@ -1,3 +1,7 @@
 import { object } from '../object';
-var defineProperties = object.defineProperties;
+import { keys } from '../keys';
+import { defineProperty } from '../define-property';
+
+var defineProperties = object.defineProperties || ((o, props) => keys(props).map(key => defineProperty(o, key, props[key])));
+
 export { defineProperties };

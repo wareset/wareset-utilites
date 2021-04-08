@@ -3,10 +3,14 @@ import { getOwnPropertyNames } from '../get-own-property-names'
 
 export const getOwnPropertyDescriptors =
   // Object.getOwnPropertyDescriptors ||
-  (object: any): any => {
+  <T>(
+    o: T
+  ): { [P in keyof T]: TypedPropertyDescriptor<T[P]> } & {
+    [x: string]: PropertyDescriptor
+  } => {
     const res: any = {}
-    getOwnPropertyNames(object).forEach(
-      (k) => (res[k] = getOwnPropertyDescriptor(object, k))
+    getOwnPropertyNames(o).forEach(
+      (k) => (res[k] = getOwnPropertyDescriptor(o, k))
     )
     return res
   }

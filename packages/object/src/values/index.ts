@@ -1,3 +1,4 @@
 import { keys } from '../keys'
 
-export const values = (value: any): any[] => keys(value).map((k) => value[k])
+export const values = <T>(object: { [s: string]: T } | ArrayLike<T>): T[] =>
+  keys(object).map((k) => (object as any)[k])

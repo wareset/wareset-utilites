@@ -18,6 +18,8 @@ var getOwnPropertySymbols = require('./get-own-property-symbols');
 
 var entries = require('./entries');
 
+var freeze = require('./freeze');
+
 var hasOwnProperty = require('./has-own-property');
 
 var keys = require('./keys');
@@ -25,6 +27,10 @@ var keys = require('./keys');
 var object = require('./object');
 
 var objectPrototype = require('./object-prototype');
+
+var preventExtensions = require('./prevent-extensions');
+
+var seal = require('./seal');
 
 var values = require('./values');
 
@@ -70,6 +76,12 @@ Object.defineProperty(exports, 'entries', {
     return entries.entries;
   }
 });
+Object.defineProperty(exports, 'freeze', {
+  enumerable: true,
+  get: function () {
+    return freeze.freeze;
+  }
+});
 Object.defineProperty(exports, 'hasOwnProperty', {
   enumerable: true,
   get: function () {
@@ -92,6 +104,18 @@ Object.defineProperty(exports, 'objectPrototype', {
   enumerable: true,
   get: function () {
     return objectPrototype.objectPrototype;
+  }
+});
+Object.defineProperty(exports, 'preventExtensions', {
+  enumerable: true,
+  get: function () {
+    return preventExtensions.preventExtensions;
+  }
+});
+Object.defineProperty(exports, 'seal', {
+  enumerable: true,
+  get: function () {
+    return seal.seal;
   }
 });
 Object.defineProperty(exports, 'values', {

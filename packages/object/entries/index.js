@@ -6,6 +6,6 @@ Object.defineProperty(exports, '__esModule', {
 
 var keys = require('../keys');
 
-var entries = value => keys.keys(value).map(k => [k, value[k]]);
+var entries = object => keys.keys(object).map(k => [k, object[k]]);
 
 exports.entries = entries;

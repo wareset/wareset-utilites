@@ -1,1 +1,3 @@
-export declare const entries: (value: any) => [string, any][];
+export declare const entries: <T>(object: {
+    [s: string]: T;
+} | ArrayLike<T>) => [string, T][];
