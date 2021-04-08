@@ -1,6 +1,6 @@
 {
   "name": "@wareset-utilites/regexp",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "wareset-utilites: regexp",
   "author": "cftcview <cftcview@gmail.com>",
   "homepage": "https://github.com/wareset/wareset-utilites/tree/main/packages/regexp#readme",
@@ -13,7 +13,8 @@
     "__types__",
     "index.d.ts",
     "index.js",
-    "index.mjs"
+    "index.mjs",
+    "index.test"
   ],
   "keywords": [
     "regexp"
@@ -54,6 +55,7 @@
     "typescript": "4.x"
   },
   "dependencies": {
-    "@wareset-utilites/lang": "0.1.6"
+    "@wareset-utilites/array": "0.1.2",
+    "@wareset-utilites/lang": "0.1.7"
   }
 }

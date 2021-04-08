@@ -1,2 +1,2 @@
-export declare const regexp: (...a: Array<string | RegExp>) => RegExp;
+export declare const regexp: (...a: (string | RegExp)[]) => RegExp;
 export default regexp;
