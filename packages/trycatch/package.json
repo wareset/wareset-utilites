@@ -1,6 +1,6 @@
 {
   "name": "@wareset-utilites/trycatch",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "wareset-utilites: trycatch",
   "author": "cftcview <cftcview@gmail.com>",
   "homepage": "https://github.com/wareset/wareset-utilites/tree/main/packages/trycatch#readme",
@@ -54,6 +54,6 @@
     "typescript": "4.x"
   },
   "dependencies": {
-    "@wareset-utilites/is": "0.1.7"
+    "@wareset-utilites/is": "0.1.8"
   }
 }
