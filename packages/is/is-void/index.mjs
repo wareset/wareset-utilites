@@ -1,5 +1,5 @@
 import { isNill } from '../is-nill';
 
-var isVoid = value => value !== value || isNill(value);
+var isVoid = v => v !== v || isNill(v);
 
 export { isVoid };

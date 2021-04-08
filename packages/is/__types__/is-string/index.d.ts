@@ -1,1 +1,1 @@
-export declare const isString: (value: any) => boolean;
+export declare const isString: (v: any) => v is string;

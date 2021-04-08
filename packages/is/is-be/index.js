@@ -6,6 +6,6 @@ Object.defineProperty(exports, '__esModule', {
 
 var isVoid = require('../is-void');
 
-var isBe = value => !isVoid.isVoid(value);
+var isBe = v => !isVoid.isVoid(v);
 
 exports.isBe = isBe;

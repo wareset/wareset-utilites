@@ -6,6 +6,6 @@ Object.defineProperty(exports, '__esModule', {
 
 var instanceOf = require('@wareset-utilites/lang/instance-of');
 
-var isRegExp = value => instanceOf.instanceOf(value, RegExp);
+var isRegExp = v => instanceOf.instanceOf(v, RegExp);
 
 exports.isRegExp = isRegExp;

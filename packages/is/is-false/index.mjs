@@ -1,3 +1,3 @@
-var isFalse = value => value === false;
+var isFalse = v => v === false;
 
 export { isFalse };

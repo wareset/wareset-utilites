@@ -1,3 +1,3 @@
 import { isVoid } from '../is-void'
 
-export const isBe = (value: any): boolean => !isVoid(value)
+export const isBe = (v: any): boolean => !isVoid(v)

@@ -1,1 +1,1 @@
-export declare const isSymbol: (value: any) => boolean;
+export declare const isSymbol: (v: any) => v is symbol;

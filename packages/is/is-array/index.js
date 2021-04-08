@@ -3,5 +3,8 @@
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var isArray = Array.isArray;
+
+var array = require('@wareset-utilites/array/array');
+
+var isArray = array.array.isArray;
 exports.isArray = isArray;

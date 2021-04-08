@@ -4,6 +4,6 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
-var isTrue = value => value === true;
+var isTrue = v => v === true;
 
 exports.isTrue = isTrue;

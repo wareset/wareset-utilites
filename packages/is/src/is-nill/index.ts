@@ -1,1 +1,1 @@
-export const isNill = (value: any): boolean => value == null
+export const isNill = (v: any): v is null | undefined => v == null

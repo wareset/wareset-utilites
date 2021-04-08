@@ -1,1 +1,1 @@
-export declare const isNill: (value: any) => boolean;
+export declare const isNill: (v: any) => v is null;

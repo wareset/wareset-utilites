@@ -1,2 +1,5 @@
+import { typeOf } from '@wareset-utilites/lang/type-of'
+
 let undef: undefined
-export const isUndefined = (value: any): boolean => value === undef
+const example = typeOf(undef)
+export const isUndefined = (v: any): v is undefined => typeOf(v, example)

@@ -1,1 +1,1 @@
-export declare const isUndefined: (value: any) => boolean;
+export declare const isUndefined: (v: any) => v is undefined;

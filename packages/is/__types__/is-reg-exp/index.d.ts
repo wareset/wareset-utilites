@@ -1,1 +1,1 @@
-export declare const isRegExp: (value: any) => boolean;
+export declare const isRegExp: (v: any) => v is RegExp;

@@ -6,6 +6,6 @@ Object.defineProperty(exports, '__esModule', {
 
 var isNill = require('../is-nill');
 
-var isVoid = value => value !== value || isNill.isNill(value);
+var isVoid = v => v !== v || isNill.isNill(v);
 
 exports.isVoid = isVoid;

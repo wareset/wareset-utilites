@@ -6,6 +6,6 @@ Object.defineProperty(exports, '__esModule', {
 
 var instanceOf = require('@wareset-utilites/lang/instance-of');
 
-var isPromise = value => instanceOf.instanceOf(value, Promise);
+var isPromise = v => instanceOf.instanceOf(v, Promise);
 
 exports.isPromise = isPromise;

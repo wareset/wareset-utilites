@@ -8,6 +8,8 @@ var isArray = require('../is-array');
 
 var typed = require('@wareset-utilites/typed');
 
-var isArrayStrict = value => isArray.isArray(value) && typed.typed(value, Array);
+var array = require('@wareset-utilites/array/array');
+
+var isArrayStrict = v => isArray.isArray(v) && typed.typed(v, array.array);
 
 exports.isArrayStrict = isArrayStrict;

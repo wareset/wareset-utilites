@@ -3,8 +3,12 @@
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var undef;
 
-var isUndefined = value => value === undef;
+var typeOf = require('@wareset-utilites/lang/type-of');
+
+var undef;
+var example = typeOf.typeOf(undef);
+
+var isUndefined = v => typeOf.typeOf(v, example);
 
 exports.isUndefined = isUndefined;

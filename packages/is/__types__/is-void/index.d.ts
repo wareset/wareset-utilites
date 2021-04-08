@@ -1,1 +1,1 @@
-export declare const isVoid: (value: any) => boolean;
+export declare const isVoid: (v: any) => v is number;

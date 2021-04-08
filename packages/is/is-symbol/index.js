@@ -6,6 +6,6 @@ Object.defineProperty(exports, '__esModule', {
 
 var typeOf = require('@wareset-utilites/lang/type-of');
 
-var isSymbol = value => typeOf.typeOf(value, 'symbol');
+var isSymbol = v => typeOf.typeOf(v, 'symbol');
 
 exports.isSymbol = isSymbol;

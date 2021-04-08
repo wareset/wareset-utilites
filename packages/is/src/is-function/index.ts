@@ -1,3 +1,5 @@
+import { noop } from '@wareset-utilites/lang/noop'
 import { typeOf } from '@wareset-utilites/lang/type-of'
 
-export const isFunction = (value: any): boolean => typeOf(value, 'function')
+const example = typeOf(noop)
+export const isFunction = (v: any): v is Function => typeOf(v, example)

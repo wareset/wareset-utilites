@@ -1,3 +1,3 @@
-var isNill = value => value == null;
+var isNill = v => v == null;
 
 export { isNill };

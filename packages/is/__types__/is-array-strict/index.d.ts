@@ -1,1 +1,1 @@
-export declare const isArrayStrict: (value: any) => boolean;
+export declare const isArrayStrict: (v: any) => v is any[];

@@ -6,6 +6,8 @@ Object.defineProperty(exports, '__esModule', {
 
 var typeOf = require('@wareset-utilites/lang/type-of');
 
-var isString = value => typeOf.typeOf(value, 'string');
+var example = typeOf.typeOf('');
+
+var isString = v => typeOf.typeOf(v, example);
 
 exports.isString = isString;

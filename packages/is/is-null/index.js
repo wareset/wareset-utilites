@@ -4,6 +4,6 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
-var isNull = value => value === null;
+var isNull = v => v === null;
 
 exports.isNull = isNull;

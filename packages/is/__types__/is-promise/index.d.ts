@@ -1,1 +1,1 @@
-export declare const isPromise: (value: any) => boolean;
+export declare const isPromise: (v: any) => v is Promise<any>;

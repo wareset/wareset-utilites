@@ -1,1 +1,1 @@
-export declare const isBe: (value: any) => boolean;
+export declare const isBe: (v: any) => boolean;
