@@ -1,12 +1,12 @@
-import { length } from '@wareset-utilites/array'
+import { length } from '@wareset-utilites/lang/length'
 import { splice } from '@wareset-utilites/array/splice'
-import { indexOf } from '@wareset-utilites/array'
+import { indexOf } from '@wareset-utilites/lang/index-of'
 
 import { isArray } from '@wareset-utilites/is/is-array'
 import { isFunction } from '@wareset-utilites/is/is-function'
 import { isPromise } from '@wareset-utilites/is/is-promise'
 
-type Callbacks = Array<any>
+type Callbacks = any[]
 
 export const Queuer = (...args: Callbacks): Function | Promise<any> | void => {
   const queuerCycle = (queue: Callbacks, c: any): void => {

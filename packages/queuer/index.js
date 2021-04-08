@@ -4,9 +4,11 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
-var array = require('@wareset-utilites/array');
+var length = require('@wareset-utilites/lang/length');
 
 var splice = require('@wareset-utilites/array/splice');
+
+var indexOf = require('@wareset-utilites/lang/index-of');
 
 var isArray = require('@wareset-utilites/is/is-array');
 
@@ -18,7 +20,7 @@ var Queuer = (...args) => {
   var queuerCycle = (queue, c) => {
     var fn, res;
 
-    for (var i = 0; i < array.length(queue); i++) {
+    for (var i = 0; i < length.length(queue); i++) {
       fn = queue[i];
 
       if (!fn.isRun) {
@@ -48,10 +50,10 @@ var Queuer = (...args) => {
 
   var queuer = (...args) => {
     var data, callbacks;
-    if (array.length(args) === 1) data = undefined, callbacks = args[0];else [data, callbacks] = args;
+    if (length.length(args) === 1) data = undefined, callbacks = args[0];else [data, callbacks] = args;
 
-    if (isArray.isArray(callbacks) && array.length(callbacks)) {
-      var run = !array.length(QUEUE);
+    if (isArray.isArray(callbacks) && length.length(callbacks)) {
+      var run = !length.length(QUEUE);
       var queue = [];
       [() => data, ...callbacks].forEach((_fn, k) => {
         var fn = !isFunction.isFunction(_fn) ? () => _fn : _fn;
@@ -74,7 +76,7 @@ var Queuer = (...args) => {
         queue.push(FN);
       });
       queue[0].isRun = true, queue[1].isRes = data;
-      splice.splice(QUEUE, array.indexOf(QUEUE, CURRENT.fn), 0, ...queue);
+      splice.splice(QUEUE, indexOf.indexOf(QUEUE, CURRENT.fn), 0, ...queue);
 
       if (run) {
         CURRENT.promise = new Promise(resolve => CURRENT.resolve = resolve);
