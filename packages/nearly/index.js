@@ -4,15 +4,21 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
-var isArray = require('@wareset-utilites/is/is-array');
+var isArray = require('@wareset-utilites/is/isArray');
 
-var isNumber = require('@wareset-utilites/is/is-number');
+var isNumber = require('@wareset-utilites/is/isNumber');
 
-var indexOf = require('@wareset-utilites/lang/index-of');
+var math = require('@wareset-utilites/math');
 
-var length = require('@wareset-utilites/lang/length');
+function _interopDefaultLegacy(e) {
+  return e && typeof e === 'object' && 'default' in e ? e : {
+    'default': e
+  };
+}
 
-var math = require('@wareset-utilites/math'); // export interface INearly {
+var isArray__default = /*#__PURE__*/_interopDefaultLegacy(isArray);
+
+var isNumber__default = /*#__PURE__*/_interopDefaultLegacy(isNumber); // export interface INearly {
 //   (value: number, pattern: number | number[], method?: -1 | 0 | 1): number
 // }
 
@@ -31,19 +37,19 @@ var nearly = (() => {
   return (value = 1, pattern, method = 0) => {
     var res;
 
-    if (isArray.isArray(pattern)) {
-      if (!length.length(pattern)) res = value;else {
+    if (isArray__default['default'](pattern)) {
+      if (!pattern.length) res = value;else {
         var f = METHODS_FOR_ARR[method] || METHODS_FOR_ARR[0];
         res = pattern.reduce((prev, curr) => f(prev, curr, value) ? prev : curr);
       }
-    } else if (pattern && isNumber.isNumber(pattern)) {
+    } else if (pattern && isNumber__default['default'](pattern)) {
       pattern = math.abs(pattern);
       var coef = math.abs(value % pattern);
       var fin = value - coef;
       fin = +method > 0 || !method && coef > pattern / 2 ? fin + pattern : fin;
       var str = `${pattern}`;
-      var index = indexOf.indexOf(str, '.');
-      res = index === -1 ? fin : +fin.toFixed(length.length(str) - index - 1);
+      var index = str.indexOf('.');
+      res = index === -1 ? fin : +fin.toFixed(str.length - index - 1);
     } else res = (METHODS_FOR_NUM[method] || METHODS_FOR_NUM[0])(value);
 
     return res;

@@ -1,7 +1,5 @@
-import { isArray } from '@wareset-utilites/is/is-array';
-import { isNumber } from '@wareset-utilites/is/is-number';
-import { indexOf } from '@wareset-utilites/lang/index-of';
-import { length } from '@wareset-utilites/lang/length';
+import isArray from '@wareset-utilites/is/isArray';
+import isNumber from '@wareset-utilites/is/isNumber';
 import { abs, floor, round, ceil } from '@wareset-utilites/math'; // export interface INearly {
 //   (value: number, pattern: number | number[], method?: -1 | 0 | 1): number
 // }
@@ -21,7 +19,7 @@ var nearly = (() => {
     var res;
 
     if (isArray(pattern)) {
-      if (!length(pattern)) res = value;else {
+      if (!pattern.length) res = value;else {
         var f = METHODS_FOR_ARR[method] || METHODS_FOR_ARR[0];
         res = pattern.reduce((prev, curr) => f(prev, curr, value) ? prev : curr);
       }
@@ -31,8 +29,8 @@ var nearly = (() => {
       var fin = value - coef;
       fin = +method > 0 || !method && coef > pattern / 2 ? fin + pattern : fin;
       var str = `${pattern}`;
-      var index = indexOf(str, '.');
-      res = index === -1 ? fin : +fin.toFixed(length(str) - index - 1);
+      var index = str.indexOf('.');
+      res = index === -1 ? fin : +fin.toFixed(str.length - index - 1);
     } else res = (METHODS_FOR_NUM[method] || METHODS_FOR_NUM[0])(value);
 
     return res;
