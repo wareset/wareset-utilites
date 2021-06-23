@@ -1,7 +1,7 @@
-var size = v => v.length;
-
-var c = 'constructor';
-var p = 'prototype';
+var c = 'constructor',
+    p = 'prototype',
+    l = 'length',
+    s = 'some';
 
 var getProto = Object.getPrototypeOf || (v => v.__proto__);
 
@@ -22,15 +22,15 @@ var getCtors = (v, protos = []) => {
 var eq = (a, b) => a === b || a === getCtor(b) && (!b[p] || typeof b !== 'function');
 
 var check = fn => (value, ...t) => {
-  if (size(t) && !fn(value, ...t)) throw new TypeError('' + value);
+  if (t[l] && !fn(value, ...t)) throw new TypeError('' + value);
   return value;
 };
 
-var typedOf = (val, ...types) => (val = getCtors(val), !size(types) ? val : val.some(ctor => types.some(t => eq(ctor, t))));
+var typedOf = (val, ...types) => (val = getCtors(val), !types[l] ? val : val[s](ctor => types[s](t => eq(ctor, t))));
 
 typedOf.check = check(typedOf);
 
-var typed = (val, ...types) => (val = getCtor(val), !size(types) ? val : types.some(t => eq(val, t)));
+var typed = (val, ...types) => (val = getCtor(val), !types[l] ? val : types[s](t => eq(val, t)));
 
 typed.check = check(typed);
 typed.of = typedOf;
