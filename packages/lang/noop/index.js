@@ -6,4 +6,5 @@ Object.defineProperty(exports, '__esModule', {
 
 var noop = () => {};
 
+exports.default = noop;
 exports.noop = noop;

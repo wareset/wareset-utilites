@@ -4,107 +4,149 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
-var first = require('./first');
+var _decodeURI = require('./decodeURI');
 
-var includes = require('./includes');
+var _decodeURIComponent = require('./decodeURIComponent');
 
-var indexOf = require('./index-of');
+var _encodeURI = require('./encodeURI');
 
-var instanceOf = require('./instance-of');
+var _encodeURIComponent = require('./encodeURIComponent');
 
-var last = require('./last');
+var instanceOf = require('./instanceOf');
 
-var lastIndexOf = require('./last-index-of');
+var _isFinite = require('./isFinite');
 
-var length = require('./length');
+var _isNaN = require('./isNaN');
+
+var jsonParse = require('./jsonParse');
+
+var jsonStringify = require('./jsonStringify');
 
 var noop = require('./noop');
 
-var size = require('./size');
+var _parseFloat = require('./parseFloat');
 
-var slice = require('./slice');
+var _parseInt = require('./parseInt');
 
-var test = require('./test');
-
-var typeOf = require('./type-of');
+var typeOf = require('./typeOf');
 
 var yoop = require('./yoop');
 
-Object.defineProperty(exports, 'first', {
+function _interopDefaultLegacy(e) {
+  return e && typeof e === 'object' && 'default' in e ? e : {
+    'default': e
+  };
+}
+
+var _decodeURI__default = /*#__PURE__*/_interopDefaultLegacy(_decodeURI);
+
+var _decodeURIComponent__default = /*#__PURE__*/_interopDefaultLegacy(_decodeURIComponent);
+
+var _encodeURI__default = /*#__PURE__*/_interopDefaultLegacy(_encodeURI);
+
+var _encodeURIComponent__default = /*#__PURE__*/_interopDefaultLegacy(_encodeURIComponent);
+
+var instanceOf__default = /*#__PURE__*/_interopDefaultLegacy(instanceOf);
+
+var _isFinite__default = /*#__PURE__*/_interopDefaultLegacy(_isFinite);
+
+var _isNaN__default = /*#__PURE__*/_interopDefaultLegacy(_isNaN);
+
+var jsonParse__default = /*#__PURE__*/_interopDefaultLegacy(jsonParse);
+
+var jsonStringify__default = /*#__PURE__*/_interopDefaultLegacy(jsonStringify);
+
+var noop__default = /*#__PURE__*/_interopDefaultLegacy(noop);
+
+var _parseFloat__default = /*#__PURE__*/_interopDefaultLegacy(_parseFloat);
+
+var _parseInt__default = /*#__PURE__*/_interopDefaultLegacy(_parseInt);
+
+var typeOf__default = /*#__PURE__*/_interopDefaultLegacy(typeOf);
+
+var yoop__default = /*#__PURE__*/_interopDefaultLegacy(yoop);
+
+Object.defineProperty(exports, 'decodeURI', {
   enumerable: true,
   get: function () {
-    return first.first;
+    return _decodeURI__default['default'];
   }
 });
-Object.defineProperty(exports, 'includes', {
+Object.defineProperty(exports, 'decodeURIComponent', {
   enumerable: true,
   get: function () {
-    return includes.includes;
+    return _decodeURIComponent__default['default'];
   }
 });
-Object.defineProperty(exports, 'indexOf', {
+Object.defineProperty(exports, 'encodeURI', {
   enumerable: true,
   get: function () {
-    return indexOf.indexOf;
+    return _encodeURI__default['default'];
+  }
+});
+Object.defineProperty(exports, 'encodeURIComponent', {
+  enumerable: true,
+  get: function () {
+    return _encodeURIComponent__default['default'];
   }
 });
 Object.defineProperty(exports, 'instanceOf', {
   enumerable: true,
   get: function () {
-    return instanceOf.instanceOf;
+    return instanceOf__default['default'];
   }
 });
-Object.defineProperty(exports, 'last', {
+Object.defineProperty(exports, 'isFinite', {
   enumerable: true,
   get: function () {
-    return last.last;
+    return _isFinite__default['default'];
   }
 });
-Object.defineProperty(exports, 'lastIndexOf', {
+Object.defineProperty(exports, 'isNaN', {
   enumerable: true,
   get: function () {
-    return lastIndexOf.lastIndexOf;
+    return _isNaN__default['default'];
   }
 });
-Object.defineProperty(exports, 'length', {
+Object.defineProperty(exports, 'jsonParse', {
   enumerable: true,
   get: function () {
-    return length.length;
+    return jsonParse__default['default'];
+  }
+});
+Object.defineProperty(exports, 'jsonStringify', {
+  enumerable: true,
+  get: function () {
+    return jsonStringify__default['default'];
   }
 });
 Object.defineProperty(exports, 'noop', {
   enumerable: true,
   get: function () {
-    return noop.noop;
+    return noop__default['default'];
   }
 });
-Object.defineProperty(exports, 'size', {
+Object.defineProperty(exports, 'parseFloat', {
   enumerable: true,
   get: function () {
-    return size.size;
+    return _parseFloat__default['default'];
   }
 });
-Object.defineProperty(exports, 'slice', {
+Object.defineProperty(exports, 'parseInt', {
   enumerable: true,
   get: function () {
-    return slice.slice;
-  }
-});
-Object.defineProperty(exports, 'test', {
-  enumerable: true,
-  get: function () {
-    return test.test;
+    return _parseInt__default['default'];
   }
 });
 Object.defineProperty(exports, 'typeOf', {
   enumerable: true,
   get: function () {
-    return typeOf.typeOf;
+    return typeOf__default['default'];
   }
 });
 Object.defineProperty(exports, 'yoop', {
   enumerable: true,
   get: function () {
-    return yoop.yoop;
+    return yoop__default['default'];
   }
 });
