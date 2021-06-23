@@ -1,15 +1,13 @@
+/* eslint-disable max-len */
 /* eslint-disable security/detect-non-literal-regexp */
-
-import { replace } from '@wareset-utilites/string/replace'
 
 export const esc = ((): {
   (string: string, ignore?: string): string
   (string: string, ignore: string, isNewFn: false): string
   (string: string, ignore: string, isNewFn: true): { (string: string): string }
 } => {
+  let undef: undefined
   const regexpG = (s: string): RegExp => new RegExp(s, 'g')
-  // const replace = (string: string, regexp: RegExp, replacer: string): string =>
-  //   string.replace(regexp, replacer)
 
   const START = '['
   const MIDDLE = '-.\\\\+*?\\[\\^\\]$(){}=!<>|:\\/'
@@ -17,15 +15,17 @@ export const esc = ((): {
   const DEFAULT_REGEXP = regexpG(START + MIDDLE + END)
   const REPLACER = '\\$&'
 
-  return (string: string, ignore: string = '', isNewFn?: boolean): any => {
+  return (string: string, ignore?: string, isNewFn?: boolean): any => {
+    if (ignore === undef) ignore = ''
     let res: any
-    if (!ignore && !isNewFn) res = replace(string, DEFAULT_REGEXP, REPLACER)
+    if (!ignore && !isNewFn) res = string.replace(DEFAULT_REGEXP, REPLACER)
     else {
-      const newMIDDLE = replace(MIDDLE, regexpG(START + esc(ignore) + END))
+      // prettier-ignore
+      const newMIDDLE = MIDDLE.replace(regexpG(START + esc(ignore) + END), '')
       const newREGEXP = regexpG(START + newMIDDLE + END)
 
       const newEscape = (string: string): string =>
-        replace(string, newREGEXP, REPLACER)
+        string.replace(newREGEXP, REPLACER)
       res = isNewFn ? newEscape : newEscape(string as string)
     }
     return res
