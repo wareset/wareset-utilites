@@ -4,36 +4,52 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
-var isNumber = require('@wareset-utilites/is/is-number');
+var isNumber = require('@wareset-utilites/is/isNumber');
 
-var isObject = require('@wareset-utilites/is/is-object');
+var isObject = require('@wareset-utilites/is/isObject');
 
-var isFunction = require('@wareset-utilites/is/is-function');
+var isFunction = require('@wareset-utilites/is/isFunction');
 
-var isNativeFunction = require('@wareset-utilites/is/is-native-function');
+var isNativeFunction = require('@wareset-utilites/is/isNativeFunction');
 
-var instanceOf = require('@wareset-utilites/lang/instance-of');
-
-var size = require('@wareset-utilites/lang/size');
-
-var length = require('@wareset-utilites/lang/length');
+var instanceOf = require('@wareset-utilites/lang/instanceOf');
 
 var typed = require('@wareset-utilites/typed');
 
-var forEach = require('@wareset-utilites/array/for-each');
+var Object$1 = require('@wareset-utilites/object/Object');
 
-var objectPrototype = require('@wareset-utilites/object/object-prototype');
+var getOwnPropertyNames = require('@wareset-utilites/object/getOwnPropertyNames');
 
-var getOwnPropertyNames = require('@wareset-utilites/object/get-own-property-names');
+var getOwnPropertySymbols = require('@wareset-utilites/object/getOwnPropertySymbols');
 
-var getOwnPropertySymbols = require('@wareset-utilites/object/get-own-property-symbols');
+function _interopDefaultLegacy(e) {
+  return e && typeof e === 'object' && 'default' in e ? e : {
+    'default': e
+  };
+}
+
+var isNumber__default = /*#__PURE__*/_interopDefaultLegacy(isNumber);
+
+var isObject__default = /*#__PURE__*/_interopDefaultLegacy(isObject);
+
+var isFunction__default = /*#__PURE__*/_interopDefaultLegacy(isFunction);
+
+var isNativeFunction__default = /*#__PURE__*/_interopDefaultLegacy(isNativeFunction);
+
+var instanceOf__default = /*#__PURE__*/_interopDefaultLegacy(instanceOf);
+
+var Object__default = /*#__PURE__*/_interopDefaultLegacy(Object$1);
+
+var getOwnPropertyNames__default = /*#__PURE__*/_interopDefaultLegacy(getOwnPropertyNames);
+
+var getOwnPropertySymbols__default = /*#__PURE__*/_interopDefaultLegacy(getOwnPropertySymbols);
 /* eslint-disable max-len */
 
 
 var getProtoOwnPropNames = (a, keys, natives) => {
-  forEach.forEach(typed.typed.of(a), p => {
-    if (p && (natives || !isNativeFunction.isNativeFunction(p))) {
-      keys.push(...getOwnPropertyNames.getOwnPropertyNames(p.prototype));
+  typed.typedOf(a).forEach(p => {
+    if (p && (natives || !isNativeFunction__default['default'](p))) {
+      keys.push(...getOwnPropertyNames__default['default'](p.prototype));
     }
   });
 };
@@ -45,30 +61,27 @@ var OPTIONS = {
   noweaks: false,
   natives: false
 };
-var vOf = 'valueOf';
-var toS = 'toString';
-var undef;
 
 var __deepEqual__ = (a, b, depth, options = OPTIONS, __cache__) => {
   if (a === b) return true;
-  if (!(+depth > 0) || !isObject.isObject(a) || !isObject.isObject(b)) return a !== a && b !== b;
+  if (!(+depth > 0) || !isObject__default['default'](a) || !isObject__default['default'](b)) return a !== a && b !== b;
   var proto = typed.typed(a);
   if (proto !== typed.typed(b)) return false;
   if (!__cache__.has(a)) __cache__.set(a, b);else if (__cache__.get(a) === b) return true;
-  if (isNumber.isNumber(depth)) depth--;
+  if (isNumber__default['default'](depth)) depth--;
 
   var __da__ = (a, b) => __deepEqual__(a, b, depth, options, __cache__);
 
   var k, v, tmp;
 
   try {
-    if (instanceOf.instanceOf(a, ArrayBuffer)) a = new DataView(a), b = new DataView(b);
+    if (instanceOf__default['default'](a, ArrayBuffer)) a = new DataView(a), b = new DataView(b);
 
     if (ArrayBuffer.isView(a)) {
       if (a.byteLength !== b.byteLength) return false;
       a = new Float64Array(a.buffer), b = new Float64Array(b.buffer);
 
-      for (k = a.byteLength; k-- > 0; undef) {
+      for (k = a.byteLength; k-- > 0;) {
         if (a[k] !== b[k]) return false;
       }
 
@@ -78,8 +91,8 @@ var __deepEqual__ = (a, b, depth, options = OPTIONS, __cache__) => {
     /**/
   }
 
-  if ((tmp = instanceOf.instanceOf(a, Map)) || instanceOf.instanceOf(a, Set)) {
-    if (size.size(a) !== size.size(b)) return false;
+  if ((tmp = instanceOf__default['default'](a, Map)) || instanceOf__default['default'](a, Set)) {
+    if (a.size !== b.size) return false;
 
     if (tmp) {
       for ([k] of a) {
@@ -94,26 +107,26 @@ var __deepEqual__ = (a, b, depth, options = OPTIONS, __cache__) => {
     }
   }
 
-  if (options.noweaks && (instanceOf.instanceOf(a, WeakMap) || instanceOf.instanceOf(a, WeakSet))) {
+  if (options.noweaks && (instanceOf__default['default'](a, WeakMap) || instanceOf__default['default'](a, WeakSet))) {
     return false;
   }
 
-  var keys = getOwnPropertyNames.getOwnPropertyNames(a);
-  if (length.length(keys) !== length.length(getOwnPropertyNames.getOwnPropertyNames(b))) return false;
+  var keys = getOwnPropertyNames__default['default'](a);
+  if (keys.length !== getOwnPropertyNames__default['default'](b).length) return false;
 
-  if (options.immerse && (options.natives || !isNativeFunction.isNativeFunction(proto))) {
+  if (options.immerse && (options.natives || !isNativeFunction__default['default'](proto))) {
     getProtoOwnPropNames(a, keys, options.natives);
   }
 
-  if (instanceOf.instanceOf(a, Error)) keys = keys.filter(v => v !== 'stack');
+  if (instanceOf__default['default'](a, Error)) keys = keys.filter(v => v !== 'stack');
 
   for (v of keys) {
     if (!(v in b) || !__da__(a[v], b[v])) return false;
   }
 
-  if (options.symbols && getOwnPropertySymbols.getOwnPropertySymbols) {
-    var symbols = getOwnPropertySymbols.getOwnPropertySymbols(a);
-    if (length.length(symbols) !== length.length(getOwnPropertySymbols.getOwnPropertySymbols(b))) return false;
+  if (options.symbols && getOwnPropertySymbols__default['default']) {
+    var symbols = getOwnPropertySymbols__default['default'](a);
+    if (symbols.length !== getOwnPropertySymbols__default['default'](b).length) return false;
 
     for (v of symbols) {
       if (!(v in b) || !__da__(a[v], b[v])) return false;
@@ -121,12 +134,12 @@ var __deepEqual__ = (a, b, depth, options = OPTIONS, __cache__) => {
   }
 
   try {
-    if (a[vOf] !== objectPrototype.objectPrototype[vOf] && isFunction.isFunction(a[vOf])) {
-      return __da__(a[vOf](), b[vOf]());
+    if (a.valueOf !== Object__default['default'].prototype.valueOf && isFunction__default['default'](a.valueOf)) {
+      return __da__(a.valueOf(), b.valueOf());
     }
 
-    if (a[toS] !== objectPrototype.objectPrototype[toS] && isFunction.isFunction(a[toS])) {
-      return __da__(a[toS](), b[toS]());
+    if (a.toString !== Object__default['default'].prototype.toString && isFunction__default['default'](a.toString)) {
+      return __da__(a.toString(), b.toString());
     }
   } catch (err) {
     return false;

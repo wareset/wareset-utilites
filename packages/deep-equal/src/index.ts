@@ -1,34 +1,24 @@
 /* eslint-disable max-len */
 
-import { isNumber } from '@wareset-utilites/is/is-number'
-import { isObject } from '@wareset-utilites/is/is-object'
-import { isFunction } from '@wareset-utilites/is/is-function'
-import { isNativeFunction } from '@wareset-utilites/is/is-native-function'
+import isNumber from '@wareset-utilites/is/isNumber'
+import isObject from '@wareset-utilites/is/isObject'
+import isFunction from '@wareset-utilites/is/isFunction'
+import isNativeFunction from '@wareset-utilites/is/isNativeFunction'
 
-import { instanceOf } from '@wareset-utilites/lang/instance-of'
-import { size } from '@wareset-utilites/lang/size'
-import { length } from '@wareset-utilites/lang/length'
+import instanceOf from '@wareset-utilites/lang/instanceOf'
 
-import { typed } from '@wareset-utilites/typed'
+import { typed, typedOf } from '@wareset-utilites/typed'
 
-import { forEach } from '@wareset-utilites/array/for-each'
-
-// const {
-//   getOwnPropertyNames,
-//   getOwnPropertySymbols,
-//   prototype: objectPrototype
-// } = Object
-
-import { objectPrototype } from '@wareset-utilites/object/object-prototype'
-import { getOwnPropertyNames } from '@wareset-utilites/object/get-own-property-names'
-import { getOwnPropertySymbols } from '@wareset-utilites/object/get-own-property-symbols'
+import Object from '@wareset-utilites/object/Object'
+import getOwnPropertyNames from '@wareset-utilites/object/getOwnPropertyNames'
+import getOwnPropertySymbols from '@wareset-utilites/object/getOwnPropertySymbols'
 
 const getProtoOwnPropNames = (
   a: any,
   keys: string[],
   natives: boolean | undefined
 ): void => {
-  forEach(typed.of(a) as Function[], (p) => {
+  ;(typedOf(a) as Function[]).forEach((p) => {
     if (p && (natives || !isNativeFunction(p))) {
       keys.push(...getOwnPropertyNames(p.prototype))
     }
@@ -51,10 +41,6 @@ const OPTIONS: TypeDeepEqualOptions = {
   natives: false
 }
 
-const vOf = 'valueOf'
-const toS = 'toString'
-
-let undef: undefined
 const __deepEqual__ = (
   a: any,
   b: any,
@@ -85,7 +71,7 @@ const __deepEqual__ = (
     if (ArrayBuffer.isView(a)) {
       if (a.byteLength !== b.byteLength) return false
       ;(a = new Float64Array(a.buffer)), (b = new Float64Array(b.buffer))
-      for (k = a.byteLength; k-- > 0; undef) if (a[k] !== b[k]) return false
+      for (k = a.byteLength; k-- > 0; ) if (a[k] !== b[k]) return false
       return true
     }
   } catch (err) {
@@ -93,7 +79,7 @@ const __deepEqual__ = (
   }
 
   if ((tmp = instanceOf(a, Map)) || instanceOf(a, Set)) {
-    if (size(a) !== size(b)) return false
+    if (a.size !== b.size) return false
 
     if (tmp) {
       for ([k] of a) if (!b.has(k)) return false
@@ -106,7 +92,7 @@ const __deepEqual__ = (
   }
 
   let keys = getOwnPropertyNames(a)
-  if (length(keys) !== length(getOwnPropertyNames(b))) return false
+  if (keys.length !== getOwnPropertyNames(b).length) return false
   if (options.immerse && (options.natives || !isNativeFunction(proto))) {
     getProtoOwnPropNames(a, keys, options.natives)
   }
@@ -115,16 +101,16 @@ const __deepEqual__ = (
 
   if (options.symbols && getOwnPropertySymbols) {
     const symbols = getOwnPropertySymbols(a)
-    if (length(symbols) !== length(getOwnPropertySymbols(b))) return false
+    if (symbols.length !== getOwnPropertySymbols(b).length) return false
     for (v of symbols) if (!(v in b) || !__da__(a[v], b[v])) return false
   }
 
   try {
-    if (a[vOf] !== objectPrototype[vOf] && isFunction(a[vOf])) {
-      return __da__(a[vOf](), b[vOf]())
+    if (a.valueOf !== Object.prototype.valueOf && isFunction(a.valueOf)) {
+      return __da__(a.valueOf(), b.valueOf())
     }
-    if (a[toS] !== objectPrototype[toS] && isFunction(a[toS])) {
-      return __da__(a[toS](), b[toS]())
+    if (a.toString !== Object.prototype.toString && isFunction(a.toString)) {
+      return __da__(a.toString(), b.toString())
     }
   } catch (err) {
     return false

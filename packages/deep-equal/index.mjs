@@ -1,19 +1,16 @@
-import { isNumber } from '@wareset-utilites/is/is-number';
-import { isObject } from '@wareset-utilites/is/is-object';
-import { isFunction } from '@wareset-utilites/is/is-function';
-import { isNativeFunction } from '@wareset-utilites/is/is-native-function';
-import { instanceOf } from '@wareset-utilites/lang/instance-of';
-import { size } from '@wareset-utilites/lang/size';
-import { length } from '@wareset-utilites/lang/length';
-import { typed } from '@wareset-utilites/typed';
-import { forEach } from '@wareset-utilites/array/for-each';
-import { objectPrototype } from '@wareset-utilites/object/object-prototype';
-import { getOwnPropertyNames } from '@wareset-utilites/object/get-own-property-names';
-import { getOwnPropertySymbols } from '@wareset-utilites/object/get-own-property-symbols';
+import isNumber from '@wareset-utilites/is/isNumber';
+import isObject from '@wareset-utilites/is/isObject';
+import isFunction from '@wareset-utilites/is/isFunction';
+import isNativeFunction from '@wareset-utilites/is/isNativeFunction';
+import instanceOf from '@wareset-utilites/lang/instanceOf';
+import { typed, typedOf } from '@wareset-utilites/typed';
+import Object$1 from '@wareset-utilites/object/Object';
+import getOwnPropertyNames from '@wareset-utilites/object/getOwnPropertyNames';
+import getOwnPropertySymbols from '@wareset-utilites/object/getOwnPropertySymbols';
 /* eslint-disable max-len */
 
 var getProtoOwnPropNames = (a, keys, natives) => {
-  forEach(typed.of(a), p => {
+  typedOf(a).forEach(p => {
     if (p && (natives || !isNativeFunction(p))) {
       keys.push(...getOwnPropertyNames(p.prototype));
     }
@@ -27,9 +24,6 @@ var OPTIONS = {
   noweaks: false,
   natives: false
 };
-var vOf = 'valueOf';
-var toS = 'toString';
-var undef;
 
 var __deepEqual__ = (a, b, depth, options = OPTIONS, __cache__) => {
   if (a === b) return true;
@@ -50,7 +44,7 @@ var __deepEqual__ = (a, b, depth, options = OPTIONS, __cache__) => {
       if (a.byteLength !== b.byteLength) return false;
       a = new Float64Array(a.buffer), b = new Float64Array(b.buffer);
 
-      for (k = a.byteLength; k-- > 0; undef) {
+      for (k = a.byteLength; k-- > 0;) {
         if (a[k] !== b[k]) return false;
       }
 
@@ -61,7 +55,7 @@ var __deepEqual__ = (a, b, depth, options = OPTIONS, __cache__) => {
   }
 
   if ((tmp = instanceOf(a, Map)) || instanceOf(a, Set)) {
-    if (size(a) !== size(b)) return false;
+    if (a.size !== b.size) return false;
 
     if (tmp) {
       for ([k] of a) {
@@ -81,7 +75,7 @@ var __deepEqual__ = (a, b, depth, options = OPTIONS, __cache__) => {
   }
 
   var keys = getOwnPropertyNames(a);
-  if (length(keys) !== length(getOwnPropertyNames(b))) return false;
+  if (keys.length !== getOwnPropertyNames(b).length) return false;
 
   if (options.immerse && (options.natives || !isNativeFunction(proto))) {
     getProtoOwnPropNames(a, keys, options.natives);
@@ -95,7 +89,7 @@ var __deepEqual__ = (a, b, depth, options = OPTIONS, __cache__) => {
 
   if (options.symbols && getOwnPropertySymbols) {
     var symbols = getOwnPropertySymbols(a);
-    if (length(symbols) !== length(getOwnPropertySymbols(b))) return false;
+    if (symbols.length !== getOwnPropertySymbols(b).length) return false;
 
     for (v of symbols) {
       if (!(v in b) || !__da__(a[v], b[v])) return false;
@@ -103,12 +97,12 @@ var __deepEqual__ = (a, b, depth, options = OPTIONS, __cache__) => {
   }
 
   try {
-    if (a[vOf] !== objectPrototype[vOf] && isFunction(a[vOf])) {
-      return __da__(a[vOf](), b[vOf]());
+    if (a.valueOf !== Object$1.prototype.valueOf && isFunction(a.valueOf)) {
+      return __da__(a.valueOf(), b.valueOf());
     }
 
-    if (a[toS] !== objectPrototype[toS] && isFunction(a[toS])) {
-      return __da__(a[toS](), b[toS]());
+    if (a.toString !== Object$1.prototype.toString && isFunction(a.toString)) {
+      return __da__(a.toString(), b.toString());
     }
   } catch (err) {
     return false;
