@@ -1,16 +1,7 @@
-import { pop } from '@wareset-utilites/array/pop'
-import { push } from '@wareset-utilites/array/push'
-import { shift } from '@wareset-utilites/array/shift'
-import { unshift } from '@wareset-utilites/array/unshift'
+import trim from '@wareset-utilites/string/trim'
+import esc from '@wareset-utilites/escape'
 
-import { trim } from '@wareset-utilites/string/trim'
-import { esc } from '@wareset-utilites/escape'
-
-import { last } from '@wareset-utilites/lang/last'
-import { length } from '@wareset-utilites/lang/length'
-import { includes } from '@wareset-utilites/lang/includes'
-
-const __charAt__ = (s: string, n: number): string => s.charAt(n)
+import last from '@wareset-utilites/array/last'
 
 export const csvParse = (
   source: string,
@@ -23,35 +14,35 @@ export const csvParse = (
   const res: string[][] = [cur]
 
   let i = -1
-  const len = length(source)
+  const len = source.length
 
   let raw = ''
   let char: string
   let isEOL: boolean
   const seps: string[] = []
   while (++i <= len) {
-    char = __charAt__(source, i)
-    if (char === '\\') raw += char + __charAt__(source, ++i)
+    char = source.charAt(i)
+    if (char === '\\') raw += char + source.charAt(++i)
     else {
-      if (includes(quotes, char)) {
-        seps[0] === char ? shift(seps) : unshift(seps, char)
+      if (quotes.indexOf(char) > -1) {
+        seps[0] === char ? seps.shift() : seps.unshift(char)
       }
 
       isEOL = char === '\n'
-      if ((!length(seps) && (isEOL || char === separator)) || !char) {
+      if ((!seps.length && (isEOL || char === separator)) || !char) {
         raw = trim(raw, trimer)
-        push(cur, raw)
+        cur.push(raw)
         raw = ''
-        if (isEOL && length(cur)) {
-          if (length(cur) === 1 && !cur[0]) pop(res)
-          push(res, (cur = []))
+        if (isEOL && cur.length) {
+          if (cur.length === 1 && !cur[0]) res.pop()
+          res.push((cur = []))
         }
       } else raw += char
     }
   }
 
   const lastItem = last(res)
-  if (lastItem && length(lastItem) === 1 && !lastItem[0]) pop(res)
+  if (lastItem && lastItem.length === 1 && !lastItem[0]) res.pop()
 
   return res
 }
