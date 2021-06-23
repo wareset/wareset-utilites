@@ -3,6 +3,7 @@ export * from './__types__';
 export { isArray } from './__types__';
 export { isArrayStrict } from './__types__';
 export { isBe } from './__types__';
+export { isBigint } from './__types__';
 export { isBoolean } from './__types__';
 export { isFalse } from './__types__';
 export { isFunction } from './__types__';

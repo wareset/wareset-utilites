@@ -4,43 +4,45 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
-var isArray = require('./is-array');
+var isArray = require('./isArray');
 
-var isArrayStrict = require('./is-array-strict');
+var isArrayStrict = require('./isArrayStrict');
 
-var isBe = require('./is-be');
+var isBe = require('./isBe');
 
-var isBoolean = require('./is-boolean');
+var isBigint = require('./isBigint');
 
-var isFalse = require('./is-false');
+var isBoolean = require('./isBoolean');
 
-var isFunction = require('./is-function');
+var isFalse = require('./isFalse');
 
-var isNativeFunction = require('./is-native-function');
+var isFunction = require('./isFunction');
 
-var isNill = require('./is-nill');
+var isNativeFunction = require('./isNativeFunction');
 
-var isNull = require('./is-null');
+var isNill = require('./isNill');
 
-var isNumber = require('./is-number');
+var isNull = require('./isNull');
 
-var isObject = require('./is-object');
+var isNumber = require('./isNumber');
 
-var isObjectStrict = require('./is-object-strict');
+var isObject = require('./isObject');
 
-var isPromise = require('./is-promise');
+var isObjectStrict = require('./isObjectStrict');
 
-var isRegExp = require('./is-reg-exp');
+var isPromise = require('./isPromise');
 
-var isString = require('./is-string');
+var isRegExp = require('./isRegExp');
 
-var isSymbol = require('./is-symbol');
+var isString = require('./isString');
 
-var isTrue = require('./is-true');
+var isSymbol = require('./isSymbol');
 
-var isUndefined = require('./is-undefined');
+var isTrue = require('./isTrue');
 
-var isVoid = require('./is-void');
+var isUndefined = require('./isUndefined');
+
+var isVoid = require('./isVoid');
 
 Object.defineProperty(exports, 'isArray', {
   enumerable: true,
@@ -58,6 +60,12 @@ Object.defineProperty(exports, 'isBe', {
   enumerable: true,
   get: function () {
     return isBe.isBe;
+  }
+});
+Object.defineProperty(exports, 'isBigint', {
+  enumerable: true,
+  get: function () {
+    return isBigint.isBigint;
   }
 });
 Object.defineProperty(exports, 'isBoolean', {
