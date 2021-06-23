@@ -1,58 +1,73 @@
-import { length } from '@wareset-utilites/lang/length'
-import { abs } from '@wareset-utilites/math'
+/* eslint-disable no-extra-boolean-cast */
 
-export interface __IFinderCallbackSelf__ {
-  index: (num: number) => number
-  offset: (num: number) => number
-  stop: () => true
+let undef: undefined
+export const UNDEFINED = undef
+
+export const isset = (a: any, b: any): boolean => (a !== a ? b !== b : a === b)
+
+type TypeFindIndex = {
+  <T>(
+    list: T[],
+    callback: (
+      value: T,
+      key: number,
+      list: T[],
+      context: {
+        index: number
+        break: boolean
+      }
+    ) => boolean,
+    offset?: number
+  ): number
+  <T extends string>(
+    list: T,
+    callback: (
+      value: string,
+      key: number,
+      list: T,
+      context: {
+        index: number
+        break: boolean
+      }
+    ) => boolean,
+    offset?: number
+  ): number
 }
 
-export const __finder__ = <T>(
-  list: T[],
-  callback: (
-    value: T,
-    key: number,
-    list: T[],
-    self: __IFinderCallbackSelf__
-  ) => boolean | any,
-  // eslint-disable-next-line no-invalid-this
-  // thisArg: any = this,
-  offset?: number,
-  offsetEnd?: number,
-  returnIndex = false,
-  fromTheEnd = false
-): T | undefined | number => {
-  // callback = callback.bind(thisArg)
-  offset = abs(offset!) || 0
-  offsetEnd = abs(offsetEnd!) || 0
-  // let i = length(list)
-  // let lastI: any = null
-
-  // const runer = (): any =>
-  //   lastI === null || lastI === thisArg || fromTheEnd === lastI > thisArg
-
-  // while (
-  //   i-- >= 0 &&
-  //   (thisArg = fromTheEnd ? i : length(list) - i - 1) >= 0 &&
-  //   (thisArg < length(list) || (thisArg = -1) > 0) &&
-  //   (!runer() || !callback(list[(lastI = thisArg)], thisArg, list))
-  // );
-
-  offset = fromTheEnd ? length(list) - offset : -1 + offset
-  let isStoped = false
-
-  const self = {
-    index: (num: number): number => (offset = num),
-    offset: (num: number): number => (offset! += num),
-    stop: (): true => (isStoped = true)
+const i = 'index'
+const b = 'break'
+export const findIndexLeftDirty: TypeFindIndex = (
+  list: any,
+  callback: (value: any, key: number, list: any, context: any) => boolean,
+  offset?: number
+) => {
+  offset = +offset! || 0
+  // let i: number
+  let res = -1
+  const ctx = { index: 0, break: false }
+  for (ctx[i] = offset - 1; ++ctx[i] < list.length; ) {
+    if (callback(list[ctx[i]], ctx[i], list, ctx) || ctx[b]) {
+      if (!ctx[b]) res = ctx[i]
+      break
+    }
   }
+  return res
+}
 
-  while (
-    !isStoped &&
-    (fromTheEnd
-      ? offset-- > offsetEnd
-      : ++offset + offsetEnd < length(list) || (offset = -1) > 0) &&
-    !callback(list[offset], offset, list, self)
-  );
-  return returnIndex ? offset : list[offset]
+export const findIndexRightDirty: TypeFindIndex = (
+  list: any,
+  callback: (value: any, key: number, list: any, context: any) => boolean,
+  offset?: number
+) => {
+  offset = +offset! || 0
+  // let i: number
+  let res = -1
+  const ctx = { index: 0, break: false }
+  for (ctx[i] = list.length - offset; ctx[i]-- > 0; ) {
+    if (callback(list[ctx[i]], ctx[i], list, ctx) || ctx[b]) {
+      if (!ctx[b]) res = ctx[i]
+      break
+    }
+  }
+  return res
 }
