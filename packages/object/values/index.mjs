@@ -1,5 +1,7 @@
-import { keys } from '../keys';
+import __Object__ from '../Object';
+import keys from '../keys';
 
-var values = object => keys(object).map(k => object[k]);
+var values = __Object__.values || (object => keys(object).map(k => object[k]));
 
+export default values;
 export { values };
