@@ -1,0 +1,74 @@
+{
+  "name": "@wareset-utilites/number",
+  "version": "0.1.1",
+  "description": "WIP: wareset-utilites: number",
+  "author": "cftcview <cftcview@gmail.com>",
+  "homepage": "https://github.com/wareset/wareset-utilites/tree/main/packages/number#readme",
+  "license": "MIT",
+  "main": "index",
+  "module": "index.mjs",
+  "types": "index.d.ts",
+  "files": [
+    "EPSILON",
+    "MAX_SAFE_INTEGER",
+    "MAX_VALUE",
+    "MIN_SAFE_INTEGER",
+    "MIN_VALUE",
+    "NEGATIVE_INFINITY",
+    "Number",
+    "POSITIVE_INFINITY",
+    "README.md",
+    "__types__",
+    "index.d.ts",
+    "index.js",
+    "index.mjs",
+    "isFinite",
+    "isInteger",
+    "isNaN",
+    "isSafeInteger",
+    "parseFloat",
+    "parseInt"
+  ],
+  "keywords": [
+    "number"
+  ],
+  "scripts": {
+    "test": "jest --",
+    "dester": "dester ./src ./ --babel",
+    "build": "npm run -s dester -- -s",
+    "dev": "npm run -s dester -- -w --no-r",
+    "pkg:name": "cat package.json | grep '\"name\":' | cut -d '\"' -f4",
+    "pkg:version": "cat package.json | grep '\"version\":' | cut -d '\"' -f4",
+    "git:get:tag": "echo $(npm run -s pkg:name)@$(npm run -s pkg:version)",
+    "git:set:tag": "t=$(npm run -s git:get:tag) && git tag -a $t -m $t",
+    "git:commit": "npm run -s build && git add . && read -p 'Commit: ' c; c=${c:-v$(npm run -s pkg:version)} && n=$(npm run -s pkg:name) && git commit -m \"$n: $c\"",
+    "commit": "read -p 'Version [patch]: ' V; V=${V:-patch} && npm version --force --no-git-tag-version $V; echo $V && read -p 'Push? (y/N): ' G && read -p 'Publish? (y/N): ' P && npm run -s git:commit && case $G in Y|y) $(git push);; esac && case $P in Y|y) $(npm run -s git:set:tag && git push --tags && npm -s publish);; esac"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wareset/wareset-utilites.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wareset/wareset-utilites/issues"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.16",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/plugin-transform-block-scoping": "^7.13.16",
+    "@types/jest": "^26.0.23",
+    "@types/node": "^12.20.11",
+    "dester": "0.x",
+    "jest": "^26.6.3",
+    "ts-jest": "^26.5.5",
+    "ts-node": "^9.1.1",
+    "tslib": "^2.2.0",
+    "typescript": "4.x"
+  },
+  "dependencies": {
+    "@wareset-utilites/lang": "0.1.8",
+    "@wareset-utilites/math": "0.1.3"
+  }
+}
