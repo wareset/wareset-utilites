@@ -1,2 +1,2 @@
-export declare const hash: (str: any, maxLength?: number, salt?: any) => string;
+export declare const hash: (str: any, salt?: string) => string;
 export default hash;
