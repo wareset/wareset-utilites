@@ -1,68 +1,62 @@
-const math = Math
+export { default as clamp } from './clamp'
+export { default as mean } from './mean'
+export { default as randomTo } from './randomTo'
+export { default as randomGen } from './randomGenerator'
+export { default as roundTo } from './roundTo'
 
-export const abs = math.abs
-export const acos = math.acos
-export const asin = math.asin
-export const atan = math.atan
-export const atan2 = math.atan2
-export const ceil = math.ceil
-export const cos = math.cos
-export const exp = math.exp
-export const floor = math.floor
-export const log = math.log
-export const max = math.max
-export const min = math.min
-export const pow = math.pow
-export const round = math.round
-export const sin = math.sin
-export const sqrt = math.sqrt
-export const tan = math.tan
+export { default as Math } from './Math'
 
-export const hypot = (...n: number[]): number =>
-  sqrt(n.reduce((a, c) => a + c * c))
+export { default as abs } from './abs'
+export { default as acos } from './acos'
+export { default as acosh } from './acosh'
+export { default as asin } from './asin'
+export { default as asinh } from './asinh'
+export { default as atan } from './atan'
+export { default as atan2 } from './atan2'
+export { default as atanh } from './atanh'
 
-export const mean = (...n: number[]): number =>
-  n.reduce((a, c) => a + c) / n.length
+export { default as cbrt } from './cbrt'
+export { default as ceil } from './ceil'
+export { default as clz32 } from './clz32'
+export { default as cos } from './cos'
+export { default as cosh } from './cosh'
 
-export const sign = (n: number): number =>
-  (n = +n) !== n ? NaN : n > 0 ? 1 : -1
+export { default as exp } from './exp'
+export { default as expm1 } from './expm1'
+export { default as E } from './E'
 
-export const trunc = (n: number): number =>
-  n - (n % 1) || (n < 0 ? -0 : n === 0 ? n : 0)
+export { default as floor } from './floor'
+export { default as fround } from './fround'
 
-export const clamp = (
-  value: number,
-  minValue: number = value,
-  maxValue: number = value
-): number => max(minValue, min(maxValue, value))
+export { default as hypot } from './hypot'
 
-export const imul = (a: number, b: number): number => {
-  const ah = (a >>> 16) & 0xffff
-  const al = a & 0xffff
-  const bh = (b >>> 16) & 0xffff
-  const bl = b & 0xffff
+export { default as imul } from './imul'
 
-  return (al * bl + (((ah * bl + al * bh) << 16) >>> 0)) | 0
-}
+export { default as log } from './log'
+export { default as log10 } from './log10'
+export { default as log1p } from './log1p'
+export { default as log2 } from './log2'
+export { default as LN10 } from './LN10'
+export { default as LN2 } from './LN2'
+export { default as LOG10E } from './LOG10E'
+export { default as LOG2E } from './LOG2E'
 
-const __random__ = math.random
-export const random = (min = 0, max = 1, floating?: boolean): number => (
-  (floating = floating || max !== floor(max) || min !== floor(min)),
-  (min = __random__() * (max - min) + min),
-  floating ? min : floor(min)
-)
+export { default as max } from './max'
+export { default as min } from './min'
 
-const __rf1__ = 2147483647
-const __rf2__ = __rf1__ + 1
-export const randomGenerator = (seed: number) => (
-  min = 0,
-  max = 1,
-  floating?: boolean
-): number => (
-  (floating = floating || max !== floor(max) || min !== floor(min)),
-  (min =
-    (((seed = imul(16807, seed) | 0 % __rf1__) & __rf1__) / __rf2__) *
-      (max - min) +
-    min),
-  floating ? min : floor(min)
-)
+export { default as pow } from './pow'
+export { default as PI } from './PI'
+
+export { default as random } from './random'
+export { default as round } from './round'
+
+export { default as sign } from './sign'
+export { default as sin } from './sin'
+export { default as sinh } from './sinh'
+export { default as sqrt } from './sqrt'
+export { default as SQRT1_2 } from './SQRT1_2'
+export { default as SQRT2 } from './SQRT2'
+
+export { default as tan } from './tan'
+export { default as tanh } from './tanh'
+export { default as trunc } from './trunc'
