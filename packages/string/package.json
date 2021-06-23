@@ -1,7 +1,7 @@
 {
   "name": "@wareset-utilites/string",
-  "version": "0.1.7",
-  "description": "wareset-utilites: string",
+  "version": "0.1.8",
+  "description": "WIP: wareset-utilites: string",
   "author": "cftcview <cftcview@gmail.com>",
   "homepage": "https://github.com/wareset/wareset-utilites/tree/main/packages/string#readme",
   "license": "MIT",
@@ -10,27 +10,29 @@
   "types": "index.d.ts",
   "files": [
     "README.md",
+    "String",
     "__types__",
-    "ends-with",
+    "endsWith",
     "index.d.ts",
     "index.js",
     "index.mjs",
     "lib",
-    "pad-end",
-    "pad-start",
+    "localeCompare",
+    "padEnd",
+    "padStart",
     "repeat",
-    "replace",
-    "starts-with",
-    "to-capitalize",
-    "to-code-camelcase",
-    "to-code-kebabcase",
-    "to-code-pascalcase",
-    "to-code-snakecase",
-    "to-lowercase",
-    "to-uppercase",
+    "replaceAll",
+    "startsWith",
+    "toCapitalize",
+    "toCodeCamelcase",
+    "toCodeKebabcase",
+    "toCodePascalcase",
+    "toCodeSnakecase",
+    "toLowercase",
+    "toUppercase",
     "trim",
-    "trim-left",
-    "trim-right"
+    "trimLeft",
+    "trimRight"
   ],
   "keywords": [
     "string"
@@ -58,21 +60,19 @@
     "url": "https://github.com/wareset/wareset-utilites/issues"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.10",
-    "@babel/plugin-proposal-class-properties": "^7.12.1",
-    "@babel/plugin-transform-block-scoping": "^7.12.12",
-    "@types/jest": "^26.0.20",
-    "@types/node": "^12.19.15",
+    "@babel/core": "^7.13.16",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/plugin-transform-block-scoping": "^7.13.16",
+    "@types/jest": "^26.0.23",
+    "@types/node": "^12.20.11",
     "dester": "0.x",
     "jest": "^26.6.3",
-    "ts-jest": "^26.5.0",
+    "ts-jest": "^26.5.5",
     "ts-node": "^9.1.1",
-    "tslib": "^2.1.0",
+    "tslib": "^2.2.0",
     "typescript": "4.x"
   },
   "dependencies": {
-    "@wareset-utilites/array": "0.1.2",
-    "@wareset-utilites/math": "0.1.2",
-    "@wareset-utilites/lang": "0.1.7"
+    "@wareset-utilites/escape": "0.1.7"
   }
 }

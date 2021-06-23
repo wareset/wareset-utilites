@@ -1,1 +1,0 @@
-export { toUppercase } from '../lib'

@@ -1,10 +1,12 @@
 export * from './__types__';
 
+export { String } from './__types__';
 export { endsWith } from './__types__';
+export { localeCompare } from './__types__';
 export { padEnd } from './__types__';
 export { padStart } from './__types__';
 export { repeat } from './__types__';
-export { replace } from './__types__';
+export { replaceAll } from './__types__';
 export { startsWith } from './__types__';
 export { toCapitalize } from './__types__';
 export { toCodeCamelcase } from './__types__';

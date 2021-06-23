@@ -1,33 +1,26 @@
 /* eslint-disable security/detect-non-literal-regexp */
 
-import { test } from '@wareset-utilites/lang/test'
-import { length } from '@wareset-utilites/lang/length'
-
-import { push } from '@wareset-utilites/array/push'
-import { join } from '@wareset-utilites/array/join'
-import { filter } from '@wareset-utilites/array/filter'
-
-export const __dash__ = '-'
-export const __empty__ = ''
-export const __space__ = ' '
-export const __underline__ = '_'
+export const $EMPTY = ''
+export const $DASH = '-'
+export const $SPACE = ' '
+export const $UNDERSCORE = '_'
 
 export const __trimer__ = '\\s'
 export const __regexp__ = (s: string): RegExp => new RegExp(s, 'g')
 
-const lowercase = __empty__.toLocaleLowerCase || __empty__.toLowerCase
+const lowercase = $EMPTY.toLocaleLowerCase || $EMPTY.toLowerCase
 export const toLowercase = (string: string): string => lowercase.call(string)
 
-const uppercase = __empty__.toLocaleUpperCase || __empty__.toUpperCase
+const uppercase = $EMPTY.toLocaleUpperCase || $EMPTY.toUpperCase
 export const toUppercase = (string: string): string => uppercase.call(string)
 
 const __regPCA__ = /[\d$]/
 export const __toArrayCase__ = (s: string): string[] => {
-  s += __dash__
-  const len = length(s)
+  s += $DASH
+  const len = s.length
   let i = -1
 
-  let current = __empty__
+  let current = $EMPTY
   let words: string[] = []
 
   let isUL: any
@@ -38,11 +31,11 @@ export const __toArrayCase__ = (s: string): string[] => {
     charLower = toLowercase(char)
     charUpper = toUppercase(char)
 
-    if (charUpper !== charLower || test(__regPCA__, char)) {
+    if (charUpper !== charLower || __regPCA__.test(char)) {
       if (isBreak || !isUL !== (char === charUpper)) {
         if (current) {
-          if (length(current) > 1) current += __dash__
-          push(words, current)
+          if (current.length > 1) current += $DASH
+          words.push(current)
         }
         current = charLower
       } else current += charLower
@@ -51,15 +44,18 @@ export const __toArrayCase__ = (s: string): string[] => {
       isBreak = false
     } else {
       if (current) {
-        if (length(current) > 1) current = __dash__ + current + __dash__
-        push(words, current), (current = __dash__)
+        if (current.length > 1) current = $DASH + current + $DASH
+        words.push(current), (current = $DASH)
       }
       // if (test(__regPCA__, char)) current += charLower
       isBreak = true
     }
   }
 
-  words = filter(join(words, __empty__).split(__dash__), (v) => !!v)
+  words = words
+    .join($EMPTY)
+    .split($DASH)
+    .filter((v) => !!v)
   // console.log(s, words)
 
   return words

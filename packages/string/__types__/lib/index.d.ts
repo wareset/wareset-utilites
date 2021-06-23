@@ -1,7 +1,7 @@
-export declare const __dash__ = "-";
-export declare const __empty__ = "";
-export declare const __space__ = " ";
-export declare const __underline__ = "_";
+export declare const $EMPTY = "";
+export declare const $DASH = "-";
+export declare const $SPACE = " ";
+export declare const $UNDERSCORE = "_";
 export declare const __trimer__ = "\\s";
 export declare const __regexp__: (s: string) => RegExp;
 export declare const toLowercase: (string: string) => string;

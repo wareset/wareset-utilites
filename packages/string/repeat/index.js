@@ -6,8 +6,8 @@ Object.defineProperty(exports, '__esModule', {
 
 var lib = require('../lib');
 
-var repeat = (string, count = 1) => {
-  var res = lib.__empty__;
+var repeat = (string, count) => {
+  var res = lib.$EMPTY;
   count = -~count || 0;
 
   while (--count > 0) {
@@ -17,4 +17,5 @@ var repeat = (string, count = 1) => {
   return res;
 };
 
+exports.default = repeat;
 exports.repeat = repeat;

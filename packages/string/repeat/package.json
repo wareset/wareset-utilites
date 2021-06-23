@@ -6,7 +6,6 @@
     "../__types__",
     "index.d.ts",
     "index.js",
-    "index.mjs",
-    "index.test"
+    "index.mjs"
   ]
 }

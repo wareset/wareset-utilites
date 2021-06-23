@@ -1,1 +1,0 @@
-export { toLowercase } from '../lib'

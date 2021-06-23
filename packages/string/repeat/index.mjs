@@ -1,7 +1,7 @@
-import { __empty__ } from '../lib';
+import { $EMPTY } from '../lib';
 
-var repeat = (string, count = 1) => {
-  var res = __empty__;
+var repeat = (string, count) => {
+  var res = $EMPTY;
   count = -~count || 0;
 
   while (--count > 0) {
@@ -11,4 +11,5 @@ var repeat = (string, count = 1) => {
   return res;
 };
 
+export default repeat;
 export { repeat };
