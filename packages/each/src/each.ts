@@ -1,19 +1,19 @@
 /* eslint-disable max-len */
 
-import { isObject } from '@wareset-utilites/is/is-object'
-import { keys } from '@wareset-utilites/object/keys'
-import { typed } from '@wareset-utilites/typed'
-import { array } from '@wareset-utilites/array/array'
+import isObject from '@wareset-utilites/is/isObject'
+import keys from '@wareset-utilites/object/keys'
+import { typedOf } from '@wareset-utilites/typed'
+import Array from '@wareset-utilites/array/Array'
 
 export const each = <T, K extends keyof T>(
   object: T,
-  callback: (v: T[K], k: K, a: T, type: string) => any
+  callback: (v: T[K], k: K, a: T, type: 'set' | 'map' | 'object') => any
 ): T => {
   if (isObject(object)) {
-    if (typed.of(object, array, Set)) {
+    if (typedOf(object, Array, Set)) {
       let k = 0
       for (const v of object as any) callback(v, k as any, object, 'set'), k++
-    } else if (typed.of(object, Map)) {
+    } else if (typedOf(object, Map)) {
       for (const [k, v] of object as any) callback(v, k, object, 'map')
     } else {
       for (const k of keys(object))
@@ -22,3 +22,4 @@ export const each = <T, K extends keyof T>(
   }
   return object
 }
+export default each

@@ -6,7 +6,7 @@ Object.defineProperty(exports, '__esModule', {
 
 var each = require('./each');
 
-var eachAsync = require('./each-async');
+var eachAsync = require('./eachAsync');
 
 Object.defineProperty(exports, 'each', {
   enumerable: true,

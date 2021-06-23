@@ -1,2 +1,2 @@
 export { each } from './each';
-export { eachAsync } from './each-async';
+export { eachAsync } from './eachAsync';

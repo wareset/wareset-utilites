@@ -1,18 +1,18 @@
-import { isObject } from '@wareset-utilites/is/is-object';
-import { keys } from '@wareset-utilites/object/keys';
-import { typed } from '@wareset-utilites/typed';
-import { array } from '@wareset-utilites/array/array';
+import isObject from '@wareset-utilites/is/isObject';
+import keys from '@wareset-utilites/object/keys';
+import { typedOf } from '@wareset-utilites/typed';
+import Array from '@wareset-utilites/array/Array';
 /* eslint-disable max-len */
 
 var each = (object, callback) => {
   if (isObject(object)) {
-    if (typed.of(object, array, Set)) {
+    if (typedOf(object, Array, Set)) {
       var k = 0;
 
       for (var v of object) {
         callback(v, k, object, 'set'), k++;
       }
-    } else if (typed.of(object, Map)) {
+    } else if (typedOf(object, Map)) {
       for (var [_k, _v] of object) {
         callback(_v, _k, object, 'map');
       }
@@ -26,4 +26,5 @@ var each = (object, callback) => {
   return object;
 };
 
+export default each;
 export { each };
