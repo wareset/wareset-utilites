@@ -1,3 +1,4 @@
 import Math from './Math'
-export const random = Math.random
+const __random__ = Math.random
+export const random = (): number => __random__() || random()
 export default random
