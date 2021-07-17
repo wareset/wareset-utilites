@@ -3,10 +3,8 @@
   "module": "index.mjs",
   "types": "index.d.ts",
   "files": [
-    "../__types__",
     "index.d.ts",
     "index.js",
-    "index.mjs",
-    "sync"
+    "index.mjs"
   ]
 }
