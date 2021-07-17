@@ -1,63 +1,22 @@
 {
-  "name": "@wareset-utilites/array",
-  "version": "0.1.4",
-  "publishConfig": {
-    "access": "public"
-  },
-  "description": "WIP: wareset-utilites: array",
-  "keywords": [
-    "array"
-  ],
-  "license": "MIT",
-  "homepage": "https://github.com/wareset/wareset-utilites/tree/main/packages/array#readme",
-  "bugs": {
-    "url": "https://github.com/wareset/wareset-utilites/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/wareset/wareset-utilites.git"
-  },
+  "name": "@wareset-utilites/constants",
+  "version": "0.1.0",
+  "description": "WIP: wareset-utilites: constants",
   "author": "cftcview <cftcview@gmail.com>",
+  "homepage": "https://github.com/wareset/wareset-utilites/tree/main/packages/constants#readme",
+  "license": "MIT",
   "main": "index",
   "module": "index.mjs",
   "types": "index.d.ts",
   "files": [
-    "Array",
     "README.md",
     "__types__",
-    "clear",
-    "concat",
-    "everyLeft",
-    "everyRight",
-    "fill",
-    "filterLeft",
-    "filterRight",
-    "findIndexLeft",
-    "findIndexRight",
-    "findLeft",
-    "findRight",
-    "first",
-    "forEachLeft",
-    "forEachRight",
-    "includes",
     "index.d.ts",
     "index.js",
-    "index.mjs",
-    "indexOfLeft",
-    "indexOfRight",
-    "last",
-    "lib",
-    "mapLeft",
-    "mapRight",
-    "pop",
-    "reverse",
-    "sample",
-    "shift",
-    "shuffle",
-    "someLeft",
-    "someRight",
-    "spliceBetween",
-    "spliceWith"
+    "index.mjs"
+  ],
+  "keywords": [
+    "constants"
   ],
   "scripts": {
     "test": "jest --",
@@ -71,6 +30,16 @@
     "git:commit": "npm run -s build && git add . && read -p 'Commit: ' c; c=${c:-v$(npm run -s pkg:version)} && n=$(npm run -s pkg:name) && git commit -m \"$n: $c\"",
     "commit": "read -p 'Version [patch]: ' V; V=${V:-patch} && npm version --force --no-git-tag-version $V; echo $V && read -p 'Push? (y/N): ' G && read -p 'Publish? (y/N): ' P && npm run -s git:commit && case $G in Y|y) $(git push);; esac && case $P in Y|y) $(npm run -s git:set:tag && git push --tags && npm -s publish);; esac"
   },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wareset/wareset-utilites.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wareset/wareset-utilites/issues"
+  },
   "devDependencies": {
     "@babel/core": "^7.13.16",
     "@babel/plugin-proposal-class-properties": "^7.13.0",
@@ -83,8 +52,5 @@
     "ts-node": "^9.1.1",
     "tslib": "^2.2.0",
     "typescript": "4.x"
-  },
-  "dependencies": {
-    "@wareset-utilites/math": "0.1.4"
   }
 }
