@@ -1,5 +1,5 @@
 import { isFunction } from './isFunction'
 
 export const isNativeFunction = (value: any): boolean =>
-  isFunction(value) && /\{\s*\[native code\]\s*\}\s*$/.test('' + value)
+  isFunction(value) && /\{\s*\[\s*native\s+code\s*\]\s*\}\s*$/.test('' + value)
 export default isNativeFunction
