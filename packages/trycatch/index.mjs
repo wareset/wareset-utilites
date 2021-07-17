@@ -7,7 +7,7 @@ var trycatch = (tryFn, catchFn, errorMsg) => {
     res = tryFn();
   } catch (e) {
     if (errorMsg) console.error(e);
-    res = isFunction(catchFn) ? trycatch(() => catchFn(e), null, errorMsg) : catchFn;
+    res = isFunction(catchFn) ? catchFn(e) : catchFn;
   }
 
   return res;

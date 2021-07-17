@@ -21,7 +21,7 @@ var trycatch = (tryFn, catchFn, errorMsg) => {
     res = tryFn();
   } catch (e) {
     if (errorMsg) console.error(e);
-    res = isFunction__default['default'](catchFn) ? trycatch(() => catchFn(e), null, errorMsg) : catchFn;
+    res = isFunction__default['default'](catchFn) ? catchFn(e) : catchFn;
   }
 
   return res;

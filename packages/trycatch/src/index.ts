@@ -10,11 +10,9 @@ export const trycatch = <T>(
     res = tryFn()
   } catch (e) {
     if (errorMsg) console.error(e)
-    res = isFunction(catchFn)
-      ? trycatch(() => (catchFn as Function)(e), null, errorMsg)
-      : catchFn
+    res = isFunction(catchFn) ? catchFn(e) : catchFn
   }
-  return res
+  return res as T
 }
 
 export default trycatch
