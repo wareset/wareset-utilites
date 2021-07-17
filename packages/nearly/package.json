@@ -1,10 +1,23 @@
 {
   "name": "@wareset-utilites/nearly",
-  "version": "0.1.11",
+  "version": "0.1.12",
+  "publishConfig": {
+    "access": "public"
+  },
   "description": "WIP: Returns the nearest value from the array, or from a pattern",
-  "author": "cftcview <cftcview@gmail.com>",
-  "homepage": "https://github.com/wareset/wareset-utilites/tree/main/packages/nearly#readme",
+  "keywords": [
+    "nearly"
+  ],
   "license": "MIT",
+  "homepage": "https://github.com/wareset/wareset-utilites/tree/main/packages/nearly#readme",
+  "bugs": {
+    "url": "https://github.com/wareset/wareset-utilites/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wareset/wareset-utilites.git"
+  },
+  "author": "cftcview <cftcview@gmail.com>",
   "main": "index",
   "module": "index.mjs",
   "types": "index.d.ts",
@@ -14,9 +27,6 @@
     "index.d.ts",
     "index.js",
     "index.mjs"
-  ],
-  "keywords": [
-    "nearly"
   ],
   "scripts": {
     "test": "jest --",
@@ -29,16 +39,6 @@
     "git:set:tag": "t=$(npm run -s git:get:tag) && git tag -a $t -m $t",
     "git:commit": "npm run -s build && git add . && read -p 'Commit: ' c; c=${c:-v$(npm run -s pkg:version)} && n=$(npm run -s pkg:name) && git commit -m \"$n: $c\"",
     "commit": "read -p 'Version [patch]: ' V; V=${V:-patch} && npm version --force --no-git-tag-version $V; echo $V && read -p 'Push? (y/N): ' G && read -p 'Publish? (y/N): ' P && npm run -s git:commit && case $G in Y|y) $(git push);; esac && case $P in Y|y) $(npm run -s git:set:tag && git push --tags && npm -s publish);; esac"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/wareset/wareset-utilites.git"
-  },
-  "bugs": {
-    "url": "https://github.com/wareset/wareset-utilites/issues"
   },
   "devDependencies": {
     "@babel/core": "^7.13.16",
@@ -54,7 +54,7 @@
     "typescript": "4.x"
   },
   "dependencies": {
-    "@wareset-utilites/is": "0.1.9",
-    "@wareset-utilites/math": "0.1.3"
+    "@wareset-utilites/is": "0.1.10",
+    "@wareset-utilites/math": "0.1.4"
   }
 }
