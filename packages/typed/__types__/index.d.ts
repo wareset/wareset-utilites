@@ -3,16 +3,16 @@ declare type IPrototypesList = IPrototype[];
 declare const typedOf: {
     (value: any): IPrototypesList;
     (value: any, ...types: IPrototypesList): boolean;
-    check: <T>(value: T, ...t: any[]) => T | never;
+    try: <T>(value: T, ...t: any[]) => T | never;
 };
 declare const typed: {
     (value: any): IPrototype;
     (value: any, ...types: IPrototypesList): boolean;
-    check: <T>(value: T, ...t: any[]) => T | never;
+    try: <T>(value: T, ...t: any[]) => T | never;
     of: {
         (value: any): IPrototypesList;
         (value: any, ...types: IPrototypesList): boolean;
-        check: <T>(value: T, ...t: any[]) => T | never;
+        try: <T>(value: T, ...t: any[]) => T | never;
     };
 };
 export { typed, typedOf };

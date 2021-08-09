@@ -1,38 +1,33 @@
-var c = 'constructor',
-    p = 'prototype',
-    l = 'length',
-    s = 'some';
+import { getPrototypeOf } from '@wareset-utilites/object/getPrototypeOf';
+import { typeOf } from '@wareset-utilites/lang/typeOf';
 
-var getProto = Object.getPrototypeOf || (v => v.__proto__);
+var r = 'constructor',
+    e = 'prototype',
+    s = 'length',
+    n = 'some',
+    p = o => null == o ? o : getPrototypeOf(o),
+    f = t => t && t[r] && t[r][e] === t ? t[r] : t,
+    u = t => f(p(t)),
+    i = typeOf(p),
+    l = (t, r) => t === r || t === u(r) && (!r[e] || !typeOf(r, i)),
+    c = t => (o, ...r) => {
+  if (r[s] && !t(o, ...r)) throw o;
+  return o;
+},
+    m = (t, ...o) => (t = (t => {
+  var o = [];
 
-var getPrototypeOf = v => v == null ? v : getProto(v);
+  for (; (t = p(t)) || !o[s];) {
+    o.push(f(t));
+  }
 
-var getProtoFn = v => !v || !v[c] || v[c][p] !== v ? v : v[c];
+  return o;
+})(t), o[s] ? t[n](t => o[n](o => l(t, o))) : t);
 
-var getCtor = v => v = getProtoFn(getPrototypeOf(v));
+m.try = c(m);
 
-var getCtors = (v, protos = []) => {
-  do {
-    v = getPrototypeOf(v), protos.push(getProtoFn(v));
-  } while (v);
+var y = (t, ...o) => (t = u(t), o[s] ? o[n](o => l(t, o)) : t);
 
-  return protos;
-};
-
-var eq = (a, b) => a === b || a === getCtor(b) && (!b[p] || typeof b !== 'function');
-
-var check = fn => (value, ...t) => {
-  if (t[l] && !fn(value, ...t)) throw new TypeError('' + value);
-  return value;
-};
-
-var typedOf = (val, ...types) => (val = getCtors(val), !types[l] ? val : val[s](ctor => types[s](t => eq(ctor, t))));
-
-typedOf.check = check(typedOf);
-
-var typed = (val, ...types) => (val = getCtor(val), !types[l] ? val : types[s](t => eq(val, t)));
-
-typed.check = check(typed);
-typed.of = typedOf;
-export default typed;
-export { typed, typedOf };
+y.try = c(y), y.of = m;
+export default y;
+export { y as typed, m as typedOf };
