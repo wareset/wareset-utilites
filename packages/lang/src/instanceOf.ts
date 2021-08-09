@@ -1,3 +1,5 @@
-export const instanceOf = (value: any, type: Function): value is typeof type =>
-  value instanceof type
+export const instanceOf = <T>(
+  value: any,
+  type: new (...a: any[]) => T
+): value is T => value instanceof type
 export default instanceOf
