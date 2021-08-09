@@ -10,42 +10,21 @@ var keys = require('@wareset-utilites/object/keys');
 
 var typed = require('@wareset-utilites/typed');
 
-var Array = require('@wareset-utilites/array/Array');
+var _Array = require('@wareset-utilites/array/Array');
 
-function _interopDefaultLegacy(e) {
-  return e && typeof e === 'object' && 'default' in e ? e : {
-    'default': e
-  };
-}
+var each = (s, i) => {
+  if (isObject.isObject(s)) if (typed.typedOf(s, _Array.Array, Set)) {
+    var t = 0;
 
-var isObject__default = /*#__PURE__*/_interopDefaultLegacy(isObject);
-
-var keys__default = /*#__PURE__*/_interopDefaultLegacy(keys);
-
-var Array__default = /*#__PURE__*/_interopDefaultLegacy(Array);
-/* eslint-disable max-len */
-
-
-var each = (object, callback) => {
-  if (isObject__default['default'](object)) {
-    if (typed.typedOf(object, Array__default['default'], Set)) {
-      var k = 0;
-
-      for (var v of object) {
-        callback(v, k, object, 'set'), k++;
-      }
-    } else if (typed.typedOf(object, Map)) {
-      for (var [_k, _v] of object) {
-        callback(_v, _k, object, 'map');
-      }
-    } else {
-      for (var _k2 of keys__default['default'](object)) {
-        callback(object[_k2], _k2, object, 'object');
-      }
+    for (var e of s) {
+      i(e, t, s, 'set'), t++;
     }
+  } else if (typed.typedOf(s, Map)) for (var [_t, _e] of s) {
+    i(_e, _t, s, 'map');
+  } else for (var _t2 of keys.keys(s)) {
+    i(s[_t2], _t2, s, 'object');
   }
-
-  return object;
+  return s;
 };
 
 exports.default = each;

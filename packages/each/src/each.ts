@@ -1,16 +1,16 @@
 /* eslint-disable max-len */
 
-import isObject from '@wareset-utilites/is/isObject'
-import keys from '@wareset-utilites/object/keys'
+import { isObject } from '@wareset-utilites/is/isObject'
+import { keys } from '@wareset-utilites/object/keys'
 import { typedOf } from '@wareset-utilites/typed'
-import Array from '@wareset-utilites/array/Array'
+import { Array as __Array__ } from '@wareset-utilites/array/Array'
 
 export const each = <T, K extends keyof T>(
   object: T,
   callback: (v: T[K], k: K, a: T, type: 'set' | 'map' | 'object') => any
 ): T => {
   if (isObject(object)) {
-    if (typedOf(object, Array, Set)) {
+    if (typedOf(object, __Array__, Set)) {
       let k = 0
       for (const v of object as any) callback(v, k as any, object, 'set'), k++
     } else if (typedOf(object, Map)) {
