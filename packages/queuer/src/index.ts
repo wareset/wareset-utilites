@@ -1,8 +1,8 @@
-import last from '@wareset-utilites/array/last'
+import { last } from '@wareset-utilites/array/last'
 
-import isArray from '@wareset-utilites/is/isArray'
-import isPromise from '@wareset-utilites/is/isPromise'
-import isFunction from '@wareset-utilites/is/isFunction'
+import { isArray } from '@wareset-utilites/is/isArray'
+import { isPromise } from '@wareset-utilites/is/isPromise'
+import { isFunction } from '@wareset-utilites/is/isFunction'
 
 export default class Queuer {
   list: (Function | Function[])[] = []

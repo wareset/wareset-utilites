@@ -12,44 +12,27 @@ var isPromise = require('@wareset-utilites/is/isPromise');
 
 var isFunction = require('@wareset-utilites/is/isFunction');
 
-function _interopDefaultLegacy(e) {
-  return e && typeof e === 'object' && 'default' in e ? e : {
-    'default': e
-  };
-}
-
-var last__default = /*#__PURE__*/_interopDefaultLegacy(last);
-
-var isArray__default = /*#__PURE__*/_interopDefaultLegacy(isArray);
-
-var isPromise__default = /*#__PURE__*/_interopDefaultLegacy(isPromise);
-
-var isFunction__default = /*#__PURE__*/_interopDefaultLegacy(isFunction);
-
 class Queuer {
-  constructor(res) {
-    this.res = res;
-    this.list = [];
-    this.is = false;
+  constructor(s) {
+    this.res = s, this.list = [], this.is = !1;
   }
 
   run() {
     if (!this.is && this.list.length) {
-      this.is = true;
-      var arr = this.list.shift();
-      var tmp = (isArray__default['default'](arr) ? [...arr] : [arr]).map(v => isFunction__default['default'](v) ? v(this.res) : v);
+      this.is = !0;
 
-      var fin = tmp => {
-        this.res = last__default['default'](tmp), this.is = false, this.run();
+      var e = this.list.shift(),
+          h = (isArray.isArray(e) ? [...e] : [e]).map(s => isFunction.isFunction(s) ? s(this.res) : s),
+          o = t => {
+        this.res = last.last(t), this.is = !1, this.run();
       };
 
-      tmp.some(isPromise__default['default']) ? Promise.all(tmp).then(fin) : fin(tmp);
+      h.some(isPromise.isPromise) ? Promise.all(h).then(o) : o(h);
     }
   }
 
-  add(...callbacks) {
-    this.list.unshift(...callbacks), this.run();
-    return this;
+  add(...s) {
+    return this.list.unshift(...s), this.run(), this;
   }
 
 }

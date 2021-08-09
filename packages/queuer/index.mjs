@@ -1,32 +1,29 @@
-import last from '@wareset-utilites/array/last';
-import isArray from '@wareset-utilites/is/isArray';
-import isPromise from '@wareset-utilites/is/isPromise';
-import isFunction from '@wareset-utilites/is/isFunction';
+import { last } from '@wareset-utilites/array/last';
+import { isArray } from '@wareset-utilites/is/isArray';
+import { isPromise } from '@wareset-utilites/is/isPromise';
+import { isFunction } from '@wareset-utilites/is/isFunction';
 
 class Queuer {
-  constructor(res) {
-    this.res = res;
-    this.list = [];
-    this.is = false;
+  constructor(s) {
+    this.res = s, this.list = [], this.is = !1;
   }
 
   run() {
     if (!this.is && this.list.length) {
-      this.is = true;
-      var arr = this.list.shift();
-      var tmp = (isArray(arr) ? [...arr] : [arr]).map(v => isFunction(v) ? v(this.res) : v);
+      this.is = !0;
 
-      var fin = tmp => {
-        this.res = last(tmp), this.is = false, this.run();
+      var e = this.list.shift(),
+          h = (isArray(e) ? [...e] : [e]).map(s => isFunction(s) ? s(this.res) : s),
+          o = t => {
+        this.res = last(t), this.is = !1, this.run();
       };
 
-      tmp.some(isPromise) ? Promise.all(tmp).then(fin) : fin(tmp);
+      h.some(isPromise) ? Promise.all(h).then(o) : o(h);
     }
   }
 
-  add(...callbacks) {
-    this.list.unshift(...callbacks), this.run();
-    return this;
+  add(...s) {
+    return this.list.unshift(...s), this.run(), this;
   }
 
 }
