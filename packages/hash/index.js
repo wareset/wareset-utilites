@@ -4,16 +4,15 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
-var hash = (str, salt) => {
-  str = ((salt || '') + str).replace(/\r/g, '');
-  var h = 0;
-  var i = str.length;
+var hash = (t, e) => {
+  var r = 0,
+      h = (t = ((e || '') + t).replace(/\r/g, '')).length;
 
-  while (i--) {
-    h = (256 * h + str.charCodeAt(i)) % 2147483647;
+  for (; h--;) {
+    r = (256 * r + t.charCodeAt(h)) % 2147483647;
   }
 
-  return (-h >>> 0).toString(36);
+  return (-r >>> 0).toString(36);
 };
 
 exports.default = hash;
