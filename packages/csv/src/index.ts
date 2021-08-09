@@ -1,1 +1,1 @@
-export { csvParse } from './csv-parse'
+export { csvParse } from './csvParse'

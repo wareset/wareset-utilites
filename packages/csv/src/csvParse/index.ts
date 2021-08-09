@@ -1,7 +1,6 @@
-import trim from '@wareset-utilites/string/trim'
-import esc from '@wareset-utilites/escape'
-
-import last from '@wareset-utilites/array/last'
+import { last } from '@wareset-utilites/array/last'
+import { trim } from '@wareset-utilites/string/trim'
+import { esc } from '@wareset-utilites/escape'
 
 export const csvParse = (
   source: string,
@@ -46,3 +45,5 @@ export const csvParse = (
 
   return res
 }
+
+export default csvParse
