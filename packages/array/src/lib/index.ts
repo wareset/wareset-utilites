@@ -36,16 +36,22 @@ type TypeFindIndex = {
 
 const i = 'index'
 const b = 'break'
-export const findIndexLeftDirty: TypeFindIndex = (
-  list: any,
+
+const findIndexDirty = <T>(
+  left: boolean,
+  list: T[],
   callback: (value: any, key: number, list: any, context: any) => boolean,
   offset?: number
-) => {
+): number => {
   offset = +offset! || 0
   // let i: number
   let res = -1
-  const ctx = { index: 0, break: false }
-  for (ctx[i] = offset - 1; ++ctx[i] < list.length; ) {
+  const ctx = { [i]: 0, [b]: false }
+  ctx[i] = left ? offset - 1 : list.length - offset
+  const forer = left
+    ? (): boolean => ++ctx[i] < list.length
+    : (): boolean => ctx[i]-- > 0
+  while (forer()) {
     if (callback(list[ctx[i]], ctx[i], list, ctx) || ctx[b]) {
       if (!ctx[b]) res = ctx[i]
       break
@@ -54,20 +60,50 @@ export const findIndexLeftDirty: TypeFindIndex = (
   return res
 }
 
+export const findIndexLeftDirty: TypeFindIndex = (
+  list: any,
+  callback: (value: any, key: number, list: any, context: any) => boolean,
+  offset?: number
+) => findIndexDirty(true, list, callback, offset)
+
 export const findIndexRightDirty: TypeFindIndex = (
   list: any,
   callback: (value: any, key: number, list: any, context: any) => boolean,
   offset?: number
-) => {
-  offset = +offset! || 0
-  // let i: number
-  let res = -1
-  const ctx = { index: 0, break: false }
-  for (ctx[i] = list.length - offset; ctx[i]-- > 0; ) {
-    if (callback(list[ctx[i]], ctx[i], list, ctx) || ctx[b]) {
-      if (!ctx[b]) res = ctx[i]
-      break
-    }
-  }
-  return res
-}
+) => findIndexDirty(false, list, callback, offset)
+
+// export const findIndexLeftDirty: TypeFindIndex = (
+//   list: any,
+//   callback: (value: any, key: number, list: any, context: any) => boolean,
+//   offset?: number
+// ) => {
+//   offset = +offset! || 0
+//   // let i: number
+//   let res = -1
+//   const ctx = { [i]: 0, [b]: false }
+//   for (ctx[i] = offset - 1; ++ctx[i] < list.length; ) {
+//     if (callback(list[ctx[i]], ctx[i], list, ctx) || ctx[b]) {
+//       if (!ctx[b]) res = ctx[i]
+//       break
+//     }
+//   }
+//   return res
+// }
+
+// export const findIndexRightDirty: TypeFindIndex = (
+//   list: any,
+//   callback: (value: any, key: number, list: any, context: any) => boolean,
+//   offset?: number
+// ) => {
+//   offset = +offset! || 0
+//   // let i: number
+//   let res = -1
+//   const ctx = { [i]: 0, [b]: false }
+//   for (ctx[i] = list.length - offset; ctx[i]-- > 0; ) {
+//     if (callback(list[ctx[i]], ctx[i], list, ctx) || ctx[b]) {
+//       if (!ctx[b]) res = ctx[i]
+//       break
+//     }
+//   }
+//   return res
+// }

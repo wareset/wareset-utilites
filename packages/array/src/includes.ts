@@ -1,4 +1,4 @@
-import indexOf from './indexOfLeft'
+import { indexOfLeft } from './indexOfLeft'
 
 // prettier-ignore
 export const includes: {
@@ -6,7 +6,7 @@ export const includes: {
   (source: string, value: string, fromIndex?: number): boolean
 } = ![].includes
   ? (source: any, value: any, fromIndex?: number): boolean =>
-    indexOf(source, value, fromIndex) > -1
+    indexOfLeft(source, value, fromIndex) > -1
   : (source: any, value: any, fromIndex?: number): boolean =>
     source.includes(value, fromIndex)
 

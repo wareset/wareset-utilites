@@ -1,5 +1,5 @@
-import min from '@wareset-utilites/math/min'
-import max from '@wareset-utilites/math/max'
+import { min } from '@wareset-utilites/math/min'
+import { max } from '@wareset-utilites/math/max'
 
 import { UNDEFINED } from './lib'
 

@@ -1,4 +1,4 @@
-import indexOf from './indexOfLeft'
+import { indexOfLeft } from './indexOfLeft'
 
 let idx1: number
 // prettier-ignore
@@ -8,5 +8,7 @@ export const spliceWith = <T>(
   idx2: number,
   ...a: T[]
 ): T[] =>
-    (idx1 = indexOf(source, val1)) > -1 ? source.splice(idx1, idx2, ...a) : []
+    (idx1 = indexOfLeft(source, val1)) > -1
+      ? source.splice(idx1, idx2, ...a) : []
+
 export default spliceWith

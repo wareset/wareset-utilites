@@ -1,4 +1,4 @@
-import randomTo from '@wareset-utilites/math/randomTo'
+import { randomTo } from '@wareset-utilites/math/randomTo'
 
 export const shuffle = <T>(list: T[], clone?: boolean): T[] => {
   if (clone) list = list.slice(0)
