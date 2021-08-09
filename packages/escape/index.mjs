@@ -1,29 +1,25 @@
-/* eslint-disable max-len */
+import { RegExp } from '@wareset-utilites/lang/RegExp';
 
-/* eslint-disable security/detect-non-literal-regexp */
 var esc = (() => {
-  var undef;
+  var t = t => new RegExp(t, 'g'),
+      r = '[',
+      s = '-.\\\\+*?\\[\\^\\]$(){}=!<>|:\\/',
+      c = ']',
+      l = t(r + s + c),
+      p = '\\$&';
 
-  var regexpG = s => new RegExp(s, 'g');
+  return (e, a, n) => {
+    var o;
 
-  var START = '[';
-  var MIDDLE = '-.\\\\+*?\\[\\^\\]$(){}=!<>|:\\/';
-  var END = ']';
-  var DEFAULT_REGEXP = regexpG(START + MIDDLE + END);
-  var REPLACER = '\\$&';
-  return (string, ignore, isNewFn) => {
-    if (ignore === undef) ignore = '';
-    var res;
-    if (!ignore && !isNewFn) res = string.replace(DEFAULT_REGEXP, REPLACER);else {
-      // prettier-ignore
-      var newMIDDLE = MIDDLE.replace(regexpG(START + esc(ignore) + END), '');
-      var newREGEXP = regexpG(START + newMIDDLE + END);
+    if ((a = a || '') || n) {
+      var _l = s.replace(t(r + esc(a) + c), ''),
+          g = t(r + _l + c),
+          i = e => e.replace(g, p);
 
-      var newEscape = string => string.replace(newREGEXP, REPLACER);
+      o = n ? i : i(e);
+    } else o = e.replace(l, p);
 
-      res = isNewFn ? newEscape : newEscape(string);
-    }
-    return res;
+    return o;
   };
 })();
 

@@ -1,13 +1,14 @@
 /* eslint-disable max-len */
 /* eslint-disable security/detect-non-literal-regexp */
 
+import { RegExp as __RegExp__ } from '@wareset-utilites/lang/RegExp'
+
 export const esc = ((): {
   (string: string, ignore?: string): string
   (string: string, ignore: string, isNewFn: false): string
   (string: string, ignore: string, isNewFn: true): { (string: string): string }
 } => {
-  let undef: undefined
-  const regexpG = (s: string): RegExp => new RegExp(s, 'g')
+  const regexpG = (s: string): RegExp => new __RegExp__(s, 'g')
 
   const START = '['
   const MIDDLE = '-.\\\\+*?\\[\\^\\]$(){}=!<>|:\\/'
@@ -16,7 +17,7 @@ export const esc = ((): {
   const REPLACER = '\\$&'
 
   return (string: string, ignore?: string, isNewFn?: boolean): any => {
-    if (ignore === undef) ignore = ''
+    ignore = ignore || ''
     let res: any
     if (!ignore && !isNewFn) res = string.replace(DEFAULT_REGEXP, REPLACER)
     else {
