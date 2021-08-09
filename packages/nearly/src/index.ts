@@ -1,5 +1,5 @@
-import isArray from '@wareset-utilites/is/isArray'
-import isNumber from '@wareset-utilites/is/isNumber'
+import { isArray } from '@wareset-utilites/is/isArray'
+import { isNumber } from '@wareset-utilites/is/isNumber'
 
 import { abs, floor, round, ceil } from '@wareset-utilites/math'
 

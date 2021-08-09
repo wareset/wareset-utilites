@@ -1,39 +1,39 @@
-import isArray from '@wareset-utilites/is/isArray';
-import isNumber from '@wareset-utilites/is/isNumber';
-import { abs, floor, round, ceil } from '@wareset-utilites/math'; // export interface INearly {
-//   (value: number, pattern: number | number[], method?: -1 | 0 | 1): number
-// }
+import { isArray } from '@wareset-utilites/is/isArray';
+import { isNumber } from '@wareset-utilites/is/isNumber';
+import { abs, floor, round, ceil } from '@wareset-utilites/math';
 
 var nearly = (() => {
-  var METHODS_FOR_NUM = {
+  var o = {
     '-1': floor,
-    '0': round,
-    '1': ceil
+    0: round,
+    1: ceil
+  },
+      n = {
+    '-1': (e = 0, t = 0, i = 0) => abs(e - i) <= abs(t - i),
+    0: (e = 0, t = 0, i = 0) => abs(e - i) < abs(t - i),
+    1: null
   };
-  var METHODS_FOR_ARR = {
-    '-1': (a = 0, b = 0, c = 0) => abs(a - c) <= abs(b - c),
-    '0': (a = 0, b = 0, c = 0) => abs(a - c) < abs(b - c),
-    '1': null
-  };
-  return (value = 1, pattern, method = 0) => {
-    var res;
+  return (i = 1, s, l = 0) => {
+    var u;
+    if (isArray(s)) {
+      if (s.length) {
+        var e = n[l] || n[0];
+        u = s.reduce((t, r) => e(t, r, i) ? t : r);
+      } else u = i;
+    } else if (s && isNumber(s)) {
+      s = abs(s);
 
-    if (isArray(pattern)) {
-      if (!pattern.length) res = value;else {
-        var f = METHODS_FOR_ARR[method] || METHODS_FOR_ARR[0];
-        res = pattern.reduce((prev, curr) => f(prev, curr, value) ? prev : curr);
-      }
-    } else if (pattern && isNumber(pattern)) {
-      pattern = abs(pattern);
-      var coef = abs(value % pattern);
-      var fin = value - coef;
-      fin = +method > 0 || !method && coef > pattern / 2 ? fin + pattern : fin;
-      var str = `${pattern}`;
-      var index = str.indexOf('.');
-      res = index === -1 ? fin : +fin.toFixed(str.length - index - 1);
-    } else res = (METHODS_FOR_NUM[method] || METHODS_FOR_NUM[0])(value);
+      var _e = abs(i % s);
 
-    return res;
+      var t = i - _e;
+      t = +l > 0 || !l && _e > s / 2 ? t + s : t;
+
+      var _o = `${s}`,
+          _n = _o.indexOf('.');
+
+      u = -1 === _n ? t : +t.toFixed(_o.length - _n - 1);
+    } else u = (o[l] || o[0])(i);
+    return u;
   };
 })();
 

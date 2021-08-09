@@ -10,49 +10,38 @@ var isNumber = require('@wareset-utilites/is/isNumber');
 
 var math = require('@wareset-utilites/math');
 
-function _interopDefaultLegacy(e) {
-  return e && typeof e === 'object' && 'default' in e ? e : {
-    'default': e
-  };
-}
-
-var isArray__default = /*#__PURE__*/_interopDefaultLegacy(isArray);
-
-var isNumber__default = /*#__PURE__*/_interopDefaultLegacy(isNumber); // export interface INearly {
-//   (value: number, pattern: number | number[], method?: -1 | 0 | 1): number
-// }
-
-
 var nearly = (() => {
-  var METHODS_FOR_NUM = {
+  var o = {
     '-1': math.floor,
-    '0': math.round,
-    '1': math.ceil
+    0: math.round,
+    1: math.ceil
+  },
+      n = {
+    '-1': (e = 0, t = 0, i = 0) => math.abs(e - i) <= math.abs(t - i),
+    0: (e = 0, t = 0, i = 0) => math.abs(e - i) < math.abs(t - i),
+    1: null
   };
-  var METHODS_FOR_ARR = {
-    '-1': (a = 0, b = 0, c = 0) => math.abs(a - c) <= math.abs(b - c),
-    '0': (a = 0, b = 0, c = 0) => math.abs(a - c) < math.abs(b - c),
-    '1': null
-  };
-  return (value = 1, pattern, method = 0) => {
-    var res;
+  return (i = 1, s, l = 0) => {
+    var u;
+    if (isArray.isArray(s)) {
+      if (s.length) {
+        var e = n[l] || n[0];
+        u = s.reduce((t, r) => e(t, r, i) ? t : r);
+      } else u = i;
+    } else if (s && isNumber.isNumber(s)) {
+      s = math.abs(s);
 
-    if (isArray__default['default'](pattern)) {
-      if (!pattern.length) res = value;else {
-        var f = METHODS_FOR_ARR[method] || METHODS_FOR_ARR[0];
-        res = pattern.reduce((prev, curr) => f(prev, curr, value) ? prev : curr);
-      }
-    } else if (pattern && isNumber__default['default'](pattern)) {
-      pattern = math.abs(pattern);
-      var coef = math.abs(value % pattern);
-      var fin = value - coef;
-      fin = +method > 0 || !method && coef > pattern / 2 ? fin + pattern : fin;
-      var str = `${pattern}`;
-      var index = str.indexOf('.');
-      res = index === -1 ? fin : +fin.toFixed(str.length - index - 1);
-    } else res = (METHODS_FOR_NUM[method] || METHODS_FOR_NUM[0])(value);
+      var _e = math.abs(i % s);
 
-    return res;
+      var t = i - _e;
+      t = +l > 0 || !l && _e > s / 2 ? t + s : t;
+
+      var _o = `${s}`,
+          _n = _o.indexOf('.');
+
+      u = -1 === _n ? t : +t.toFixed(_o.length - _n - 1);
+    } else u = (o[l] || o[0])(i);
+    return u;
   };
 })();
 
