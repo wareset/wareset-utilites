@@ -1,2 +1,2 @@
-const __Infinity__ = Infinity
-export default __Infinity__
+const __Infinity__ = 1 / 0
+export { __Infinity__ as Infinity }

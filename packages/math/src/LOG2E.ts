@@ -1,3 +1,3 @@
-import Math from './Math'
-export const LOG2E = Math.LOG2E
+import { Math as __Math__ } from './Math'
+export const LOG2E = __Math__.LOG2E
 export default LOG2E

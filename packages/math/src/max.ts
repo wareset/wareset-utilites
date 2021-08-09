@@ -1,3 +1,3 @@
-import Math from './Math'
-export const max = Math.max
+import { Math as __Math__ } from './Math'
+export const max = __Math__.max
 export default max

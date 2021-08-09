@@ -1,7 +1,7 @@
-import pow from './pow'
-import imul from './imul'
-import floor from './floor'
-import randomIsFloating from './lib/randomIsFloating'
+import { pow } from './pow'
+import { imul } from './imul'
+import { floor } from './floor'
+import { randomIsFloating } from './lib/randomIsFloating'
 const __rf2__ = pow(2, 31)
 const __rf1__ = __rf2__ - 1
 export const randomGenerator = (seed: number) => (

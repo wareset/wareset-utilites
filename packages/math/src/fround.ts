@@ -1,4 +1,4 @@
-import Math from './Math'
+import { Math as __Math__ } from './Math'
 export const fround =
-  Math.fround || ((x: number): number => new Float32Array([x])[0])
+  __Math__.fround || ((x: number): number => new Float32Array([x])[0])
 export default fround

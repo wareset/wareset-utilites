@@ -1,6 +1,6 @@
-import floor from './floor'
-import random from './random'
-import randomIsFloating from './lib/randomIsFloating'
+import { floor } from './floor'
+import { random } from './random'
+import { randomIsFloating } from './lib/randomIsFloating'
 export const randomTo = (
   min = 0,
   max = 1,

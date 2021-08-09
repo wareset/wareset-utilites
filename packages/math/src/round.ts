@@ -1,3 +1,3 @@
-import Math from './Math'
-export const round = Math.round
+import { Math as __Math__ } from './Math'
+export const round = __Math__.round
 export default round

@@ -1,3 +1,3 @@
-import Math from './Math'
-export const ceil = Math.ceil
+import { Math as __Math__ } from './Math'
+export const ceil = __Math__.ceil
 export default ceil
