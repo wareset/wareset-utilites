@@ -3,9 +3,6 @@
   "module": "index.mjs",
   "types": "index.d.ts",
   "files": [
-    "../__types__",
-    "eft",
-    "ight",
     "index.d.ts",
     "index.js",
     "index.mjs"

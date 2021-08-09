@@ -6,15 +6,14 @@ Object.defineProperty(exports, '__esModule', {
 
 var lib = require('../lib');
 
-var repeat = (string, count) => {
-  var res = lib.$EMPTY;
-  count = -~count || 0;
+var repeat = (r, t) => {
+  var o = lib.$EMPTY;
 
-  while (--count > 0) {
-    res += string;
+  for (t = -~t || 0; --t > 0;) {
+    o += r;
   }
 
-  return res;
+  return o;
 };
 
 exports.default = repeat;

@@ -1,6 +1,6 @@
 import { __regexp__, $EMPTY } from '../lib';
 
-var trim = (string, trimer) => trimer ? string.replace(__regexp__(`^[${trimer}]+|[${trimer}]+$`), $EMPTY) : string.trim();
+var trim = (i, m) => m ? i.replace(__regexp__(`^[${m}]+|[${m}]+$`), $EMPTY) : i.trim();
 
 export default trim;
 export { trim };

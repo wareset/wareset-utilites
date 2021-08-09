@@ -6,7 +6,7 @@ Object.defineProperty(exports, '__esModule', {
 
 var lib = require('../lib');
 
-var trim = (string, trimer) => trimer ? string.replace(lib.__regexp__(`^[${trimer}]+|[${trimer}]+$`), lib.$EMPTY) : string.trim();
+var trim = (i, m) => m ? i.replace(lib.__regexp__(`^[${m}]+|[${m}]+$`), lib.$EMPTY) : i.trim();
 
 exports.default = trim;
 exports.trim = trim;

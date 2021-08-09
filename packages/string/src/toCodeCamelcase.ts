@@ -1,7 +1,7 @@
 import { $EMPTY } from './lib'
 
 import { __toArrayCase__ } from './lib'
-import toCapitalize from './toCapitalize'
+import { toCapitalize } from './toCapitalize'
 
 export const toCodeCamelcase = (string: string): string =>
   __toArrayCase__(string)

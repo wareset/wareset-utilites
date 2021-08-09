@@ -1,63 +1,40 @@
-/* eslint-disable security/detect-non-literal-regexp */
+import { RegExp } from '@wareset-utilites/lang/RegExp';
 var $EMPTY = '';
 var $DASH = '-';
 var $SPACE = ' ';
 var $UNDERSCORE = '_';
 var __trimer__ = '\\s';
 
-var __regexp__ = s => new RegExp(s, 'g');
+var __regexp__ = e => new RegExp(e, 'g');
 
-var lowercase = $EMPTY.toLocaleLowerCase || $EMPTY.toLowerCase;
+var e = $EMPTY.toLocaleLowerCase || $EMPTY.toLowerCase;
 
-var toLowercase = string => lowercase.call(string);
+var toLowercase = t => e.call(t);
 
-var uppercase = $EMPTY.toLocaleUpperCase || $EMPTY.toUpperCase;
+var o = $EMPTY.toLocaleUpperCase || $EMPTY.toUpperCase;
 
-var toUppercase = string => uppercase.call(string);
+var toUppercase = t => o.call(t);
 
-var __regPCA__ = /[\d$]/;
+var r = /[\d$]/;
 
-var __toArrayCase__ = s => {
-  s += $DASH;
-  var len = s.length;
-  var i = -1;
-  var current = $EMPTY;
-  var words = [];
-  var isUL;
-  var isBreak = !isUL;
-  var char, charUpper, charLower;
+var __toArrayCase__ = t => {
+  var o = (t += $DASH).length;
 
-  while (++i < len) {
-    char = s.charAt(i);
-    charLower = toLowercase(char);
-    charUpper = toUppercase(char);
+  var s,
+      p,
+      c,
+      n,
+      a = -1,
+      $ = $EMPTY,
+      l = [],
+      _ = !s;
 
-    if (charUpper !== charLower || __regPCA__.test(char)) {
-      if (isBreak || !isUL !== (char === charUpper)) {
-        if (current) {
-          if (current.length > 1) current += $DASH;
-          words.push(current);
-        }
-
-        current = charLower;
-      } else current += charLower;
-
-      isUL = isBreak || isUL || char !== charUpper;
-      isBreak = false;
-    } else {
-      if (current) {
-        if (current.length > 1) current = $DASH + current + $DASH;
-        words.push(current), current = $DASH;
-      } // if (test(__regPCA__, char)) current += charLower
-
-
-      isBreak = true;
-    }
+  for (; ++a < o;) {
+    p = t.charAt(a), x = p, n = e.call(x), c = toUppercase(p), c !== n || r.test(p) ? (_ || !s != (p === c) ? ($ && ($.length > 1 && ($ += $DASH), l.push($)), $ = n) : $ += n, s = _ || s || p !== c, _ = !1) : ($ && ($.length > 1 && ($ = $DASH + $ + $DASH), l.push($), $ = $DASH), _ = !0);
   }
 
-  words = words.join($EMPTY).split($DASH).filter(v => !!v); // console.log(s, words)
-
-  return words;
+  var x;
+  return l = l.join($EMPTY).split($DASH).filter(t => !!t), l;
 };
 
 export { $DASH, $EMPTY, $SPACE, $UNDERSCORE, __regexp__, __toArrayCase__, __trimer__, toLowercase, toUppercase };

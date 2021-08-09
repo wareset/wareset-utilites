@@ -1,8 +1,7 @@
 import { $EMPTY } from './lib'
+import { RegExp as __RegExp__ } from '@wareset-utilites/lang/RegExp'
+import { esc } from '@wareset-utilites/escape'
 
-import esc from '@wareset-utilites/escape'
-
-const r = RegExp
 // prettier-ignore
 export const replaceAll: {
   (
@@ -15,11 +14,11 @@ export const replaceAll: {
     pattern.test
       ? pattern.global
         ? pattern
-        : new r(
+        : new __RegExp__(
           pattern.source,
           'g' + (pattern.flags || ($EMPTY + pattern).match(/[gimuy]*$/)![0])
         )
-      : new r(esc(pattern as string), 'g'),
+      : new __RegExp__(esc(pattern as string), 'g'),
     replacer || $EMPTY
   )
 

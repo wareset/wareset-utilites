@@ -1,12 +1,14 @@
 /* eslint-disable security/detect-non-literal-regexp */
 
+import { RegExp as __RegExp__ } from '@wareset-utilites/lang/RegExp'
+
 export const $EMPTY = ''
 export const $DASH = '-'
 export const $SPACE = ' '
 export const $UNDERSCORE = '_'
 
 export const __trimer__ = '\\s'
-export const __regexp__ = (s: string): RegExp => new RegExp(s, 'g')
+export const __regexp__ = (s: string): RegExp => new __RegExp__(s, 'g')
 
 const lowercase = $EMPTY.toLocaleLowerCase || $EMPTY.toLowerCase
 export const toLowercase = (string: string): string => lowercase.call(string)

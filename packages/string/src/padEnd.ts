@@ -1,5 +1,5 @@
 import { $SPACE } from './lib'
-import repeat from './repeat'
+import { repeat } from './repeat'
 
 export const padEnd = (string: string, len: number, pad?: string): string =>
   !((len = (len || 0) - string.length) > 0)

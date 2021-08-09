@@ -1,14 +1,13 @@
 import { $EMPTY } from '../lib';
 
-var repeat = (string, count) => {
-  var res = $EMPTY;
-  count = -~count || 0;
+var repeat = (r, t) => {
+  var o = $EMPTY;
 
-  while (--count > 0) {
-    res += string;
+  for (t = -~t || 0; --t > 0;) {
+    o += r;
   }
 
-  return res;
+  return o;
 };
 
 export default repeat;
