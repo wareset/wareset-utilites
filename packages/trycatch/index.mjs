@@ -1,16 +1,15 @@
-import isFunction from '@wareset-utilites/is/isFunction';
+import { isFunction } from '@wareset-utilites/is/isFunction';
 
-var trycatch = (tryFn, catchFn, errorMsg) => {
-  var res;
+var trycatch = (r, e, c) => {
+  var o;
 
   try {
-    res = tryFn();
-  } catch (e) {
-    if (errorMsg) console.error(e);
-    res = isFunction(catchFn) ? catchFn(e) : catchFn;
+    o = r();
+  } catch (i) {
+    c && console.error(i), o = isFunction(e) ? e(i) : e;
   }
 
-  return res;
+  return o;
 };
 
 export default trycatch;

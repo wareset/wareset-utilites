@@ -1,10 +1,10 @@
-import isFunction from '@wareset-utilites/is/isFunction'
+import { isFunction } from '@wareset-utilites/is/isFunction'
 
-export const trycatch = <T>(
+export const trycatch = <T, B>(
   tryFn: () => T,
-  catchFn?: T | ((error: Error) => T),
+  catchFn?: ((error?: Error, ...a: any[]) => B) | B,
   errorMsg?: boolean
-): T => {
+): T | B => {
   let res
   try {
     res = tryFn()
@@ -12,7 +12,7 @@ export const trycatch = <T>(
     if (errorMsg) console.error(e)
     res = isFunction(catchFn) ? catchFn(e) : catchFn
   }
-  return res as T
+  return res as T | B
 }
 
 export default trycatch

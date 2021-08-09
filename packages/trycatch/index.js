@@ -6,25 +6,16 @@ Object.defineProperty(exports, '__esModule', {
 
 var isFunction = require('@wareset-utilites/is/isFunction');
 
-function _interopDefaultLegacy(e) {
-  return e && typeof e === 'object' && 'default' in e ? e : {
-    'default': e
-  };
-}
-
-var isFunction__default = /*#__PURE__*/_interopDefaultLegacy(isFunction);
-
-var trycatch = (tryFn, catchFn, errorMsg) => {
-  var res;
+var trycatch = (r, e, c) => {
+  var o;
 
   try {
-    res = tryFn();
-  } catch (e) {
-    if (errorMsg) console.error(e);
-    res = isFunction__default['default'](catchFn) ? catchFn(e) : catchFn;
+    o = r();
+  } catch (i) {
+    c && console.error(i), o = isFunction.isFunction(e) ? e(i) : e;
   }
 
-  return res;
+  return o;
 };
 
 exports.default = trycatch;
