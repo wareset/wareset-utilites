@@ -1,8 +1,8 @@
-import indexOfLeft from '@wareset-utilites/array/indexOfLeft'
-import filterLeft from '@wareset-utilites/array/filterLeft'
-import includes from '@wareset-utilites/array/includes'
-import isBe from '@wareset-utilites/is/isBe'
-import isFunction from '@wareset-utilites/is/isFunction'
+import { indexOfLeft } from '@wareset-utilites/array/indexOfLeft'
+import { filterLeft } from '@wareset-utilites/array/filterLeft'
+import { isFunction } from '@wareset-utilites/is/isFunction'
+import { includes } from '@wareset-utilites/array/includes'
+import { isBe } from '@wareset-utilites/is/isBe'
 
 // prettier-ignore
 export const unique = <T>(
