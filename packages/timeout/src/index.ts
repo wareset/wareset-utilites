@@ -1,6 +1,7 @@
-export const timeout = <T>(
-  msec = 1,
-  callback: () => T | Promise<T> = (): any => {}
-): Promise<T> => new Promise((res) => setTimeout(() => res(callback()), msec))
+export const timeout: {
+  (msec?: number): undefined
+  <T>(msec: number, callback: (...a: any[]) => Promise<T> | T): Promise<T>
+} = (msec?: number, callback?: Function): any =>
+  new Promise((res) => setTimeout(() => res(callback && callback()), msec || 0))
 
 export default timeout
