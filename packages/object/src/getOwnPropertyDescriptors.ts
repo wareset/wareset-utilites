@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
 
-import __Object__ from './Object'
-import getOwnPropertyDescriptor from './getOwnPropertyDescriptor'
-import getOwnPropertyNames from './getOwnPropertyNames'
+import { Object as __Object__ } from './Object'
+import { getOwnPropertyDescriptor } from './getOwnPropertyDescriptor'
+import { getOwnPropertyNames } from './getOwnPropertyNames'
 
 // prettier-ignore
 export const getOwnPropertyDescriptors =

@@ -1,5 +1,5 @@
-import __Object__ from './Object'
-import keys from './keys'
+import { Object as __Object__ } from './Object'
+import { keys } from './keys'
 
 export const values =
   __Object__.values ||

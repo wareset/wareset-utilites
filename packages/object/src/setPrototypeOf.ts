@@ -1,7 +1,7 @@
 /* eslint-disable guard-for-in */
 
-import __Object__ from './Object'
-import keys from './keys'
+import { Object as __Object__ } from './Object'
+import { keys } from './keys'
 
 // prettier-ignore
 export const setPrototypeOf =

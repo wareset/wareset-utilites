@@ -1,4 +1,4 @@
-import __Object__ from './Object'
+import { Object as __Object__ } from './Object'
 
 // prettier-ignore
 export const fromEntries =

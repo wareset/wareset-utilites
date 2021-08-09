@@ -1,6 +1,6 @@
-import __Object__ from './Object'
-import keys from './keys'
-import defineProperty from './defineProperty'
+import { Object as __Object__ } from './Object'
+import { keys } from './keys'
+import { defineProperty } from './defineProperty'
 
 export const defineProperties =
   __Object__.defineProperties ||

@@ -1,7 +1,7 @@
-import __Object__ from '../Object';
-import keys from '../keys';
+import { Object as Object$1 } from '../Object';
+import { keys } from '../keys';
 
-var entries = __Object__.entries || (object => keys(object).map(k => [k, object[k]]));
+var entries = Object$1.entries || (e => keys(e).map(t => [t, e[t]]));
 
 export default entries;
 export { entries };
