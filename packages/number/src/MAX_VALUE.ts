@@ -1,4 +1,4 @@
-import Number from './Number'
+import { Number as __Number__ } from './Number'
 
-export const MAX_VALUE = Number.MAX_VALUE
+export const MAX_VALUE = __Number__.MAX_VALUE
 export default MAX_VALUE
