@@ -16,8 +16,8 @@
   ],
   "scripts": {
     "test": "jest --",
-    "dester": "dester ./src ./ --babel",
-    "build": "npm run -s dester -- -s",
+    "dester": "dester ./src ./ --babel -m",
+    "build": "npm run -s dester -- -s -r",
     "dev": "npm run -s dester -- -w --no-r",
     "pkg:name": "cat package.json | grep '\"name\":' | cut -d '\"' -f4",
     "pkg:version": "cat package.json | grep '\"version\":' | cut -d '\"' -f4",

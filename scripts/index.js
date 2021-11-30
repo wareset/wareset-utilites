@@ -164,7 +164,7 @@ const autobuild = () => {
 
     const git = execSync('git status', {
       // stdio: ['ignore', 'inherit', 'inherit'],
-      cwd: DIR_ROOT,
+      cwd  : DIR_ROOT,
       shell: true
     })
       .toString()
@@ -180,7 +180,8 @@ const autobuild = () => {
       packageJson.version = minority(packageJson.version)
       console.log(packageJson.version)
       fs.writeFileSync(FILE_PACKAGE_JSON, JSON.stringify(packageJson, null, 2))
-      return autobuild()
+      autobuild()
+      return
     }
   }
 
@@ -195,7 +196,7 @@ const autobuild = () => {
 
     const git = execSync('git status', {
       // stdio: ['ignore', 'inherit', 'inherit'],
-      cwd: DIR_ROOT,
+      cwd  : DIR_ROOT,
       shell: true
     })
       .toString()
@@ -210,48 +211,46 @@ const autobuild = () => {
       `npm run build && sleep 1 && git add . && git commit -m "autobuild: ${pakagename}/${packageJson.version}" && git push`,
       {
         stdio: ['ignore', 'inherit', 'inherit'],
-        cwd: DIR_PACKAGE,
+        cwd  : DIR_PACKAGE,
         shell: true
       }
     )
 
     execSync('sleep 1 && npm publish && sleep 1', {
       stdio: ['ignore', 'inherit', 'inherit'],
-      cwd: DIR_PACKAGE,
+      cwd  : DIR_PACKAGE,
       shell: true
     })
   }
 
-  if (JSON.stringify(actualVersions) === JSON.stringify(originVersions)) {
-    return
-  }
+  if (JSON.stringify(actualVersions) !== JSON.stringify(originVersions)) {
+    for (const pakagename of LS_PACKAGES) {
+      if (pakagename !== 'wareset-utilites') continue
+      const DIR_PACKAGE = path.resolve(DIR_PACKAGES, pakagename)
+      const FILE_PACKAGE_JSON = path.resolve(DIR_PACKAGE, FILENAME_PACKAGE_JSON)
+      // prettier-ignore
+      const packageJson = JSON.parse(fs.readFileSync(FILE_PACKAGE_JSON).toString())
+      packageJson.dependencies = actualVersions
+      packageJson.version = minority(packageJson.version)
+      fs.writeFileSync(FILE_PACKAGE_JSON, JSON.stringify(packageJson, null, 2))
 
-  for (const pakagename of LS_PACKAGES) {
-    if (pakagename !== 'wareset-utilites') continue
-    const DIR_PACKAGE = path.resolve(DIR_PACKAGES, pakagename)
-    const FILE_PACKAGE_JSON = path.resolve(DIR_PACKAGE, FILENAME_PACKAGE_JSON)
-    // prettier-ignore
-    const packageJson = JSON.parse(fs.readFileSync(FILE_PACKAGE_JSON).toString())
-    packageJson.dependencies = actualVersions
-    packageJson.version = minority(packageJson.version)
-    fs.writeFileSync(FILE_PACKAGE_JSON, JSON.stringify(packageJson, null, 2))
+      console.log('UPDATING:')
+      console.log(pakagename, packageJson.version)
+      execSync(
+        `npm run build && sleep 1 && git add . && git commit -m "autobuild: ${pakagename}/${packageJson.version}" && git push`,
+        {
+          stdio: ['ignore', 'inherit', 'inherit'],
+          cwd  : DIR_PACKAGE,
+          shell: true
+        }
+      )
 
-    console.log('UPDATING:')
-    console.log(pakagename, packageJson.version)
-    execSync(
-      `npm run build && sleep 1 && git add . && git commit -m "autobuild: ${pakagename}/${packageJson.version}" && git push`,
-      {
+      execSync('sleep 1 && npm publish && sleep 1', {
         stdio: ['ignore', 'inherit', 'inherit'],
-        cwd: DIR_PACKAGE,
+        cwd  : DIR_PACKAGE,
         shell: true
-      }
-    )
-
-    execSync('sleep 1 && npm publish && sleep 1', {
-      stdio: ['ignore', 'inherit', 'inherit'],
-      cwd: DIR_PACKAGE,
-      shell: true
-    })
+      })
+    }
   }
 }
 
