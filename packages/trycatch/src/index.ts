@@ -1,5 +1,3 @@
-import { isFunction } from '@wareset-utilites/is/isFunction'
-
 export const trycatch = <T, B>(
   tryFn: () => T,
   catchFn?: ((error?: Error, ...a: any[]) => B) | B,
@@ -8,9 +6,9 @@ export const trycatch = <T, B>(
   let res
   try {
     res = tryFn()
-  } catch (e) {
+  } catch (e: any) {
     if (errorMsg) console.error(e)
-    res = isFunction(catchFn) ? catchFn(e) : catchFn
+    res = typeof catchFn === 'function' ? (catchFn as any)(e) : catchFn
   }
   return res as T | B
 }
