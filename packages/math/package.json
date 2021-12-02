@@ -1,6 +1,6 @@
 {
   "name": "@wareset-utilites/math",
-  "version": "0.1.6-rc.0",
+  "version": "0.1.6",
   "publishConfig": {
     "access": "public"
   },
