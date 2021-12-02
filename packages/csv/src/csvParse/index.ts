@@ -24,17 +24,18 @@ export const csvParse = (
     if (char === '\\') raw += char + source.charAt(++i)
     else {
       if (quotes.indexOf(char) > -1) {
-        seps[0] === char ? seps.shift() : seps.unshift(char)
+        if (seps[0] === char) seps.shift()
+        else seps.unshift(char)
       }
 
       isEOL = char === '\n'
-      if ((!seps.length && (isEOL || char === separator)) || !char) {
+      if (!seps.length && (isEOL || char === separator) || !char) {
         raw = trim(raw, trimer)
         cur.push(raw)
         raw = ''
         if (isEOL && cur.length) {
           if (cur.length === 1 && !cur[0]) res.pop()
-          res.push((cur = []))
+          res.push(cur = [])
         }
       } else raw += char
     }
