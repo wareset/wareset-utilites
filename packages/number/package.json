@@ -70,7 +70,7 @@
     "typescript": "4.x"
   },
   "dependencies": {
-    "@wareset-utilites/lang": "0.1.9",
-    "@wareset-utilites/math": "0.1.5"
+    "@wareset-utilites/lang": "0.1.10",
+    "@wareset-utilites/math": "0.1.6"
   }
 }
