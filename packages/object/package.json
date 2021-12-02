@@ -1,6 +1,6 @@
 {
   "name": "@wareset-utilites/object",
-  "version": "0.1.7-rc.0",
+  "version": "0.1.7",
   "publishConfig": {
     "access": "public"
   },
@@ -83,6 +83,6 @@
     "typescript": "4.x"
   },
   "dependencies": {
-    "@wareset-utilites/lang": "0.1.9"
+    "@wareset-utilites/lang": "0.1.10"
   }
 }
