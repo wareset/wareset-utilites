@@ -1,3 +1,6 @@
+import { PROTOTYPE } from './lib'
+
 const __Function__ = Function
-export { __Function__ as Function }
+const prototype = __Function__[PROTOTYPE]
+export { __Function__ as Function, prototype }
 export default __Function__
