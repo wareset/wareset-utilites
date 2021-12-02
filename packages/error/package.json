@@ -1,6 +1,6 @@
 {
   "name": "@wareset-utilites/error",
-  "version": "0.1.4-rc.0",
+  "version": "0.1.4",
   "publishConfig": {
     "access": "public"
   },
