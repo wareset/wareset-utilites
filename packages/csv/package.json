@@ -1,6 +1,6 @@
 {
   "name": "@wareset-utilites/csv",
-  "version": "0.0.6-rc.0",
+  "version": "0.0.6",
   "publishConfig": {
     "access": "public"
   },
@@ -56,8 +56,8 @@
     "typescript": "4.x"
   },
   "dependencies": {
-    "@wareset-utilites/array": "0.1.5",
-    "@wareset-utilites/escape": "0.1.8",
-    "@wareset-utilites/string": "0.1.9"
+    "@wareset-utilites/array": "0.1.6",
+    "@wareset-utilites/escape": "0.1.9",
+    "@wareset-utilites/string": "0.1.10"
   }
 }
