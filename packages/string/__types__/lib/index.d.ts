@@ -1,9 +1,0 @@
-export declare const $EMPTY = "";
-export declare const $DASH = "-";
-export declare const $SPACE = " ";
-export declare const $UNDERSCORE = "_";
-export declare const __trimer__ = "\\s";
-export declare const __regexp__: (s: string) => RegExp;
-export declare const toLowercase: (string: string) => string;
-export declare const toUppercase: (string: string) => string;
-export declare const __toArrayCase__: (s: string) => string[];

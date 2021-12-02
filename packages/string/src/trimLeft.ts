@@ -1,6 +1,5 @@
-import { $EMPTY } from './lib'
-import { __trimer__, __regexp__ } from './lib'
+import { RegExp as __RegExp__ } from '@wareset-utilites/lang/RegExp'
 
 export const trimLeft = (string: string, trimer?: string): string =>
-  string.replace(__regexp__(`^[${trimer || __trimer__}]+`), $EMPTY)
+  string.replace(trimer ? new __RegExp__(`^[${trimer}]+`) : /^\s+/, '')
 export default trimLeft
