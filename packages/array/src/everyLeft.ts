@@ -1,36 +1,18 @@
-import { findIndexLeftDirty } from './lib'
+import { findIndexDirtyLeft } from './lib'
 
-export const everyLeft: {
-  <T>(
-    list: T[],
-    callback: (
-      value: T,
-      key: number,
-      list: T[],
-      context: {
-        index: number
-        break: boolean
-      }
-    ) => boolean,
-    offset?: number
-  ): boolean
-  <T extends string>(
-    list: T,
-    callback: (
-      value: string,
-      key: number,
-      list: T,
-      context: {
-        index: number
-        break: boolean
-      }
-    ) => boolean,
-    offset?: number
-  ): boolean
-} = (
-  list: any,
-  callback: (value: any, key: number, list: any, context: any) => boolean,
+export const everyLeft = <L extends ArrayLike<unknown> | unknown[]>(
+  list: L,
+  callback: (
+    value: L[number],
+    key: number,
+    list: L,
+    context: {
+      index: number
+      break: boolean
+    }
+  ) => boolean,
   offset?: number
-) => findIndexLeftDirty(list, (v, k, a, s) => !callback(v, k, a, s), offset) < 0
+): boolean => list.length === 0 ||
+  findIndexDirtyLeft(list, (v, k, a, s) => !callback(v, k, a, s), offset) < 0
 
 export default everyLeft

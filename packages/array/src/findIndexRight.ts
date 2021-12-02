@@ -1,12 +1,12 @@
-import { findIndexRightDirty } from './lib'
+import { findIndexDirtyRight } from './lib'
 
 export const findIndexRight: {
-  <T>(
-    list: T[],
+  <L extends ArrayLike<unknown> | unknown[]>(
+    list: L,
     callback: (
-      value: T,
+      value: L[number],
       key: number,
-      list: T[],
+      list: L,
       context: {
         index: number
         break: boolean
@@ -14,11 +14,6 @@ export const findIndexRight: {
     ) => boolean,
     offset?: number
   ): number
-  <T extends string>(
-    list: T,
-    callback: (value: string, key: number, list: T, context: any) => boolean,
-    offset?: number
-  ): number
-} = findIndexRightDirty
+} = findIndexDirtyRight
 
 export default findIndexRight

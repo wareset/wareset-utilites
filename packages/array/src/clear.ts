@@ -1,2 +1,2 @@
-export const clear = <T>(list: T[]): T[] => ((list.length = 0), list)
+export const clear = <T>(list: T[]): T[] => (list.length = 0, list)
 export default clear

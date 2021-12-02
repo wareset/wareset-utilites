@@ -1,13 +1,10 @@
-/* eslint-disable max-len */
-import { findIndexLeftDirty, isset } from './lib'
+import { isEqual } from '@wareset-utilites/is/isEqual'
+import { findIndexDirtyLeft } from './lib'
 
-export const indexOfLeft: {
-  <T>(v: T[], value: T, offset?: number): number
-  (v: string, value: string, offset?: number): number
-} = (source: any, value: any, offset?: number) =>
-  // value === value
-  //   ? source.indexOf(value, offset)
-  //   :
-  findIndexLeftDirty(source, (v) => isset(v, value), offset)
+export const indexOfLeft = <L extends ArrayLike<unknown> | unknown[]>(
+  source: L,
+  value: L[number],
+  offset?: number
+): number => findIndexDirtyLeft(source, (v) => isEqual(v, value), offset)
 
 export default indexOfLeft
