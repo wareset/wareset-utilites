@@ -1,6 +1,6 @@
 {
   "name": "@wareset-utilites/deep-equal",
-  "version": "0.1.14-rc.0",
+  "version": "0.1.14",
   "publishConfig": {
     "access": "public"
   },
@@ -55,9 +55,9 @@
     "typescript": "4.x"
   },
   "dependencies": {
-    "@wareset-utilites/is": "0.1.11",
-    "@wareset-utilites/lang": "0.1.9",
-    "@wareset-utilites/object": "0.1.6",
-    "@wareset-utilites/typed": "0.3.8"
+    "@wareset-utilites/is": "0.1.12",
+    "@wareset-utilites/lang": "0.1.10",
+    "@wareset-utilites/object": "0.1.7",
+    "@wareset-utilites/typed": "0.4.0"
   }
 }
