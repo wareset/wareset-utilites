@@ -1,6 +1,6 @@
 {
   "name": "wareset-utilites",
-  "version": "0.2.16-rc.0",
+  "version": "0.2.16",
   "publishConfig": {
     "access": "public"
   },
@@ -52,26 +52,26 @@
     "typescript": "4.x"
   },
   "dependencies": {
-    "@wareset-utilites/array": "0.1.5",
-    "@wareset-utilites/csv": "0.0.5",
-    "@wareset-utilites/deep-equal": "0.1.13",
-    "@wareset-utilites/each": "0.1.11",
-    "@wareset-utilites/error": "0.1.3",
-    "@wareset-utilites/escape": "0.1.8",
-    "@wareset-utilites/hash": "0.1.6",
-    "@wareset-utilites/is": "0.1.11",
-    "@wareset-utilites/lang": "0.1.9",
-    "@wareset-utilites/math": "0.1.5",
-    "@wareset-utilites/nearly": "0.1.13",
+    "@wareset-utilites/array": "0.1.6",
+    "@wareset-utilites/csv": "0.0.6",
+    "@wareset-utilites/deep-equal": "0.1.14",
+    "@wareset-utilites/each": "0.1.12",
+    "@wareset-utilites/error": "0.1.4",
+    "@wareset-utilites/escape": "0.1.9",
+    "@wareset-utilites/hash": "0.1.7",
+    "@wareset-utilites/is": "0.1.12",
+    "@wareset-utilites/lang": "0.1.10",
+    "@wareset-utilites/math": "0.1.6",
+    "@wareset-utilites/nearly": "0.1.14",
     "@wareset-utilites/number": "0.1.3",
-    "@wareset-utilites/object": "0.1.6",
-    "@wareset-utilites/queuer": "0.2.3",
-    "@wareset-utilites/regexp": "0.1.10",
+    "@wareset-utilites/object": "0.1.7",
+    "@wareset-utilites/queuer": "0.2.4",
+    "@wareset-utilites/regexp": "0.1.11",
     "@wareset-utilites/stacktrace": "0.1.6",
-    "@wareset-utilites/string": "0.1.9",
-    "@wareset-utilites/timeout": "0.0.7",
-    "@wareset-utilites/trycatch": "0.0.8",
-    "@wareset-utilites/typed": "0.3.8",
-    "@wareset-utilites/unique": "1.1.8"
+    "@wareset-utilites/string": "0.1.10",
+    "@wareset-utilites/timeout": "0.0.8",
+    "@wareset-utilites/trycatch": "0.0.9",
+    "@wareset-utilites/typed": "0.4.0",
+    "@wareset-utilites/unique": "1.1.9"
   }
 }
