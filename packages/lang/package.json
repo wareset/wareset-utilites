@@ -1,6 +1,6 @@
 {
   "name": "@wareset-utilites/lang",
-  "version": "0.1.10-rc.0",
+  "version": "0.1.10",
   "publishConfig": {
     "access": "public"
   },
