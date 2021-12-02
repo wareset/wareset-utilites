@@ -1,6 +1,6 @@
 {
   "name": "@wareset-utilites/typed",
-  "version": "0.3.9-rc.0",
+  "version": "0.3.99-rc.0",
   "publishConfig": {
     "access": "public"
   },
