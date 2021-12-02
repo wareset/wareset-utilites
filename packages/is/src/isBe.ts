@@ -1,4 +1,2 @@
-import { isVoid } from './isVoid'
-
-export const isBe = (v: any): boolean => !isVoid(v)
+export const isBe = (v: any): boolean => v != null && v === v
 export default isBe

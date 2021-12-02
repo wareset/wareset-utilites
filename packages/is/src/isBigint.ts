@@ -1,4 +1,4 @@
-import { typeOf } from '@wareset-utilites/lang/typeOf'
+import { typeofFactory } from './lib/typeofFactory'
 
-export const isBigint = (v: any): v is bigint => typeOf(v, 'bigint')
+export const isBigint = typeofFactory<bigint>('bigint')
 export default isBigint

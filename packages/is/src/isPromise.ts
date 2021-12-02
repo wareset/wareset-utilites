@@ -1,4 +1,5 @@
-import { instanceOf } from '@wareset-utilites/lang/instanceOf'
+import { Promise as __Promise__ } from '@wareset-utilites/lang/Promise'
+import { instanceofFactory } from './lib/instanceofFactory'
 
-export const isPromise = (v: any): v is Promise<any> => instanceOf(v, Promise)
+export const isPromise = instanceofFactory<Promise<any>>(__Promise__)
 export default isPromise

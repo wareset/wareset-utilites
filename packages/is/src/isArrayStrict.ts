@@ -1,7 +1,5 @@
-import { isArray } from './isArray'
 import { typed } from '@wareset-utilites/typed'
-import { Array as __Array__ } from '@wareset-utilites/array/Array'
+import { Array as __Array__ } from '@wareset-utilites/lang/Array'
 
-export const isArrayStrict = (v: any): v is any[] =>
-  isArray(v) && typed(v, __Array__)
+export const isArrayStrict = (v: any): v is any[] => typed(v, __Array__)
 export default isArrayStrict

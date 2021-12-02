@@ -1,6 +1,6 @@
 {
   "name": "@wareset-utilites/is",
-  "version": "0.1.11",
+  "version": "0.1.12-rc.0",
   "publishConfig": {
     "access": "public"
   },
@@ -32,21 +32,29 @@
     "isBe",
     "isBigint",
     "isBoolean",
+    "isEqual",
     "isFalse",
     "isFunction",
+    "isMap",
+    "isNaN",
     "isNativeFunction",
-    "isNill",
+    "isNil",
+    "isNotEqual",
     "isNull",
     "isNumber",
     "isObject",
     "isObjectStrict",
     "isPromise",
     "isRegExp",
+    "isSame",
+    "isSet",
     "isString",
     "isSymbol",
+    "isThenable",
     "isTrue",
     "isUndefined",
-    "isVoid"
+    "isVoid",
+    "lib"
   ],
   "scripts": {
     "test": "jest --",
@@ -64,6 +72,7 @@
     "@babel/core": "^7.16.0",
     "@babel/plugin-proposal-class-properties": "^7.16.0",
     "@babel/plugin-transform-block-scoping": "^7.16.0",
+    "@babel/plugin-transform-template-literals": "^7.16.0",
     "@types/jest": "^27.0.0",
     "@types/node": "^12.20.0",
     "dester": "0.x",
@@ -74,10 +83,7 @@
     "typescript": "4.x"
   },
   "dependencies": {
-    "@wareset-utilites/array": "0.1.5",
     "@wareset-utilites/lang": "0.1.9",
-    "@wareset-utilites/object": "0.1.6",
-    "@wareset-utilites/string": "0.1.9",
     "@wareset-utilites/typed": "0.3.8"
   }
 }

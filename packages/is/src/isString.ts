@@ -1,5 +1,5 @@
 import { typeOf } from '@wareset-utilites/lang/typeOf'
+import { typeofFactory } from './lib/typeofFactory'
 
-export const isString = (v: any): v is string => typeOf(v, __string__)
-const __string__ = typeOf('')
+export const isString = typeofFactory<string>(typeOf(''))
 export default isString

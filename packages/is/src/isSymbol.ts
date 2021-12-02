@@ -1,4 +1,4 @@
-import { typeOf } from '@wareset-utilites/lang/typeOf'
+import { typeofFactory } from './lib/typeofFactory'
 
-export const isSymbol = (v: any): v is symbol => typeOf(v, 'symbol')
+export const isSymbol = typeofFactory<symbol>('symbol')
 export default isSymbol
