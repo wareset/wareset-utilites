@@ -1,58 +1,60 @@
+/* eslint-disable no-invalid-this */
 import { getPrototypeOf } from '@wareset-utilites/object/getPrototypeOf'
-import { typeOf } from '@wareset-utilites/lang/typeOf'
 
-const c = 'constructor',
-  p = 'prototype',
-  l = 'length',
-  s = 'some'
-// const __getProto__ = Object.getPrototypeOf || ((v: any): any => v.__proto__)
-const getPrototype = (v: any): any => (v == null ? v : getPrototypeOf(v))
-const getProtoFn = (v: any): any => (!v || !v[c] || v[c][p] !== v ? v : v[c])
+// const getProto = (v: any): any =>
+//   !v || !v.constructor || v.constructor.prototype !== v ? v : v.constructor
 
-const getCtor = (v: any): Function | object => (v = getProtoFn(getPrototype(v)))
-const getCtors = (v: any): (Function | object)[] => {
-  const protos: any[] = []
-  while ((v = getPrototype(v)) || !protos[l]) protos.push(getProtoFn(v))
-  return protos
+const getProto = (v: any): any =>
+  v == null
+    ? null
+    : !v.constructor || v.constructor.prototype !== v
+      ? v
+      : v.constructor
+
+const check = (fn: typeof typed | typeof typedOf) => (
+  ...a: Parameters<typeof fn>
+): Parameters<typeof fn>[0] | never => {
+  if (a.length > 1 && (fn as any)(...a) === false) {
+    throw { value: a.shift(), types: a }
+  }
+  return a[0]
 }
-
-const f = typeOf(getPrototype)
-const eq = (a: any, b: any): boolean =>
-  a === b || (a === getCtor(b) && (!b[p] || !typeOf(b, f)))
-
-const check = (fn: Function) => <T>(value: T, ...t: any[]): T | never => {
-  // eslint-disable-next-line no-throw-literal
-  if (t[l] && !fn(value, ...t)) throw value
-  return value
-}
-
-type IPrototype = Function | object | null | undefined
-type IPrototypesList = IPrototype[]
-
-const typedOf: {
-  (value: any): IPrototypesList
-  (value: any, ...types: IPrototypesList): boolean
-  try: <T>(value: T, ...t: any[]) => T | never
-} = (val: any, ...types: IPrototypesList) => (
-  (val = getCtors(val)),
-  !types[l] ? val : val[s]((ctor: any) => types[s]((t) => eq(ctor, t)))
-)
-typedOf.try = check(typedOf)
 
 const typed: {
-  (value: any): IPrototype
-  (value: any, ...types: IPrototypesList): boolean
-  try: <T>(value: T, ...t: any[]) => T | never
-  of: {
-    (value: any): IPrototypesList
-    (value: any, ...types: IPrototypesList): boolean
-    try: <T>(value: T, ...t: any[]) => T | never
-  }
-} = (val: any, ...types: IPrototypesList) => (
-  (val = getCtor(val)), !types[l] ? val : types[s]((t) => eq(val, t))
-)
+  <T>(v: T): (new (...a: any) => T) | any
+  <T>(v: T, ...a: (Function | object | null | undefined)[]): boolean
+  of: typeof typedOf
+  try: ReturnType<typeof check>
+} = (v: any, ...a: any[]): any => {
+  v = v == null ? void 0 : getProto(getPrototypeOf(v))
+  return a.length > 0 ? a.some(typedArr, v) : v
+}
 typed.try = check(typed)
+const typedArr = function(this: any, v: any): boolean {
+  return this === v
+}
+
+const typedOf: {
+  <T>(v: T): (
+    | (new (...a: any) => T)
+    | (new (...a: any) => new (...a: any) => T)
+    | (new (...a: any) => new (...a: any) => new (...a: any) => T)
+    | any
+  )[]
+  <T>(v: T, ...a: (Function | object | null | undefined)[]): boolean
+  try: ReturnType<typeof check>
+} = (v: any, ...a: any[]): any => {
+  const res = []
+  for (; v != null && ((v = getPrototypeOf(v)) || !res.length);) {
+    res.push(getProto(v))
+  }
+  return a.length > 0 ? res.some(typedOfArr, a) : res
+}
 typed.of = typedOf
+typedOf.try = check(typedOf)
+const typedOfArr = function(this: any, v: any): boolean {
+  return this.some(typedArr, v)
+}
 
 export { typed, typedOf }
 export default typed

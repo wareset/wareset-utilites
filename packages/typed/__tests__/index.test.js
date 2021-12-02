@@ -11,7 +11,7 @@ test('Infinity:', () => {
 
   expect(typed.of(Infinity, null)).toBe(false)
   expect(typed.of(Infinity, Object, Array, String)).toBe(true)
-  expect(typed.of(Infinity, undefined, Array, String)).toBe(false)
+  expect(typed.of(Infinity, void 0, Array, String)).toBe(false)
 })
 
 test('NaN:', () => {
@@ -20,13 +20,13 @@ test('NaN:', () => {
 })
 
 test('undefined:', () => {
-  expect(typed(undefined)).toBe(undefined)
-  expect(typed.of(undefined)).toEqual([undefined])
+  expect(typed(void 0)).toBe(void 0)
+  expect(typed.of(void 0)).toEqual([])
 })
 
 test('null:', () => {
-  expect(typed(null)).toBe(null)
-  expect(typed.of(null)).toEqual([null])
+  expect(typed(null)).toBe(void 0)
+  expect(typed.of(null)).toEqual([])
 })
 
 test('Object:', () => {
@@ -73,11 +73,12 @@ test('Function:', () => {
   expect(typed(() => {})).toBe(Function)
   expect(typed.of(() => {})).toEqual([Function, Object])
 
-  const AsyncFunction = (async () => {}).constructor
-  expect(typed(async () => {})).toBe(AsyncFunction)
-  expect(typed.of(async () => {})).toEqual([AsyncFunction, Function, Object])
+  const AsyncFunction = (async() => {}).constructor
+  expect(typed(async() => {})).toBe(AsyncFunction)
+  expect(typed.of(async() => {})).toEqual([AsyncFunction, Function, Object])
 
-  function* gen() {}
+  // eslint-disable-next-line func-style
+  function *gen() {}
   const GeneratorFunction = gen.constructor
   expect(typed(gen)).toBe(GeneratorFunction)
   expect(typed.of(gen)).toEqual([GeneratorFunction, Function, Object])
@@ -187,13 +188,13 @@ test('Class:', () => {
 // test('DIV:', () => {
 //   const div = document.createElement('div')
 //   expect(typed(div)).toBe(HTMLDivElement)
-//   // expect(typed.of(div)).toEqual([
-//   //   HTMLDivElement,
-//   //   HTMLElement,
-//   //   Element,
-//   //   Node,
-//   //   EventTarget,
-//   //   Object,
-//   //   null
-//   // ]);
+//   expect(typed.of(div)).toEqual([
+//     HTMLDivElement,
+//     HTMLElement,
+//     Element,
+//     Node,
+//     EventTarget,
+//     Object,
+//     null
+//   ]);
 // })

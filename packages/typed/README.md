@@ -26,31 +26,22 @@ npm i @wareset-utilites/typed ## yarn add @wareset-utilites/typed
 import typed from '@wareset-utilites/typed'
 ```
 
-### Method: `typed(value)` and `typed.of(value)`
-
-```typescript
-declare function typed(value: any): Function | object | null | undefined
-declare function typedOf(
-  value: any
-): Array<Function | object | null | undefined>
-```
-
-Returns prototype:
+#### Returns prototype:
 
 ```js
+// they do not have prototypes
 expect(typed(undefined)).toBe(undefined)
-expect(typed.of(undefined)).toEqual([undefined])
+expect(typed.of(undefined)).toEqual([])
 
-expect(typed(null)).toBe(null)
-expect(typed.of(null)).toEqual([null])
+expect(typed(null)).toBe(undefined)
+expect(typed.of(null)).toEqual([])
+// but:
+expect(typed(Object.create(null))).toBe(null)
+expect(typed.of(Object.create(null))).toEqual([null])
 
 const boolean = true
 expect(typed(boolean)).toBe(Boolean)
 expect(typed.of(boolean)).toEqual([Boolean, Object])
-
-const symbol = Symbol('1')
-expect(typed(symbol)).toBe(Symbol)
-expect(typed.of(symbol)).toEqual([Symbol, Object])
 
 const number = 304010
 expect(typed(number)).toBe(Number)
@@ -93,6 +84,10 @@ test('DIV:', () => {
 // etc...
 
 // Object:
+const object = Object.create(null)
+expect(typed(object)).toBe(null)
+expect(typed.of(object)).toEqual([null])
+
 const proto = { q: 1 }
 const object = Object.create(proto)
 expect(typed(object)).toBe(proto)
@@ -112,41 +107,17 @@ expect(typed(object4)).toBe(object3)
 expect(typed.of(object4)).toEqual([{}, [1, 2, 3], Array, Object])
 ```
 
-### Methods: `typedOf(value, ...types)` and `typed.of(value, ...types)`
-
-```typescript
-declare function typed(
-  value: any,
-  ...types: Array<Function | object | null | undefined>
-): boolean
-declare function typedOf(
-  value: any,
-  ...types: Array<Function | object | null | undefined>
-): boolean
-```
-
-Check the availability of prototypes:
+#### Check the availability of prototypes:
 
 ```js
 expect(typed(Infinity, Number)).toBe(true) // Number
-expect(typed(Infinity, Number, String)).toBe(true) // Number
 expect(typed(Infinity, String)).toBe(false)
+expect(typed(Infinity, Number, String)).toBe(true) // Number
 expect(typed(Infinity, Array, String)).toBe(false)
 
+expect(typed.of(Infinity, Array, String)).toBe(false)
+expect(typed.of(Infinity, Number, Array, String)).toBe(true)
 expect(typed.of(Infinity, Object, Array, String)).toBe(true) // Object
-expect(typed.of(Infinity, undefined, Array, String)).toBe(false)
-
-// other
-const someFn = () => {}
-const someFnAsync = async () => {}
-
-console.log(typed(someFn, Function)) // true
-console.log(typed(someFn, () => {})) // true
-console.log(typed.of(someFnAsync, someFn)) // true
-console.log(typed.of(someFn, someFnAsync)) // false
-console.log(typed(someFnAsync, someFn)) // false
-console.log(typed(someFn, someFnAsync)) // false
-// etc...
 ```
 
 ### Methods: `typed.try(value, ...types)` and `typed.of.try(value, ...types)`
@@ -154,14 +125,14 @@ console.log(typed(someFn, someFnAsync)) // false
 Check the availability of prototypes:
 
 ```js
-console.log(typed.try(9999)) // RETURN: 9999
-console.log(typed.of.try(9999)) // RETURN: 9999
+console.log(typed.try(123)) // RETURN: 123
+console.log(typed.of.try(123)) // RETURN: 123
 
-console.log(typed.try(9999, Number)) // RETURN: 9999
-console.log(typed.of.try(9999, [String, Object])) // RETURN: 9999
+console.log(typed.try(123, Number)) // RETURN: 123
+console.log(typed.of.try(123, [String, Object])) // RETURN: 123
 
-console.log(typed.try(9999, String)) // throw new Error()
-console.log(typed.of.try(9999, [String, Node])) // throw new Error()
+console.log(typed.try(123, String)) // throw { value: 123, types: [String] }
+console.log(typed.of.try(123, [String]))//throw { value: 123, types: [String] }
 ```
 
 ## License
