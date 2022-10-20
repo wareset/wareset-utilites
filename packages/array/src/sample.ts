@@ -1,5 +1,6 @@
-import { randomTo } from '@wareset-utilites/math/randomTo'
+import { floor } from '@wareset-utilites/math/floor'
+import { random } from '@wareset-utilites/math/random'
 
 export const sample = <T>(list: ArrayLike<T>): T =>
-  list[randomTo(0, list.length, false)]
+  list[floor(random() * list.length)]
 export default sample

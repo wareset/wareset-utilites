@@ -9,10 +9,10 @@ export const randomGenerator = (seed: number) => (
   max = 1,
   floating: boolean = randomIsFloating(min, max)
 ): number => (
-  (min =
-    (((seed = imul(16807, seed) | 0 % __rf1__) & __rf1__) / __rf2__) *
+  min =
+    ((seed = imul(16807, seed) | 0 % __rf1__) & __rf1__) / __rf2__ *
       (max - min) +
-    min),
+    min,
   floating ? min : floor(min)
 )
 export default randomGenerator

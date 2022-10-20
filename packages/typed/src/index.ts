@@ -30,7 +30,7 @@ const typed: {
   return a.length > 0 ? a.some(typedArr, v) : v
 }
 typed.try = check(typed)
-const typedArr = function(this: any, v: any): boolean {
+function typedArr(this: any, v: any): boolean {
   return this === v
 }
 
@@ -52,7 +52,7 @@ const typedOf: {
 }
 typed.of = typedOf
 typedOf.try = check(typedOf)
-const typedOfArr = function(this: any, v: any): boolean {
+function typedOfArr(this: any, v: any): boolean {
   return this.some(typedArr, v)
 }
 

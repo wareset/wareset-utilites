@@ -15,23 +15,30 @@ const existsStatSync = (
   } catch (e) {}
   return false
 }
-const removeSync = (filepath) => {
-  const stat = existsStatSync(filepath)
-  if (stat) {
-    if (stat.isDirectory()) {
-      fs.readdirSync(filepath).forEach((name) => {
-        removeSync(path.resolve(filepath, name))
-      })
-      fs.rmdirSync(filepath)
-    } else fs.unlinkSync(filepath)
-  }
+// const removeSync = (filepath) => {
+//   const stat = existsStatSync(filepath)
+//   if (stat) {
+//     if (stat.isDirectory()) {
+//       fs.readdirSync(filepath).forEach((name) => {
+//         removeSync(path.resolve(filepath, name))
+//       })
+//       fs.rmdirSync(filepath)
+//     } else fs.unlinkSync(filepath)
+//   }
 
-  return !!stat
-}
+//   return !!stat
+// }
 const getPackageJson = (dir) =>
   JSON.parse(fs.readFileSync(path.resolve(dir, 'package.json')).toString())
 const setPackageJson = (dir, obj) =>
   fs.writeFileSync(path.resolve(dir, 'package.json'), JSON.stringify(obj, null, 2))
+
+const setRCVersion = (packagejson) => {
+  const version = packagejson.version.split('-')[0].split('.').map(Number)
+  version[2]++
+  if (version[2] > 99) version[1]++, version[2] = 0
+  packagejson.version = version.join('.') + '-rc.0'
+}
 
 const DIR_ROOT = __dirname
 // const PACKAGE_ROOT = 'wareset-utilites'
@@ -63,24 +70,18 @@ for (const name in packagesNamesObj) {
   if (existsStatSync(packagepath)) {
     console.log('PACKAGE: ' + name)
 
-    fs.readdirSync(packagepath, { withFileTypes: true }).forEach((dirent) => {
-      const name = dirent.name
-      if (dirent.isFile() && /^index\./.test(name) ||
-        dirent.isDirectory() && !/^(?:src|node_modules|__tests__)$/.test(name)) {
-        console.log(' REMOVE: ' + name)
-        removeSync(path.resolve(packagepath, name))
-      }
-    })
+    // fs.readdirSync(packagepath, { withFileTypes: true }).forEach((dirent) => {
+    //   const name = dirent.name
+    //   if (dirent.isFile() && /^index\./.test(name) ||
+    //     dirent.isDirectory() && !/^(?:src|node_modules|__tests__)$/.test(name)) {
+    //     console.log(' REMOVE: ' + name)
+    //     removeSync(path.resolve(packagepath, name))
+    //   }
+    // })
 
     const packagejson = getPackageJson(packagepath)
     packagejson.devDependencies = devDependencies
-    if (state.src) {
-      const version = packagejson.version.split('-')[0].split('.').map(Number)
-      version[2]++
-      if (version[2] > 999) version[1]++, version[2] = 0
-      packagejson.version = version.join('.') + '-rc.0'
-    }
-
+    if (state.src) setRCVersion(packagejson)
     setPackageJson(packagepath, packagejson)
 
     execSync(
@@ -96,28 +97,45 @@ PACKAGES.forEach((name) => {
   // console.log(name)
   const packagepath = path.resolve(DIR_PACKAGES, name)
   const packagejson = getPackageJson(packagepath)
-  packagejson.version = packagejson.version.split('-')[0]
   packages[name] = { packagepath, packagejson }
 })
 
 // console.log(packages)
 
-for (const name in packages) {
-  // if (name !== PACKAGE_ROOT) {
-  const { packagepath, packagejson } = packages[name]
-  console.log(name)
-  if (packagejson.dependencies) {
-    for (const pkg in packagejson.dependencies) {
-      if (/^@wareset-utilites[/]./.test(pkg)) {
-        const name2 = pkg.split('/')[1].trim()
-        if (!(name2 in packages)) throw new Error([pkg, name2, packagejson.dependencies[pkg]])
-        else {
-          // console.log(pkg, name2, packagejson.dependencies[pkg])
-          packagejson.dependencies[pkg] = packages[name2].packagejson.version
+let loop
+for (;;) {
+  loop = false
+  forloop: for (const name in packages) {
+    const { packagejson } = packages[name]
+    const isRc = packagejson.version.indexOf('-') > -1
+    console.log(name)
+    if (packagejson.dependencies) {
+      for (const pkg in packagejson.dependencies) {
+        if (/^@wareset-utilites[/]./.test(pkg)) {
+          const name2 = pkg.split('/')[1].trim()
+          if (!(name2 in packages)) throw new Error([pkg, name2, packagejson.dependencies[pkg]])
+          else {
+            const version = packages[name2].packagejson.version.split('-')[0]
+            if (packagejson.dependencies[pkg] !== version) {
+              packagejson.dependencies[pkg] = version
+
+              if (!isRc) {
+                loop = true
+                setRCVersion(packagejson)
+                break forloop
+              }
+            }
+          }
         }
       }
     }
   }
+  if (!loop) break
+}
+
+for (const name in packages) {
+  const { packagepath, packagejson } = packages[name]
+  packagejson.version = packagejson.version.split('-')[0]
   setPackageJson(packagepath, packagejson)
   const git = execSync(
     'git status --porcelain=v1',
@@ -133,15 +151,14 @@ for (const name in packages) {
       )
     } catch (e) {}
   }
-  // }
 }
 
-execSync(
-  'git push',
-  { stdio: ['ignore', 'inherit', 'inherit'], cwd: DIR_ROOT, shell: true }
-)
-
 const publish = () => {
+  execSync(
+    'git push',
+    { stdio: ['ignore', 'inherit', 'inherit'], cwd: DIR_ROOT, shell: true }
+  )
+  
   for (const name in packages) {
     // if (name !== PACKAGE_ROOT) {
     const { packagepath } = packages[name]
