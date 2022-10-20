@@ -1,5 +1,4 @@
-import { min } from '@wareset-utilites/math/min'
-import { max } from '@wareset-utilites/math/max'
+const { max, min } = Math
 
 export const fill = <T>(
   list: T[],

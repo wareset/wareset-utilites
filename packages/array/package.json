@@ -1,6 +1,6 @@
 {
   "name": "@wareset-utilites/array",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "publishConfig": {
     "access": "public"
   },
@@ -87,7 +87,6 @@
   },
   "dependencies": {
     "@wareset-utilites/is": "0.1.12",
-    "@wareset-utilites/lang": "0.1.10",
-    "@wareset-utilites/math": "0.1.6"
+    "@wareset-utilites/lang": "0.1.10"
   }
 }
