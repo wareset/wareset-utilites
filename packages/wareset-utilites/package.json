@@ -1,6 +1,6 @@
 {
   "name": "wareset-utilites",
-  "version": "0.2.20",
+  "version": "0.2.21",
   "publishConfig": {
     "access": "public"
   },
@@ -56,18 +56,14 @@
     "@wareset-utilites/csv": "0.0.6",
     "@wareset-utilites/deep-equal": "0.1.14",
     "@wareset-utilites/each": "0.1.12",
-    "@wareset-utilites/error": "0.1.4",
     "@wareset-utilites/escape": "0.1.9",
     "@wareset-utilites/hash": "0.1.7",
     "@wareset-utilites/is": "0.1.12",
     "@wareset-utilites/lang": "0.1.10",
     "@wareset-utilites/math": "0.1.6",
-    "@wareset-utilites/nearly": "0.1.14",
     "@wareset-utilites/number": "0.1.3",
     "@wareset-utilites/object": "0.1.7",
-    "@wareset-utilites/regexp": "0.1.11",
     "@wareset-utilites/string": "0.1.10",
-    "@wareset-utilites/trycatch": "0.0.9",
     "@wareset-utilites/typed": "0.4.0"
   }
 }
