@@ -1,4 +1,0 @@
-import { MAX_SAFE_INTEGER } from './MAX_SAFE_INTEGER'
-
-export const MIN_SAFE_INTEGER = -MAX_SAFE_INTEGER
-export default MIN_SAFE_INTEGER
