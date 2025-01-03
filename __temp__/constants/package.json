@@ -46,7 +46,7 @@
     "@babel/plugin-transform-block-scoping": "^7.13.16",
     "@types/jest": "^26.0.23",
     "@types/node": "^12.20.11",
-    "dester": "0.x",
+    "dester": "1.0.x",
     "jest": "^26.6.3",
     "ts-jest": "^26.5.5",
     "ts-node": "^9.1.1",
