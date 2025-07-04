@@ -48,8 +48,7 @@
     "jest": "^29.3.1",
     "ts-jest": "^28.0.7",
     "ts-node": "^10.9.2",
-    "tslib": "^2.6.1",
-    "typescript": "5.7.2"
+    "tslib": "^2.6.1"
   },
   "dependencies": {
     "@wareset-utilites/array": "0.1.7",
@@ -61,5 +60,8 @@
     "@wareset-utilites/object": "0.1.7",
     "@wareset-utilites/string": "0.1.10",
     "@wareset-utilites/typed": "0.4.0"
+  },
+  "peerDependencies": {
+    "typescript": "5.x"
   }
 }
